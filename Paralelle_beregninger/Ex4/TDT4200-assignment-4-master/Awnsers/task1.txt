@@ -1,0 +1,148 @@
+Task 1
+
+a)
+  The running-time of the loop dominates the running time of the rasterize-function, but there is also quite a bit of unaccounted runtime (When running at 1*normal resolution)
+  When runnign at 5* resuolution, 15322 of 15922 ms are used on work, but the whole process takes:
+  real	0m27.586s
+  user	0m27.036s
+  sys	0m0.136s
+  Which means that about half of all the work is done elsewhere.
+
+
+
+  a.1) Thus, we check the time that is used for the entire program, from the beginning of main, untill the end:
+        The resulting ooutput is:
+
+                              Output from ratio 1920x1080:
+                              Rendering an image on the CPU..
+                              Loading '../input/spheres.obj' file...
+                              Rendering image... 0/703 complete.
+                              Finished!
+                              Procesing work queue  =1635 ms
+                              Entire rasterization  =1704 ms
+                              Writing image to '../output/sphere.png'...
+                              With main: 2538
+
+      As we can see, the entire program uses 2.5 seconds, while the rasterization only uses 1.7 ms on the rasterization.
+      This means that the program can not get faster than 0.8ms, even with an infinite speedup
+
+
+
+
+
+
+
+
+b)
+  We use openMP to paralelize the main loop. Since we have not been diving deep enough in the program to propperly see how unbalanced the workload is,
+  we try both static and dynamic scheduling on a smaller dataset.
+  Depending on how unbalanced the work is, it might also be usefull to divide the list into small chuncks:
+  #pragma omp for schedule(dynamic, 1), or larger #pragma omp for schedule(dynamic, BIGGER_NUMBER)
+
+
+
+  Output from ratio 1920x1080:
+  Rendering an image on the CPU..
+  Loading '../input/spheres.obj' file...
+
+
+  STATIC:
+                      Procesing work queue  =9635 ms
+                      Entire rasterization  =9695 ms
+
+                      With main: 10512
+
+
+
+  DYNAMIC (chuncks of 3):
+                    Procesing work queue  =1626 ms
+                    Entire rasterization  =1673 ms
+
+                    With main: 2259
+
+
+DYNAMIC (chuncks of 5):
+                    Procesing work queue  =860 ms
+                    Entire rasterization  =931 ms
+
+                    With main: 1518
+
+
+DYNAMIC (chuncks of 1):
+                    Procesing work queue  =732 ms
+                    Entire rasterization  =798 ms
+
+                    With main: 1348
+
+It
+  It becomes quite self-evident that the static distribution takes longer, even longer than the unthreaded version.
+   Thus, we may assume that the amount of work needed for each task can be quite different.
+   There does not seem to be a monotonic growth with the chunck-size, but dynamic, with size 1 seems to be the best choice
+
+
+
+   (I just realized that the ratios were given in the wrong order, when i looked at the output-file....)
+      (The error does not seem to have affected the runtime or the distribution og the time spent on rendering the image. )
+
+
+  The image looks quite bad, a lot of it is not properly coloured, and some of the colours are smeared everywhere.
+  Aditionally, the result changes each time, which might imply race-conditions.
+
+
+
+c)
+  I Was somewhat stuck, sine I thought the errors came form race-conditions form the depthBuffer or the frameBuffer, from when the threads tries to read/write from them.
+  Just to see what would happen, I made the mesh and transformed mes into copies instead of refferences, just to see what happened.
+  (They are refferences to a shared variable, which is dangerous, but I thought the resource was read-only (Which would make it safe)).
+  I expected to see an increase in runtime, as the need for copies would increase. Even thoug this also happened, the rendering did no longer have any errors
+  There is still suposed to be a race-comdition in the line:
+
+                                            if( pixelDepth >= -1 && pixelDepth <= 1 && pixelDepth < depthBuffer.at(y * width + x)) {
+                                              depthBuffer.at(y * width + x) = pixelDepth;
+
+
+  Since depthBuffer is shared, there should be a possibility of some spheres being possible to see through, but the image might be so big that two threads writing to the same buffer at the same time becomes a rare occurance.
+
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  THERE IS STILL SUPPOSED TO BE A RACE CONDITION HERE
+
+
+
+d)
+
+  The results for static and dynamic are already documented. So I will simply mention those from guided:
+
+UNTHREADED
+                      Procesing work queue  =2345 ms
+                      Entire rasterization  =2402 ms
+
+                      With main: 3192
+
+    GUIDED (1)
+                      Procesing work queue  =591 ms
+                      Entire rasterization  =653 ms
+
+                      With main: 1452
+
+
+
+              When comparing this to the unthreaded, we get a speedp (Of the total program):
+
+              static  speedup: 0.3
+              dynamic speedup: 2.3
+              guided  speedup: 2.1
+
+
+              When only comparing the paralelized part, we instead get:
+
+
+              static  speedup: 0.2
+              dynamic speedup: 3.2
+              guided  speedup: 3.9
+
+
+When comparing shceduling strategies, there is no guarantee for which one will be faster, as static has less overhead, but no load-balancing. Guided and dynamic have more load balancing.
+With more load-balancing, there is also more overhead.
+Since this task involves something similair to a heap-structure saved as an array, the earlier elements will be larger, and thus require more computing
+This means that the first thread gets a lot more work than all the others. If we have used the structure of the work-queue to redistribute the jobs, static might have been the fastest.
+=> We can not expect one strategy to be faster than the others, only more or less robust. 

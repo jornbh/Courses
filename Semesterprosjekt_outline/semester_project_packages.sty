@@ -1,0 +1,236 @@
+% Stuff from the linear systems report
+\ProvidesPackage{semester_project_packages}
+
+% Search http://ctan.org or type texdoc <package name> in a terminal to access LaTeX package documentation.
+\usepackage{babel} % babel and csquotes are packages for multilingual (e.g. Norwegian) support.
+\usepackage[T1]{fontenc} % See http://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc
+\usepackage[utf8]{inputenc} % See http://tex.stackexchange.com/questions/44694/fontenc-vs-inputenc
+\usepackage{csquotes} % Needs to be loaded after inputenc.
+\usepackage{amsmath} % See: http://tex.stackexchange.com/questions/32100/what-does-each-ams-package-do
+\usepackage{amssymb} % See above.
+%\usepackage[squaren]{SIunits} % Provides SI units like \meter. The squaren option is due to a conflict with amssymb. %! I removed this part
+\usepackage{graphicx} % Provides the \includegraphics command.
+\usepackage{booktabs} % Better tables. Provides \toprule, \midrule, \bottomrule.
+\usepackage{listings} % Provides source code listings.
+\usepackage[]{todonotes} % Provides several handy TODO commands.
+\usepackage[
+  backend=biber,
+  style=numeric,
+  isbn=false,
+  doi=false]{biblatex} % http://tex.stackexchange.com/questions/25701/bibtex-vs-biber-and-biblatex-vs-natbib
+\usepackage{hyperref} % Provides clickable links. Always load last, but before cleveref.
+\usepackage{cleveref} % Provides the \Cref command, for cross-referencing of equations, sections, figures and tables. Always load last.
+\usepackage{mathtools}
+\usepackage{breqn}
+\usepackage[parfill]{parskip}
+\usepackage{siunitx}
+\usepackage{todonotes}
+\usepackage{xspace}
+\usepackage{subcaption}
+\usepackage{caption}
+
+% ``listings'' package settings
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{pink}{rgb}{0.63, 0.13, 0.94}
+\lstset{language=Matlab, 
+	keywords={break, case, catch, continue,else,elseif,end,for,function,
+		global,if,otherwise,persistent,return,switch,try,while},
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{pink},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	numbersep=10pt,
+	backgroundcolor=\color{white},
+	tabsize=4,
+	showspaces=false,
+        showstringspaces=false}
+        
+\newenvironment{smallbmatrix}{
+  \bigl[ \begin{smallmatrix}}{
+  \end{smallmatrix} \bigr]}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\ctrbObsv}[1]{\pmb{\mathbb{#1}}}
+\newcommand{\MATLAB}{\textsc{Matlab}\xspace}
+\newcommand{\matlabMacro}[1]{\texttt{#1}}
+
+
+%My new stuff
+
+\usepackage{algorithm} % Write algorithms 
+\usepackage[noend]{algpseudocode} % Also needed to write algorithms (?)
+\usepackage{amsmath} % Multi-line equations
+% Command for making the norm 
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+% Commands for algorithms
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+\let\oldReturn\Return
+\renewcommand{\Return}{\State\oldReturn}
+
+\usepackage{lscape}
+
+% For using references
+\usepackage{hyperref}
+% \bibliography{bibliography}
+
+% For making acronyms (Hopefully, this will be the salvation of somebody. Probably not.... )
+\usepackage[acronym]{glossaries}
+
+\makeglossaries
+\newacronym{VSC}{VSC}{\hyperref[sec:VSC]{ Voltage Source Converter}}
+\newacronym{PLL}{PLL}{\hyperref[sec:PLL]{Phase Locked Loop}}
+\newacronym{PWM}{PWM}{\hyperref[sec:PWM]{Pulse Width Modulation}}
+\newacronym{SISO}{SISO}{Single Input Single Output}
+\newacronym{MIMO}{MIMO}{Multiple Input Multiple Output}
+
+
+
+\makeglossaries
+\newglossaryentry{omega_g}{
+    name={\ensuremath{\omega_g}},
+  description={Angular velocity of the grid (In per unit)},
+  sort={L}
+}
+\newglossaryentry{_b}{
+    name={\ensuremath{_b}},
+  description={Subscript b refers to the basis values that are used to define the per unit system},
+  sort={L}
+}
+
+\newglossaryentry{_dc}{
+    name={\ensuremath{_{dc}}},
+  description={ subscript dc refers to the impedances on the dc-side of the VSC. If it is used on a voltage, it means the voltage that goes directly into the VSC.( See \cref{fig:simplest_system})},
+  sort={L}
+}
+
+
+\newglossaryentry{_f}{
+    name={\ensuremath{_{f}}},
+  description={Subscript f refers to the impedance components on the 3-phase side of the VSC. They are used so that the discrete voltages from the VSC result in somewhat smooth currents and voltages at $V_o$ and $I_o$. (See \cref{fig:simplest_system})},
+  sort={L}
+}
+
+
+\newglossaryentry{V_cv}{
+    name={\ensuremath{V_{cv}}},
+  description={Average voltage given by the VSC over one duty-cycle},
+  sort={L}
+}
+
+\newglossaryentry{I_cv}{
+    name={\ensuremath{I_{cv}}},
+  description={Average current given by the VSC over one duty-cycle},
+  sort={L}
+}
+
+\newglossaryentry{_cv}{
+    name={\ensuremath{_{cv}}},
+  description={Subscript cv denotes an average value over one duty-cycle, given out by the VSC on the AC-side},
+  sort={L}
+}
+
+\newglossaryentry{_o}{
+    name={\ensuremath{_{o}}},
+  description={Subscript o refers to a value at the terminal between the output of the filter that smoothens  the VSC-signal and the grid},
+  sort={L}
+}
+
+\newglossaryentry{_g}{
+    name={\ensuremath{_{g}}},
+  description={Subscript g denotes a value that is related to the characteristics of the grid. These values are not a part of the VSC itself},
+  sort={L}
+}
+
+\newglossaryentry{i_dc,s}{
+    name={\ensuremath{i_{dc,s}}},
+  description={The current given by the idealised dc-source, unaffected by any impedance or parasitic losses},
+  sort={L}
+}
+\newglossaryentry{v_dc,s}{
+    name={\ensuremath{v_{dc,s}}},
+  description={The voltage given by the idealised dc-source, unaffected by any impedance or parasitic losses},
+  sort={L}
+}
+
+\newglossaryentry{_0}{
+    name={\ensuremath{_{0}}},
+  description={Subscript zero refers to that this is the value of a variable when it is at the stationary linear operating point, which means that the derivative of all states is zero},
+  sort={L}
+}
+
+
+\newglossaryentry{_s}{
+    name={\ensuremath{_{s}}},
+  description={Subscript s on matrices representing the continuous-time system (s as in s-domain). The system is open-loop without a controller (Non-official notation)},
+  sort={L}
+}
+
+
+\newglossaryentry{_z}{
+    name={\ensuremath{_{z}}},
+  description={Subscript oz n matrices representing the exact solution of the system in the discrete time-domain (z as in z-domain). The system is controller has been included in the system states, so it is closed-loop (Non-official notation)},
+  sort={L}
+}
+
+
+\newglossaryentry{_w}{
+    name={\ensuremath{_{w}}},
+  description={Subscript w on matrices the characteristics in the w-domain. The states of the systems include the controller states. (Non-official notation)},
+  sort={L}
+}
+
+
+\newglossaryentry{impulse_resp}{
+    name={\ensuremath{\mathbb{A}}},
+  description={A time-varying matrix that that gives the exact response of a system if multiplyed by an initial state $\Vec{x}(0)$ (Non-official notation)},
+  sort={L}
+}
+
+\newglossaryentry{step_resp}{
+    name={\ensuremath{\mathbb{B}}},
+  description={A time-varying matrix that that gives the exact response of a system if multiplyed by an an input-matrix and a constant input-vector $\Vec{B}\Vec{u}(0)$ (Non-official notation)},
+  sort={L}
+}
+\newglossaryentry{///}{
+    name={\ensuremath{///}},
+  description={I a circuit-drawing, three diagonal lines on a cable means that there are actually three phases that pass through similar impedances},
+  sort={L}
+}
+
+\newglossaryentry{rho}{
+    name={\ensuremath{\rho}},
+  description={Rho represents an arbitrary parameter in the physical system, like a capacitance, or certain parameters in the controllers}, 
+  sort={L}
+}
+
+\newglossaryentry{sup}{
+    name={\ensuremath{sup}},
+  description={ sup stands for supremum, and is an operator that chooses the lowest value, such that all values in a set are less that or equal to it (Like a max, but if you a restriction $x < 3$, then $sup(x) =3$ )}, 
+  sort={L}
+}
+
+\newglossaryentry{Hilbert_space_1}{
+    name={\ensuremath{\mathcal{H}}},
+  description={ A Hilbert-space. The important thing in this project is that an euclidian vector-space is a Hilbert-space}, 
+  sort={L}
+}
+\newglossaryentry{Hilbert_space_2}{
+    name={\ensuremath{\mathcal{K}}},
+  description={A potentially different Hilbert-space from $\mathcal{H}$. Since Euclidian spaces are Hilbert-spaces, a matrix-multiplication with $\Vec{A}$ that maps  $\Vec{A} : \Re^n \rightarrow \Re^m$, will mean that $\Re^n$ can be written as $\mathcal{H}$ and $\Re^m$ can be written as $\mathcal{K}$ }, 
+  sort={L}
+}
+
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}

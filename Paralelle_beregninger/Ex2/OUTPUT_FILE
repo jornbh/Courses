@@ -1,0 +1,12 @@
+Task 1 a 
+mpirun -np 1 time ./cpurender/cpurender -i input/audir8.obj -o output/audir8.png -w 1920 -h 1080 -d 2
+
+real	0m10.409s
+user	0m10.197s
+sys	0m0.194s
+Task 1 a 
+mpirun -np 1 time ./cpurender/cpurender -i input/cubes.obj -o output/cubes.png -w 1920 -h 1080 -d 2
+
+real	0m0.353s
+user	0m0.314s
+sys	0m0.023s

@@ -1,0 +1,10 @@
+Log-file of program ./dymosim
+(generated: Tue Feb 20 11:17:57 2018)
+
+dymosim started
+... "dsin.txt" loading (dymosim input file)
+The following error was detected at time: 0
+
+Model error - division by zero: (tank5.Xp) / (Settler.Xf) = (0) / (0)
+
+Error: Failed to start model.

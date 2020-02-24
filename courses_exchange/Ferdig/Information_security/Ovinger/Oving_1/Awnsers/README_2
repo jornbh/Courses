@@ -1,0 +1,26 @@
+The website sets a cookie that contains some inforation that seems like giberish. 
+I got to see the cookies asscosiated with the page by going into the storage inspector
+    Firefox: 
+    sidebar that comes from pressing the three lines in the top right corner    
+            -> Web Developer  
+            -> Storage Inspector
+
+The cookie contains some of the information that was to be expected, like the site, date when last accessed, as well as something that looks like giberish 
+    -> The thing that looks like giberish might be encrypted with some important information. 
+
+Normally, it would possibly have been hard to decrypt this, since there is so little information there (We could possibly have reconnected multiple times to get more information, in an attempt to try to crack the code)
+    (The values could also have been something we can't decrypt, like a random key into a garbage-collected hash-table, which would have made it hard to modify the cookie)
+    But since this course is not planning on being unreasonably hard, we can simply try some well known "encryption" algorithms and see if they give some reasonable awnsers
+        The awnser ended up containing mostly letters, but also an equal-sign, which means that a standard alphabetic cesar-cipher is unreasonable. 
+        I had never heard of base64 before, so this part was a bit tricky. Luckily, I ended up getting a hint, leading me in the right direction. 
+            After "Decrypting" the cookie, the contents are for the most part quite easy to read. The site lets us log in with any username, so changing that is not as interesting, but changing the last field on the other hand
+
+The last field seems to store information about the status of the user. In this case, we are simply a normal user.
+    -> We might want to change this into "administrator" instead (admin also seems reasonable, but that did not work) 
+
+Thus, we became an admin and got the cookie:
+
+Sucess! Token: 5EAci1xzbYF53LkKS7xsB93UwWkZs0HqBuxChlRgCvE=
+
+
+

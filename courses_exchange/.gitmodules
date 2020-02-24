@@ -1,0 +1,3 @@
+[submodule "Neural_networks/Artifichial_neural_networks_miniprojects"]
+	path = Neural_networks/Artifichial_neural_networks_miniprojects
+	url = git@github.com:jornbh/Artifichial_neural_networks_miniprojects.git

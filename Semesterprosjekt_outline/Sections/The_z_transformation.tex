@@ -1,0 +1,121 @@
+\chapter{The z-transform}
+Since our regulator is bound to be controlled by a micro-controller, part of the system is going to be sampled, and thus, it will act as a discrete system. Therefore, some of the tools for analyzing discrete-time systems are needed. 
+\label{chp:z_transform}
+\section{Characteristics of the z-transform}
+
+The z-transform works similarly to the Laplace-transform, mapping a sequence $x(k T_s)$ to the z-domain, giving $x(z)$. If the values of $x$ only depend on the previous values, the system is causal, and we can use the one-sided z-transform to represent it. 
+
+\begin{equation}
+ x(z) = Z\{ x(k T_s) \} = \sum_{k=0}^\infty x(k T_s) z^{-k}
+\end{equation}{}
+
+The z-transform is notable, because it is a one-to-one transformation, meaning anything that can be transformed into the z-domain can also be inverse transformed back into the discrete time-domain. This is done by the inverse z-transformation. 
+\begin{equation}
+ \{x(k T_s)\} = Z^{-1}\{ x(z) \} = \frac{1}{2 \pi j} \int_C z^{k-1} x(z) dz
+\end{equation}{}
+
+Where C is a closed path around all poles in the z-transform. \todo[inline]{Gjøre denne delen mer presis}
+Finally, when looking at the z-transform, it can be observed that
+
+\begin{align}
+ x(z) = Z\{ x((k+1) T_s) \} &= \sum_{k=0}^\infty x((k+1) T_s) z^{-k}\\
+ &= (z\sum_{k=0}^\infty x(k T_s) z^{-k}) -x(0)
+\end{align}
+Which means that the factor $z^{-1}$ works as a time-delay operator for one time-step. 
+
+\section{The effects of sampling}
+When sampling a system, it is also worth noting that the sampling will introduce harmonics. 
+Put simply, if you sample with a frequency of $T_s$
+\begin{equation}
+sin(\omega t) = sin\left((\omega + \frac{2\pi}{T_s })t\right) \forall t = n T_s : n \in \{...-1, 0,1,2, ...\}
+\end{equation}{}
+ As a result, the two sine-waves will be observed as the exact same signal. This phenomenon is known as aliasing and can occur for any signal that has a frequency that is faster than half the sampling frequency. This is known as the Nyquist-frequency. Aliasing can potentially affect the controller in ways that are more difficult to analyze. Usually, it is desirable to use an analog low-pass-filter to remove high-frequency noise that might give issues. This means that a filter with a cutoff-frequency around the Nyquist-frequency should be used. In this text, we will choose to ignore any effects resulting from these harmonic frequencies. 
+ 
+ 
+\section{Discretising continuous systems with the trapezoid rule}
+Normally, if one wants to transform a linear system in the continuous time-domain into the z-domain, it is done by transforming it into the Laplace domain, and then substituting all occurrences of $s$ with some expression given by $z$. If we ignore the fact that sampling can create harmonics, the delay in the z-transform can be represented as.
+
+\begin{equation}
+z = e^{T_s s} 
+\end{equation}{}
+
+Which results in:
+\begin{equation}
+ s = -\frac{1}{T_s} \ln{z}
+\end{equation}{}
+However, this can not be used to make a rational transfer function, since neither $\ln{z}$, nor $e^{-T_ss}$ are can be described as fractions of finite polynomials. Thus, a simplification is made from the Taylor-series, by using $e^{T_s s}$, around the point s = 0 
+
+\begin{equation}
+ e^{T_s s} = \sum_{n =0}^\infty \frac{1}{n!} T_s^n s^n e^{0}
+\end{equation}{}
+When making a simplification from this, this will have the disadvantage of changing the amplitude of a signal, unless the entire infinite series is included. So instead, the relation
+\begin{equation}
+e^{T_s s} = \frac{e^{T_s/2 s}}{e^{-T_s/2 s}} 
+\end{equation}{}
+When using the first order Taylor-approximation from each of them, we get a first order padé-approximation. 
+\begin{equation}
+ e^{T_s s} \approx \frac{2 + T_s s}{2 - T_s s}
+\end{equation}{}
+
+\begin{equation}
+ z^{-1} \approx \frac{2 + T_s s}{2 - T_s s}
+\end{equation}{}
+
+\begin{align}
+ s \approx \frac{2}{T_s} \frac{1 - z^{-1}}{1 + z^{-1}}
+\end{align}{}
+
+This approximation of the discretisation corresponds to using the trapezoid method when discretising a continuous system. This solution for discretising a continuous system is not exact.
+\section{Discretising linear systems by exact solutions}
+In the case of linear systems, when they are discretised, they are changed from. 
+\begin{equation}
+ s \Vec{x} = \Vec{A_{cont.}} \Vec{x} + \Vec{B_{cont.}} \Vec{u}
+\end{equation}{}
+to the form 
+\begin{equation}
+ z \Vec{x} = \Vec{A_{discrete}} \Vec{x} + \Vec{B_{discrete}} \Vec{u} 
+\end{equation}{}
+($\Vec{A_{cont.}}$ and $\Vec{A_{discrete}}$ are not the same matrix)
+Instead of using the trapezoid-rule that we just showed, it is possible to find the exact solution of how the system will respond by using a Taylor-expansion. 
+
+If we try to have a look at how it is possible to differentiate $\Vec{x}$ if $\frac{d \Vec{u}}{dt}=0$
+
+\begin{align}
+ \Vec{\dot{x}} &= \Vec{A} \Vec{x} + \Vec{B}\Vec{u}\\
+ \Vec{\ddot{x}} &= \Vec{A} \Vec{\dot{x}} + 0\\
+ \Vec{\ddot{x}} &= \Vec{A} \left(\Vec{A} \Vec{x} + \Vec{B}\Vec{u}\right)
+\end{align}{}
+
+This results in a series, that can be written as: 
+\begin{equation}
+ \Vec{x}^{(n)} = \Vec{A}^{(n-1)} ( \Vec{A}\Vec{x} + \Vec{B}\Vec{u}) \forall n \geq 1
+\end{equation}{}
+
+As a result, a Taylor-series can be used to express the solution:
+
+\begin{equation}
+ \Vec{x}(t) = \sum_{n=0}^\infty \frac{(t-t_0)^n}{n!}\Vec{A}^n\Vec{x}(0) + \sum_{i=1}^\infty \frac{(t-t_0)^n}{n!} \Vec{A}^{n-1}\Vec{B}\Vec{u}
+\end{equation}{}
+
+
+Since both $\Vec{x}(0)$ and $\Vec{u}$ are constants, they can be extracted from the sum. As a result, the two Taylor-series will the same matrices, regardless of $\Vec{x}(0)$ and $\Vec{u}$. 
+
+The Taylor-series with the multiple A-matrices, multiplied by the time-differences can be solved exactly if $\Vec{A}$ is written on Jordan form, as will be seen in \cref{sec:finding_eAt_when_A_is_defective}.
+The resulting matrix is written as 
+\begin{equation}
+ e^{ \Vec{A}t} \triangleq \sum_{i=0}^\infty \frac{t^n}{n!}A^n
+\end{equation}{}
+
+It is possible to extract the taylor-series for $\sum_{i=1}^\infty \frac{(t-t_0)^n}{n!} \Vec{A}^{n-1}$ If $\Vec{A}$ is invertible.
+
+As a result, an exact solution can be given by 
+
+\begin{equation}
+ \Vec{x}(t) = e^{\Vec{A}t}\Vec{x}(0) + \Vec{A}^{-1}( e^{\Vec{A}t} -\Vec{I})\Vec{B}\Vec{u}
+\end{equation}{}
+
+Finding an exact solution is a bit more troublesome if the matrix $\Vec{A}$ is non-invertible (If one or more eigenvalue is equal to 0), but it is possible and will be discussed in \cref{sec:solving_for_uninvertible_matrices} 
+
+
+Using the trapezoid-rule is a lot easier than finding exact solutions, and usually gives good results. As a matter of fact, it is so much simpler, that it is possible that all transformation could have been done symbolically (if only one symbol is used) if the trapezoid-rule were to be used instead. The trapezoid-rule comes with the issue that is not as easy to say anything about the consequences of performing such a simplification. So it might be less desirable for systems that are not allowed to fail. 
+

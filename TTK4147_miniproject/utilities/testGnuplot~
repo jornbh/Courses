@@ -1,0 +1,29 @@
+
+
+#Global
+set term png enhanced size 1280,1024
+set output "plot5.png"
+unset key
+set multiplot
+set size 0.9, 0.45
+
+
+# u(t) lower left
+set origin 0, 0
+set title "dt(t)"
+set xlabel "t"
+set ylabel "dt"
+set grid
+plot "results.dat" using 1:2 title "print result" with lines
+
+
+
+# u(t) lower left
+set origin 0, 0.5
+set title "u(t)"
+set xlabel "t"
+set ylabel "dt"
+set grid
+plot "results.dat" using 1:3 title "print result" with lines
+
+

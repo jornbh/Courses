@@ -1,0 +1,11 @@
+Scanning dependencies of target helloWorld
+[ 11%] Building C object CMakeFiles/helloWorld.dir/src/taskD.c.o
+[ 22%] Building C object CMakeFiles/helloWorld.dir/src/time_operators.c.o
+[ 33%] Building C object CMakeFiles/helloWorld.dir/src/taskA.c.o
+[ 44%] Building C object CMakeFiles/helloWorld.dir/src/taskB.c.o
+[ 55%] Building C object CMakeFiles/helloWorld.dir/src/taskE.c.o
+[ 66%] Building C object CMakeFiles/helloWorld.dir/src/array.c.o
+[ 77%] Building C object CMakeFiles/helloWorld.dir/src/main.c.o
+[ 88%] Building C object CMakeFiles/helloWorld.dir/src/taskC.c.o
+[100%] Linking C executable helloWorld
+[100%] Built target helloWorld

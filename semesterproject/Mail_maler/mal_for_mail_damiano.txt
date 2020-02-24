@@ -1,0 +1,16 @@
+Jeg vil gjerne søke på semesterprosjktene: 
+
+Formation Control Strategies for Multi-SpacecraftSpace Debris Removal Missions
+Image-based Estimation Algorithms For RendezvousManeuvering to Non-Cooperative Objects in Space
+
+Jeg bør advare om at jeg ikke har hatt 
+1. Romteknologi 1 eller 2 
+2. Noen som helst erfaring med kontroll av systemer med flere aktører. 
+
+I tillegg bør jeg envne at jeg tar et atassyn-fag dete semesteret, så jeg kan ikke dokumentere i hvilken grad jeg har/ikke har none kompetanse innenfor feltet. 
+Likevel er jeg veldig intresert i å prøve meg på en oppgave som involverer formasjons-kontroll, i tillegg til adativ regulering. 
+
+(Jeg må virkelig beklage for at jeg sender denne mailen så absurd sent. )
+
+mvh 
+- Jørn Bøni Hofstad

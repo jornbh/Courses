@@ -1,0 +1,2 @@
+task B
+gcc -o bin/program obj/time_operators.o obj/taskA.o obj/taskB.o -lm 

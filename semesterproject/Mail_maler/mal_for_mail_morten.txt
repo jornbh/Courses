@@ -1,0 +1,12 @@
+Jeg vil gjerne søke på semesterprosjktene: 
+
+Control and estimation of the heat equation, with application to de-icing. (With UBIQ Aerospace).
+Cyclic and collective rotor control for floatingwind turbines
+Optimal maneuvering with sail propulsion
+
+Jeg har virkelig lyst til å få prøvd meg på en semesteroppgave som er ordentlig tung på reguleringsteknikk. (Jeg tilbringer for øyeblikket et semester på utveksling og begynner å savne noen ordentlige kyb-fag). Jeg har desverre ikke hatt foertøysstyring, så det er noe du bør være klar over om det er et problem. Men, som sagt har jeg veldig lyst til å få prøvd meg på en litt hårete reguleringsoppgave, spessielt den som omhandler PDE-er, siden at jeg fremdeles iriterer meg over at jeg ikke har lært hvordan man styrer et system som er beskrevet av en PDE. 
+
+(Jeg må virkelig beklage for at jeg sender denne mailen så absurd sent. )
+
+mvh 
+- Jørn Bøni Hofstad

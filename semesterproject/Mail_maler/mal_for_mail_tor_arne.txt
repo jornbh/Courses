@@ -1,0 +1,19 @@
+Jeg vil gjerne søke på semesterprosjktene: 
+
+
+Automatic landing of multi-rotor on moving platform
+Multi-rotor pickup of objects in the sea.
+Hyperspectral imagingof marine biologyfrom UAVs
+Wind Estimation with Multirotor UAVs
+Design of an Icing Wind Tunnel for UAVs
+In deep learning, a convolutional neural networkConvolutional neural network for real-time crack detection in ships from drone inspection
+
+Jeg bør advare om at jeg ikke har hatt 
+1. Fartøysstyring
+
+
+
+(Jeg må virkelig beklage for at jeg sender denne mailen så absurd sent. )
+
+mvh 
+- Jørn Bøni Hofstad

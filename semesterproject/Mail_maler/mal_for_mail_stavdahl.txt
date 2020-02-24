@@ -1,0 +1,17 @@
+Jeg vil gjerne søke på semesterprosjktene: 
+
+Modified Empirical Mode Decomposition 
+Path Planning for Perception-Driven Obstacle-Aided Locomotion of Snake Robots
+Sensorstyrte slangeroboter  (Perception-Driven Obstacle-Aided Locomotion for Snake Robots)
+Estimering av hjertefrekvens og –variabilitet under ulike oksygeneringsregimer
+
+Etter et semester med litt for mange datafag har je veldig lyst på et semesterprosjekt som fokuserer mer på kyb/signalbehandling. MOdellering av slangeroboter virker som en ekstremt spennenede oppgave, og det samme gjelder for prosjektet som omhandler dekomponering, 
+Jeg bør sannsynligvis advare om at jeg ikke har hatt fartøysstyring, og at jeg tar digital signalbehandling på utveksling, så si ifra om dette er et prolem for å kunne ta prosjektet. 
+
+Signal processing for communications
+http://edu.epfl.ch/coursebook/en/signal-processing-for-communications-COM-303-1
+
+(Jeg må virkelig beklage for at jeg sender denne mailen så absurd sent. )
+
+mvh 
+- Jørn Bøni Hofstad

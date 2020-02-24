@@ -1,0 +1,7 @@
+Task 2
+
+a)
+  Number of devices on the lab PC = 1
+
+b)
+  I pipe the output to a .txt-file, so it is written there istead...

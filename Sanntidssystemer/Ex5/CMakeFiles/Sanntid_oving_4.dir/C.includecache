@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jorn/Documents/Fag/Sanntidssystemer/Ex5/src/main.c
+other.h
+/home/jorn/Documents/Fag/Sanntidssystemer/Ex5/src/other.h
+stdio.h
+/home/jorn/Documents/Fag/Sanntidssystemer/Ex5/src/stdio.h
+stdlib.h
+/home/jorn/Documents/Fag/Sanntidssystemer/Ex5/src/stdlib.h
+pthread.h
+-
+sched.h
+-
+
+/home/jorn/Documents/Fag/Sanntidssystemer/Ex5/src/other.c
+stdio.h
+/home/jorn/Documents/Fag/Sanntidssystemer/Ex5/src/stdio.h
+
+/home/jorn/Documents/Fag/Sanntidssystemer/Ex5/src/other.h
+

@@ -1,0 +1,29 @@
+Jeg vil gjerne søke på semesterprosjktene: 
+
+Studentprosjektforslag - Procedural Generation: Game Worlds
+
+Jeg har desverre ikke en veldig dyp erfaring innenefor dette, men jeg har veldig gjerne kunen tenkt meg å prøvd å vinklet denne oppgaven å få til anti-korrolerende conditiona sampling. 
+For eksempel: 
+ 1) Oppnå høy varians langs parametre som man anser som "viktige"
+    - f.eks om bakgrunnsfargen i en verden er "rød", så bør bakgrunnsfargen av den neste verden være noe annet, f.eks "Rød". 
+ 2) Ha en viss grad av korrolasjon mellom parametre som "Bør høre sammen"
+    - Om en verden er "Rød" vil manhelst at visse sett av parametre bør korrolere med dette (Som at de fleste dyrene også er røde)
+    - Interesse-punkter bør derimot ha egenskaper som ikke korrolerer med dette. (f.eks at dører bør være en annen farge enn rød)
+    
+
+Det er et par ting du likevel bør være klar over
+1) Det kan være at store deler av dette, muligens alt er løst av sampling fra grafiske modeller. 
+2) Jeg vet ikke hvor komplisert noe slikt kommert til å være. Det er høyst sannsynlig at jeg ikke er rett person for denne jobben. 
+
+
+
+( Det er også mulig at dette ikke er i nærheten av hva du hadde sett for deg og at jeg bare babler ;-)   ) 
+
+
+Signal processing for communications
+http://edu.epfl.ch/coursebook/en/signal-processing-for-communications-COM-303-1
+
+(Jeg må virkelig beklage for at jeg sender denne mailen så absurd sent. )
+
+mvh 
+- Jørn Bøni Hofstad

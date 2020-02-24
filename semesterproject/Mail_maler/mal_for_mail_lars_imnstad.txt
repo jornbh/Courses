@@ -1,0 +1,16 @@
+Jeg vil gjerne søke på semesterprosjktene: 
+
+Model-based control of offshore wind turbines
+Model-based control ofmulti-rotor wind turbine
+Machine learning in wind turbine control
+Project thesis–Forecast and fault detection ontrajectories
+
+Jeg har veldig lyst til å prøve meg på et semesterprosjekt som involverer en del regulering, og det føles ut som om MPC kan være en veldig god mulighet for å gjøre det. 
+Jeg har desverre ikke noe sørlig forkunskap om vindmøler, men jeg håpre at det ikke blir noe sørlig stort problem. 
+Jeg mangler også fartøysstyring, om dette er veldig viktig for forecast-prosjektet. 
+
+
+(Jeg må virkelig beklage for at jeg sender denne mailen så absurd sent. )
+
+mvh 
+- Jørn Bøni Hofstad

@@ -1,0 +1,23 @@
+\chapter{Conclusion and future work}
+\label{chp:conclusion}
+
+\section{Conclusion} %# TODO The conclusion must be finished soon
+Analysing discretised systems in the z-domain tends to be a difficult task, and the results provided in this project did not change that. The method that was provided here did, however provide a tool that should, at least, in theory give estimates that will be pessimistic. That is something that can be useful for problems, where the cost of failure is very large. Furthermore, the uncertainties of the estimates come from the limited ability to perform matrix-multiplications. That means, that as computational power increases, it will be possible to analyse larger systems, or with less error. During the project, no methods were found that could provide a general solution, which will work on any linear system. In return, the solution that was provided covers a wide class of linear systems, and will be valid for most physical systems, and all passive ones. There was not enough time in the project to implement the algorithm, and test for how tight the bounds for the estimates would have been. From the rough estimate of the bounds in \cref{sec:guarantees_of_estimate}, the current upper bound may work very poorly for stiff systems, since calculating the derivative of a Taylor-series with 60 steps is unreasonable for a matrix in $\Re^{1000\times 1000}$
+
+
+\todo[inline]{I left off here}
+\section{Future work}
+Since there was not enough time to test the method that was developed in this project, the most important task forward will be to simulate the methods provided, and see if they work in practice.
+
+\noindent
+As a secondary goal, it is also relevant to see if the upper bounds that were given on the derivatives are tight enough to be used. It is deffinitely possible that tighter bounds can be given. Differentiating the Taylor-approximations grows more or less cubically with the number of steps done in the Taylor-approximating. Additionally, the norm given by the matrices will grow with the number of elements, so the method may scale poorly. So tighter bounds might also be needed. 
+
+\noindent
+It is potentially of equal importantance to try to describe inputs properly in the w-domain. This project was only able to say something about modeling errors, and not anything about noise. It is possible that if it would be possible express inputs in the w-domain, something valueble could be said about the robustness to noise. 
+
+Furthermore, the method is not general, so there may be ways to always give an upper bound on the derivative, even for singular system-matrices where the eigenvalues are 0, and change depending on the parameters. After asking some people who work in the field of mathematics to take a quick glance at the problem, they mentioned that the problem looked close to something that could be solved with a pseudo-inverse. The awnsers were mostly based on a huch, but it may be worth looking into. It has also been mentioned that Higham's Complex Step Approximation is a good estimator for $\frac{d e^{\Vec{A}(\rho)}}{d \rho }$, but there was not enough time to explore it further, or to see if it was possible to give any guarantees with regards to the error. 
+
+\noindent
+
+Additionally, a lot of work remains on the practical side. The model explored in this paper is one of the simplest set-ups for a \gls{VSC}, and does not cover concepts such as multiple controllers on a grid, variable sources, or different kinds of controllers. 
+

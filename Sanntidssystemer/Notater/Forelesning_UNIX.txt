@@ -1,0 +1,79 @@
+Building a linux kernel (~6 mill linjer kode)
+    Er et stort stykke progrmvre og kan konfigureres på mange forskjellige måter
+
+Alle funksjonelle komponenter av kernelen har tilgang til intærne routiner 
+Loadable modules
+    Rellativt uavhengige blokker 
+    En modul er en ogjekt-fil hvor koden kan linkes og unlinkes fra kernel-runtimen 
+En modul utføres i kernel-mode på vegne av den nåværende prosessen 
+To viktige karakteristikker 
+    Dynamisk linking  (Man trenger ikke reboote for å laste en modul)
+    Stackable modules 
+Prosesser kan bare kommunisere eller be om noe fra kernelen ved hjelp av system calls. 
+Interrupts-modulen tar interrupts fra maskinvare, terminal eller direkte fra IO (Også fra Network interface controller)
+Traps og faults 
+
+Concurency i linux kernelen 
+    Fire mekanismer er nevnt i Stallings
+    Atomiske operasjoner
+    Spinlocks (De sover ikke)
+    (Kernel) Semaforer 
+        Semaforer som man kan bruke i kernel-space code 
+    Bariærer: Tvinger rekkefølgen instruksjoner utføres. 
+    
+Linux mmory management 
+    Ganske komplekst 
+    Det er en tre-lags tabellstruktur   
+    Page middle directory 
+    Page table directory 
+        En for hver prosess
+
+Linux page replacement 
+    Det fysiske minnet vil før eller siden bli fylt opp:
+    Page replacement følger "Least frequently used"
+    Hver side i main memort har en teller, som inkrementeres hver gang den aksesseres
+    Linuks vil periodisk dekrementere disse tellerene
+
+Memory alocation 
+    Hpgaven er å allokere og deallokere frames for spesifikk bruk. 
+
+Linux scheduling 
+    Tre klasser av scheduling-algoritmer 
+        FIFO, round robin real-time-trheads, SCHED_OTHER: andre ikke real-time tråder 
+
+    Linux-kernelen ble ikke laget for å være preemptive, men den kan ikke være fullstendig preemptive, uansett hvilken konfigurasjon man setter den i
+    Linux desktop vil pgså kjøre flere prosesser, så det kan være vaskelig å vite hvilken prosess osm forsinker en task 
+
+    
+Slik det er np har ikke Linux et skille melom tråder og prosesser.
+    Men tråder har delt minne 
+    Kontekst-switches mellom tråder er raskere 
+    Kernelen scheduler hver tråd individuelt. 
+
+
+Hva om user-spacet ikke er nok
+    Man kan lage tråder som kan kjøre i kernel-space
+    Funksjonaliteter kan impleenteres i kernel-space kan implementeres i kernel space for å redusere context-switcehs, som reduserer ytelse 
+    f.ejs åndtereing av rotasjonsenkodere
+    Men man kan ikke bruke user-space biblioteker i kernel-space, men i stedet spesielle Linux kernel header files
+
+
+
+PREEMPT-RT 
+    Default linux-kernelen kommer med tre nivåer a preemption
+        ....
+
+Generic co-kernel concept 
+    Kjører ved siden av main kernel
+
+Xenomai
+    Første og andre versjon brukte en co-kernel eller deal kernel aproach
+    Den nyere xenomai 3 har to forskjellige moduser
+        Dual kerenel aproach, hvor Cobalt kjører ved siden av Linux kernelen 
+    Single kernel aproach, hvor native.....
+
+Dual kernel aproachen har bedre ytelse og lavere forsinkelse 
+    Men det er en del problemer med å operere i to kontekster 
+    Det å bytte mellom dem vil ta tid 
+    Om man bytter til Linux-kontekst mister man real-time "Privilegiene"
+    Det trengs mer utvikling 

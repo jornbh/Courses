@@ -1,0 +1,11 @@
+The results are in the top-level documents 
+task_1.txt
+task_2.txt
+task_3.txt
+
+
+Each task is run by a bash-file in 
+
+task_[1,2,3]/UserMadeFiles/task_[1,2,3].sh
+
+Running some of the tasks might take a very long time... 

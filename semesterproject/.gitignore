@@ -1,0 +1,10 @@
+# Just in case there are lisencing-issues
+Papers/Damping_osciltions_Suul.pdf
+Papers/PECon_published.pdf
+Boker/
+Damping_osciltions_Suul.pdf
+PECon_published.pdf
+~$*
+*.tmp
+# Papers/Other_papers/IEEE Xplore Full-Text PDF:_files/*
+Papers/Other_papers/*

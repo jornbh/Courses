@@ -1,0 +1,41 @@
+Angeling Cubes
+mpirun -np 1 time ./cpurender/cpurender -i input/cubes.obj -o output/cubes.png -w 1920 -h 1080 -d 2
+
+real	0m0.351s
+user	0m0.314s
+sys	0m0.021s
+mpirun -np 2 time ./cpurender/cpurender -i input/cubes.obj -o output/cubes.png -w 1920 -h 1080 -d 2
+
+real	0m0.324s
+user	0m0.584s
+sys	0m0.039s
+mpirun -np 3 time ./cpurender/cpurender -i input/cubes.obj -o output/cubes.png -w 1920 -h 1080 -d 2
+
+real	0m0.430s
+user	0m1.057s
+sys	0m0.105s
+mpirun -np 4 time ./cpurender/cpurender -i input/cubes.obj -o output/cubes.png -w 1920 -h 1080 -d 2
+
+real	0m0.477s
+user	0m1.611s
+sys	0m0.086s
+mpirun -np 5 time ./cpurender/cpurender -i input/cubes.obj -o output/cubes.png -w 1920 -h 1080 -d 2
+
+real	0m0.775s
+user	0m2.181s
+sys	0m0.428s
+mpirun -np 10 time ./cpurender/cpurender -i input/cubes.obj -o output/cubes.png -w 1920 -h 1080 -d 2
+
+real	0m1.363s
+user	0m4.124s
+sys	0m0.424s
+mpirun -np 20 time ./cpurender/cpurender -i input/cubes.obj -o output/cubes.png -w 1920 -h 1080 -d 2
+
+real	0m2.717s
+user	0m8.500s
+sys	0m0.975s
+mpirun -np 100 time ./cpurender/cpurender -i input/cubes.obj -o output/cubes.png -w 1920 -h 1080 -d 2
+
+real	0m13.705s
+user	0m42.212s
+sys	0m6.386s

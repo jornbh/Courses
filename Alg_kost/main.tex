@@ -1,0 +1,44 @@
+\documentclass[11pt, a4paper, USenglish]{article} % change ``USenglish'' to ``norsk'' if applicable.
+
+\usepackage{kyblab} % Contains all included packages. See kyblab.sty.
+\begin{document}
+% Titlepage
+\title{TTK4115 Linear System Theory\\
+    \large Helicopter lab assignment \\
+}
+\author{Jørn Bøni Hofstad}
+\date{October 22, 2017}
+\begin{titlepage}
+    \maketitle
+    \begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/itk_ntnu}\\
+    filler picture
+    \end{figure}
+    \thispagestyle{empty}
+\end{titlepage}
+
+% Abstract
+\newpage
+\input{abstract}
+\thispagestyle{empty} % Avoid page numbering on the abstract page.
+
+% TOC
+\newpage
+\tableofcontents
+\thispagestyle{empty} % Avoid page numbering on the table of contents.
+% Main content
+\newpage
+\setcounter{page}{1}
+\include{part1}
+\include{part2}
+% \input simply inserts the contents of the file, while \include forces a \newpage.
+% See \input vs. \include: http://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include
+
+% References
+\newpage
+% \addcontentsline{toc}{section}{References}
+% \printbibliography[heading=bibintoc]{References}
+\label{sec:bibliography}
+
+\end{document}

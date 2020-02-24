@@ -1,0 +1,50 @@
+Task 2
+a) 
+    Dividing the processes into non-overlapping intervals, proved to be somewhat tricky. 
+    Dividing the rasterisation tasks between all n processes can be done with a simple 
+        (iterator % nProcesses) == RANK
+    But this causes unnececary traversal of the tree of tasks
+        (One task spawns 26 new ones untill the bottom of the tree) 
+    But by finding the size of a tree, given a depth and a branching-factor makes things easier.
+    All processes can be given an interval they have to work on.
+        If the IDs of the tasks are assigend in the same order as a depth firts search,
+        it makes it possible to know what interval a subtree contains. 
+        With this information, a task can simply avoid going down into a subrtree if there 
+        is no overlap between the assigned interval to the process and the contained interval in the subtree. 
+
+
+                        1
+                    /       \
+                   2         5
+                 /  \       /  \
+               3      4    6     7 
+
+        The interval contained in a subtree can be calculated form the index of the root node, 
+        as well as the size of the subtree and all preceeding subtrees with the same root. 
+
+        The size of a subtree can be given by:
+                    sum[from depth = 0 to depth = depthLimit]( branchFactor^depth)
+        
+        The index of the root-node is given by 1+ the som of the size of all preceeding subtrees with the same root
+
+    We only implemented reduce, not any solutions using send. 
+
+b)  
+    The resulting frame-vector only contains the computed values, but by sharing closest(smallest) values the depth-buffers
+    by using MPI_ALLREDUCE() with MPI_MIN, each process can say if they are (one of) the closest process(es) to the canvas. 
+    If  process is alone in being the closest, it is safe to write to it (Given no transparency).
+    Thus after receiving the depth-buffer all preocesses create a new frame-buffer and write to it if they are the closest.
+    Finally a new MPI_REDUCE is called with MPI_BAND  (bitwise and),
+    which will work if all elements in the vectors have been initialized to their max value (255)
+
+    A simple test on rank ensures only the master (rank = 0) wirtes the file. 
+
+
+
+    As long as there are free CPUs, launching more tasks in this case only improves the execution-time.
+    Adding more tasks than there are processors, causes the program to run slower. Aditionally, the memory-usage increases when more threads are run.
+    If a simgle computer with limited RAM is used, exceeding this limit will cause the system to write some of the 
+    memory to hard-disk in order to emulate a larger memory. This will casue the system as a whole to run substantially slower.
+    On linux, the entire user interface practically freezes, and the PC has to be restarted, since killing the processes takes such a long time. 
+    Aditionally, if there are several tasks that compete for running-time on the PC, the sceduler will have to schedule them, which will also take some time,
+    More importantly. Switching between task will require new memory to be received, and if none of them share memory more page-misses will occur, and important memeory might be swaped to the hard-disk.

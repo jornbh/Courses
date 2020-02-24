@@ -1,0 +1,9 @@
+Man disabler interrupts for interrupts med lavere prioritet når en interrupt skjer
+Tre karakteristikker mellom forskjellige typer minne
+  Kapasitet
+  Aksess-tid
+  Kostnad
+
+DMA: Direct memory access
+  Interaksjon ked IO-enheter blir "Outsourcet" til en DMA-modul
+  CPU-en får bare vite når overføringen er ferdig

@@ -1,0 +1,101 @@
+We only look at the total runtime of the tests
+The runtime of the unchanged objects are:
+
+
+a)
+UNCHANGED 
+
+The tests are in order:
+    1) sphere
+    2) prop
+    3) scene
+    4) head
+the results were: 
+    sphere  :  THe program took: 161ms
+    prop    :  THe program took: 3713ms
+    scene   :  THe program took: 160063ms
+    head    :  THe program took: 28044ms
+
+
+b) 
+I don't quite understand what to do here...
+
+1)
+Tried to make a struct which contained for loops for all opareators, to tell the compiler to optimize with sse
+    No significant speedup (Did not document)
+
+2) 
+Used  
+    #include <emmintrin.h>
+to gain acces to the sse datatype __m128 (4 floats) and added it to the union
+All operators were already overloaded for __m128 => Simply used them in the overloaded operators
+
+
+Result:
+
+sphere    : THe program took: 110ms
+prop      : THe program took: 2648ms
+scene     : THe program took: 112205ms
+head      : THe program took: 24426ms
+
+
+
+
+
+sphere    :  161 / 110        =  1.4636363636363636
+prop      :  3713 / 2648      =  1.402190332326284  
+scene     :  160063 / 112205  =  1.4265228822244997      
+head      :  28044 / 24426    =  1.1481208548268238    
+
+
+
+=> Moderate speedup (Old has ~1.4 times the runtime of the new one)
+
+This makes some sense. By definition one vector-operation can't be any faster than one scalar operation. 
+In the lectue, it was mentioned that a vector operation often takes ~2*  the time of a scalar operation, but performs it on 4* the datatype
+Thus the maximum speedup would be twice as fast. 
+    But the != operator was not implemented as a vector operation, so that part of the program still ran with the same speed
+    Aditionally, setting the random variables is still performed serially, so if you compare the time of only performing the number-crunching:
+
+
+
+If only the run-time of the number-crunching is checked, the result is:
+
+
+Paralell: 
+
+
+sphere   :   THe program took:     89ms
+prop     :   THe program took:   2046ms
+scene    :   THe program took: 104514ms
+head     :   THe program took:  18971ms
+
+
+Serial: 
+
+sphere  : THe program took:    109ms
+prop    : THe program took:   2905ms
+scene   : THe program took: 149903ms
+head    : THe program took:  27508ms
+
+
+
+Result: 
+    When only lokking at the time for chrunching numbers, the result is:
+
+
+sphere  :   1.2247191011235956
+prop    :   1.4198435972629522
+scene   :   1.4342863157089003
+head    :   1.450002635601708
+
+
+speedup foud by: 
+(serial/paralell)
+
+
+
+           
+         
+          
+         

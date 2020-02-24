@@ -1,0 +1,211 @@
+Mesteparten av kommunikasjon skjer over Moodle 
+TO forum: Et for annonseringer, og et for spørsmål
+
+
+Mid-termen er gruppearbeid (på 3)
+    Man skal presentere det sammen 
+    Man skal presentere et research paper
+
+
+Muntlig eksamen
+    Ingen grense på hvor mye informasjon på man kn ha 
+        Men ingen kommuniserende hjelpemiddel
+    
+
+Kurset har to deler 
+    En del med tråbundende nettverk
+    Nettverk via trådløs kommunikasjon
+
+Vi får ikke gjort noe på maskinvre, så vi skal bruke simmuleringsmodeller (På PC-ene våre) 
+    Ingen evaluering på dette
+
+Ikke vent på pausen med å stille spørsmål
+
+
+
+
+
+FORELESNINGEN
+
+
+
+real-time betyr fremdeles IKKE fort (duh) 
+Det finnes også tilfeller der det er en feil om noe skjer for tidlig også (Men det er ikke like vanlig) 
+
+
+Ofte, jo nærmere man er hardware, jo strengere enn tidskravene, men dataene blir ofte større jo lenger unna man går. (Men dette er ikke alltid tilfellet)
+
+Points: Målinger
+    Absolutt ikke det samme som big data
+
+Avstander. Man kan ha rekkevidder fra flere tusen kilometer (Transmisjon og distribusjon), ned til et par meter (inne i et kjøretøy)
+Reaksjons-tider: Fra mikrosekunder opp til et minutt
+    Det viktigste er å være tidsnok
+
+
+Application modeller
+    To typer: 
+        Time triggered:
+            Syklisk 
+            Man kan ofte ha jitter constraints på periodiske tasks
+                T_0 -T_1 /T = Jitter
+            
+        Event triggered:
+            De gjør ikke noe, helt til en eller annen event skjer
+            Det er en maksimum end-end delay 
+            Man må vite rekkefølgen noe skjedde i 
+                Og man må av og til synkronisere proseser 
+
+Data modeller 
+    Process data 
+    Configurasjoner og parametre 
+    Programmer 
+    Egenskaper 
+        Temporal consistency 
+            Absolutt 
+            rellativ
+        Spartial consistency 
+
+Temporal consistenct 
+    [a, t_a, v_a]
+    En instans t, v_a er absolutt konsistent <=> t-t_a < A (A: Absolute conistency thresshold for a)
+    v_a og v_b er rellativt konsistente <=> | t_a -t_b| < R (R: rellative consistenc threshold) 
+    Data har ofte mange egenskaper som må bli transportert/assosiert med dataene 
+        En temperatursensor gir velgig forskjellig informasjon, avhengig av hvor den er plassert, selv om dataene er veldig like
+    Vi snakker ikke om routing => Vi holder oss på netwok liknk layeret 
+    LAN : en data link som bruker det samme fysiske laget og de samme MAC-protokollene
+
+Trafic model 
+    Real-time periodic
+        M_{p,i} = {T_i, D_i, C_i} 
+            C_i er lengden på meldingen, D er RELATIV deadline og T er perioden
+                Absolutt deadline er gitt ved n*T_i + D_i
+    Real-time sproadic
+        M_{s,i} = {T_i, D_i, C_i} 
+            T_i er min interval time. 
+
+
+    Multimedia 
+        Ujevn annkomst av pakker med varrierende lengde. 
+        Ikke sanntid, men vi vil vise bedre enn best effort => Vi deler ofte en båndbredde => Vi garanterer en min-båndbredde 
+
+    Best effort trafic kan avo og til la være å sende data som man ville ønsket det 
+    
+    Kabel-nettverk er ikke /så/ langt unna å være sant (Man gjør av og til denne antagelsen)
+        men dette stemmer IKKE for trådløse
+        
+    Wireless 
+        Vanligvis har man bursts av feil på trådbasserte nettverk
+        eller så har man fading: (Lange feil) 
+            Refleksjon som fører til at man får samme signal litt forskjøvet fra hverandre
+    Wired : Ofte godt moddellert med pakke error-rate uten noen korrolasjon
+
+    Modeller for nettverksfeil:
+        Duplikasjoner 
+        Ommissions 
+        Kollisjoner 
+        Bapbling idiot : En node krasjer og sender ut data på nettet. 
+        Failing scilently
+        
+
+Course objective 
+    ...
+    Kunne garantere QoS, og vurdere QoS (Quality of Service) 
+    ... 
+
+Det finnes mange forskjellige sanntidss-nettverks
+
+
+
+
+
+
+
+
+
+
+
+DEL 2
+
+Data link layer 
+    En frame er noe som har mening
+        Man grupperer bits inn i frames 
+        Frame synkronisering 
+        Deteksjon (korreksjon) av feil
+        Flyt-kontorll
+        Management av aksess til mediet. 
+
+        Er ofte avhengig av det fysiske laget
+    Når man kan sende en melding direkte til noen andre. 
+        Om man må videresende det trener man bruke routing eller noe liknende => Netverkks-laget
+Trasnport-laget 
+    Man må sørge for at daten fremdeles er korrekt, og at den sørger for at man ikke har mister noe. 
+        Gir også en abstraksjon av en strøm.
+Session layer 
+    Gir en måte å få forskjellige recovery points om noe går galt 
+Presentation layer 
+    Sørger for at man slipper å tenke på ting som little eller big endian
+Application layer
+    Det programmereren får se. 
+
+Interconnections 
+    Repeaters   
+        Fysisk lag
+    Bridges (Switch)
+        Data link laget 
+    Routers 
+        Nettverskalaget 
+    Gateways 
+        Application-layer
+
+
+Routere endrer addressen, bassert på en global addresse
+Gateways: Når to nettverk snakker over forskjellige protokoler
+    FTP <-> HTTP
+
+Påvirknig på QoS    
+    Observerbare egenskaper på nettverket (3)
+        Transfer delay bounds 
+        Trnafer delay variations 
+
+
+    Fysiske laget 
+        Topologi og fysiske begrensninger 
+        Bit rate (IKKE baud rate <== Baud rate er ofte hvor ofte signalet endrer seg i mediet =/= bit rate (Informasjon) )
+        SNR 
+        Motstansdyktighet mot interferens
+Medium Access COntrol 
+    Aksess-mekanismer 
+        Kan bli påviket av prioriteter 
+    Error detection scheme 
+        Performance til error dection 
+    Error correction scheme 
+        Redundans, eller be og gjentagelse
+        FEC: Forward error correction 
+    Packet delimination 
+        Packet error rate
+    Det er vanskelig å skille mellom signaler og støy over trådløs lomminikasjon 
+        Det er grunnen til at "start-sekvensen" er på 4 bits => Mindre sannsynlighet for at støy fanges opp
+    Skille mellom emisjoner fra forskjellige kilder 
+        3 basis-valg 
+            Forskjellige grekvenser, Forskjellige tider, 
+
+    FDMA
+        Det er ogte noe overlapp mellom hosliggende kanaler
+        I en del WLAN bruker man frequency hopping (Som hos Nordic), slik at man minimerer interferens 
+    TDMA 
+        Krever tids-synkronisering. 
+        Båndbredde kan endres til å passe til senderen 
+        Det er mulig å "Skru av" en emitter om de ikke trenger å sende 
+        Men sårbar ovenfor fading. 
+    CDMA 
+        Separerer i tid og frekvens 
+            TO prinsipper 
+                Direkte sekvenser: Hver bitt konverteres til en sekvens av chips 
+                Frequency hopping 
+    TDD: Time division duplexing 
+    FDD: Frequency division duplexing
+
+
+Det er forskjellige typer TDMA
+    De fleste tingene som 

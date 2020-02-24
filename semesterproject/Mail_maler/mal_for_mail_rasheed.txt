@@ -1,0 +1,17 @@
+Jeg vil gjerne søke på semesterprosjktene: 
+
+Uncertainty quantification in Machine Learning Models
+Machine Learning Controllers
+
+For øyeblikket tar jeg alle maskinløringsfagene mine mens jeg er på utveksling i Lausanne, så jeg har desverre ikke noen karrakterutskrifter å vise til. 
+
+Artifichial neural Networks: 
+http://edu.epfl.ch/coursebook/en/artificial-neural-networks-CS-456
+Learning theory
+http://edu.epfl.ch/coursebook/en/learning-theory-CS-526
+
+
+(Jeg må virkelig beklage for at jeg sender denne mailen så absurd sent. )
+
+mvh 
+- Jørn Bøni Hofstad

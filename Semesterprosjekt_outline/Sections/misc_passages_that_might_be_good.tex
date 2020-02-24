@@ -1,0 +1,37 @@
+\chapter{Misc. Points that might be cool to bring up}
+\label{chp:misc_cool_stuff}
+\todo[inline]{Kanskje fjerne denne delen}
+These are included to give a better understanding, but there should deffinitely be souces that explains these things
+\section{Park adding up to 0}
+The $120\deg$ rotation between between the phases means that if the triangle between them is divided into twoo, it will be a 30,60,90-triangle. Whivh means the hypothenus is twice as lng as the shortest katet.  This lets uss decompose the a and b-vectors into two. The long katets are pointing the påpsite direction and have the same length , so they cancel out. ALsp, the short ktets point in the same direction, each with a length of half of one of the vectors. This one stands 60 defrees from each vector, which means that it will be $180\deg$ from the last vector, with a length of one. So that they will all cancel out. 
+
+
+
+The d-transformation in Park can be seen as (if we normalize the voltage to have max amplitude 1) 
+
+\begin{align}
+    v_d = \frac{2}{3}\sum_{n=1}^3 cos( \theta +\tilde{\theta} - n \frac{2\pi}{3}) cos( \theta - n\frac{2\pi}{3}) 
+\end{align}{}
+We will denote $ \theta  - n \frac{2\pi}{3}$ as $\theta_n$ from now on
+When multiplying these and using the Euler's formula, we can get 
+
+\begin{align}
+     cos( \theta_n +\tilde{\theta}  ) \cdot cos( \theta_n)  = \frac{cos( 2 \theta_n + \tilde{\theta}) + cos(\tilde{\theta})}{2}
+\end{align}{}
+
+When looking at $\frac{n2\pi}{3} mod 2\pi$, multiplied by two, the result is that they go from being 0, 1 and 2 times $\frac{2\pi }{3}$, to being 0, 2, 1 times $\frac{2\pi}{3}$, which means they will give the same result when they are added together. And this will be regardless of the phase they have at a certain point in time. 
+\section{Differentiating the park transform with respect to error in angular estimate}
+When summing complex numbers of the same amplitude, whose angles are evenly distributed along the unit-circle, they will add up to 0. And since a cosine can be seen as the real part of such a number, the sum of such cosines are also 0. As a result, we get. 
+
+\begin{align}
+    v_d = \frac{2}{3}\sum_{n=1}^3 \frac{cos(\tilde{\theta})}{2}
+\end{align}{}
+
+Since $sin(x)$ = $cos(x -\frac{\pi}{2})$. We can simply expand this to get. 
+\begin{align}
+    v_q = \frac{2}{3}\sum_{n=1}^3 \frac{sin(\tilde{\theta})}{2}
+\end{align}{}
+
+This means that the derivative with respect to $\tilde{\theta}$ will be $1$ for $v_q$ and 0 for $v_d$. 
+
+This is where the effects of  $\delta \theta$  on the rest of the variables comes in when linearizing the system. 

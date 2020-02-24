@@ -1,0 +1,28 @@
+a)
+    Made a global variable for rotation- angle that is changed depending on rank. 
+    Running the program with far more processes than CPUs (1000 processes) makes more processes than the PC can handle, an causes all CPUS to run at 100% , but at  least the PC does not freeze completely due to swaping...
+    Needed to go into the system monitor to kill all of them
+    The processes are spread among the 4 CPUs, so up untill 4 cores, the running time is basically the same. At the 5th, the time roughly doubles, 
+        Results are in ./notes/task1A.txt
+    The speedup is roughly equivalent to dividing the tasks in 4, rounded up.
+        But exceeding the limits of the RAM causes it to freeze. 
+
+    The changes mainly included adding an input parameter to rasterize and using a global variable for the rotation 
+
+
+b) 
+    Since we know all the participants, we simply allow the master to distribute rotations among all. 
+    I did not know that the MIP_SEND guaranteed that the function will not return unless the data that has been sendt in 
+    is ready to be modified, so we simply made an array with the data for each other process, and asked for an ACK in return
+    
+
+c) Sending a vector of structs containing vectors is somewhat tricky, as they have variable size.
+    The meshes have to be sendt one at a time, regardless of implementation. 
+    Sending objects over MPI is somewhat dangerous. If a class is polymorphic, it will contain ponters corresponding to its class
+    Aditionallly, there is no guarantee that the compiler will not change the placement of the elements,
+    in order to fit words, etc. I'm not quite sure if this means that we can guarantee that everything will stay consistent between -O0 and -O3
+
+    Only sending vectors does not send the colours as well, so in the final implementation all threads load the image
+
+
+

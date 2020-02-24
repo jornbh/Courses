@@ -1,0 +1,20 @@
+In this instance, we had to set up as server, as well as make our own self-signed certificate. 
+
+This means we had to set up our own server, as well as our own certificate.
+Luckily ngingx does most of the work, but there are some things to take not of: 
+    The http-part of this file has most likely allready been called, so we can not add http{  ...} in our file
+        But this is not a problem, since it http seem so encapsulate the entire file, so we will simply have to write the fields directly
+            
+            You can get the key by, for instance using: 
+                openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout localhost.key -out localhost.crt -config localhost.conf
+
+                source: https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04
+            
+            This gives us the key and the certificate we need for our server. 
+            Thre rest we need is to add the rest to the server. 
+                Port 443 for https-requests.
+                Filepath for where the files are suposed to be gotten from 
+                And the location of the server in the folder-structure. 
+
+    
+            

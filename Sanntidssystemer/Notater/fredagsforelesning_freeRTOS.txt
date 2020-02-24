@@ -1,0 +1,8 @@
+Containers vs. Intrusive data structures
+    Listen intrudes inn i tingen den prøver å lagre 
+        Den har list-capabilities.
+
+
+All synkronisering i FreeRTOS er køer
+
+Man kan lage maroer for å utføre med makroer, men det er implementert med for-løkker

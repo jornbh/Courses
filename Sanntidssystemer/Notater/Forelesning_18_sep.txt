@@ -1,0 +1,32 @@
+Priority inversion.
+    Når en middelsprioritet-task kjører over en med lav prioritet, men den med lav prioritet har en ressurs som den med høy prioritet trenger
+Løsning:
+    Priority inheritance
+    Man arver prioriteten til den høyeste tasken man blokkerer. 
+
+Priority inversion reduserer effekten av priority inversion til high-priority tasks
+    Men man kan forbedre dette med Priority ceiling protocoll
+
+Immediate ceiling Priority protocol
+    Hver delte ressurs får en prioritet som tilsvarer den høyeste prioriteten til en task som kan spørre etter den.
+    EN task får prioriteten som er størst av sin egen prioritet og prioriteten til en task den har resservert.
+
+Original ceiling priority
+    Hver task starter også her med en static proority, og hver ressrs har en static priority = max av prioritetene til tasks som kan trenge den. 
+    EN task har dynamisk prioritet arver prioriteten fra den høyeste den blokkerer 
+    EN task kan bare blokkere en ressurs om ressursens dynamiske prioritet er høyere enn ceilingen av alle låste ressurser (Ekskludert alle den har låst selv)
+    Prioriteten til en ressurs er konstant. Prioriteten til en task endres avhengig av tasksene som brukes.
+
+ICPP har mindre hopp mellom kontekster
+    ICPP er også lettere å implementere, siden den ikke trenger å ha kontroll over hvilke ressurser som brukes
+
+Priority ceiling gjør det mulig å regne ut worst-case blocking time
+    Vi får større forutsigbarhet. 
+
+Worst-case blocking time med inheritance
+    Max-block time er maksimal tid lav-prioritets-tasken kan brike ressursen 
+    B_i = sum{k=1 => K}(useage(k,i)C(k)
+Når man har multiprocessor-miljø, hvor hver task kjøter på hver sin CPU.
+ 
+
+

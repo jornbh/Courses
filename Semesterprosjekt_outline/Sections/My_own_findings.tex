@@ -1,0 +1,293 @@
+\chapter{Contribution}
+\label{chp:new_findings}
+\section{Transforming a MIMO-system into the system into the w-domain}
+
+As described in \cref{chp:w_transformation}, the eigenvalues of a system can be written in the w-domain as: 
+ 
+\begin{equation}
+ w\Vec{x} = \Vec{A}_w\Vec{x} + \Vec{B}_w\Vec{u}
+ \label{eq:MIMO_in_w}
+\end{equation}{}
+
+If the system is on this form given in \cref{eq:MIMO_in_w}, it will be stable if all eigenvalues of $\Vec{A_w}$ are in the left half-plane. 
+
+By using the derivative of the eigenvalues of $\Vec{A_w}$, it is possible to say something about how sensitive the system is to changes in the different parameters that define $\Vec{A_w}$. Consequently, the derivative will be able to tell how plausible it is that some of the eigenvalues might end up in the right half-plane. This can be very useful when estimating the robustness against modeling errors. 
+
+Ideally, we want to find out as precisely as possible how much the eigenvalues change if we are slightly wrong about the parameters in our physical system. The derivatives of $\lambda$ will not be able to tell exactly at what point an eigenvalue will cross over to the right half-plane, but for small changes, the derivative is often a decent approximation. But in order to find the derivative in the w-domain, we will have to step through the entire transformation of how we got from the time-domain all the way to the w-domain. 
+
+How to find the derivative of an eigenvalue was described in \cite{Suul_eigenvalue_presentation}, but will be re-elaborated here. 
+
+In order to find the derivative of an eigenvalue $\lambda_i$, the vectors $\phi_i$ and $\psi_i$ are needed. $\phi_i$ and $\psi_i$ have to be eigenvectors and eigencolumns corresponding to an eigenvalue $\lambda_i$. So they have to fulfil
+\begin{equation}
+ \Vec{A}\phi_i = \lambda_i \phi_i
+\end{equation}{}
+\begin{equation}
+\psi_i\Vec{A}= \lambda_i \psi_i
+\end{equation}{}
+If $\psi_i$ and $\phi_i$ also satisfy the requirement that 
+\begin{align}
+ \psi_i \phi_j = 0 \forall i \neq j \\
+ \psi_i \phi_i = 1 \forall i
+\end{align}{}
+Then
+\todo[inline]{Finn en ordentlig refferanse som beskriver dette ordentlig, eller forklar det selv ( Virker vanskelig ) }
+\todo[inline]{Uttrykket for endringen i eigenverdien må endres}
+\begin{equation}
+ \frac{d \lambda_{w,i}}{d \rho} = \frac{1}{|\psi_i \phi_i|} \psi_i \frac{d \Vec{A_w}}{d \rho }\phi_i 
+\end{equation}{}
+In order to find the sensitivity of the eigenvalues with respect to a parameter in the physical system, it is necessary to use the chain rule through every step that was done in the transformation, until we reach the step $\frac{d \Vec{A_s}}{d \rho}$, or $\frac{d \Vec{B_{cont}}}{d \rho}$, which can be differentiated directly. 
+
+
+As shown in \cref{sec:Transforming_from_z_to_w}, the transformation from the z-domain to the w-domain is: 
+
+\begin{equation}
+ \Vec{A}_w = \frac{2}{T} \left(\Vec{I} - 2( \Vec{I}+\Vec{A}_z)^{-1}\right)
+\end{equation}{}
+
+We use the trick from \cite{Matrix_differentiation_source}, the inverse of a matrix $\Vec{A}$ can be found by: 
+
+\begin{equation}
+ \frac{d \Vec{I}}{d \rho} = \frac{d ((\Vec{A})(\Vec{A})^{-1}}{d \rho} = 0
+\end{equation}{}
+
+\begin{equation}
+ \frac{d (\Vec{A})(\Vec{A})^{-1}}{d \rho} = 
+ \frac{d (\Vec{A})}{d \rho} (\Vec{A})^{-1} +
+ (\Vec{A})\frac{d (\Vec{A})^{-1}}{d \rho}
+\end{equation}{}
+
+Which gives: 
+\begin{equation}
+ \frac{d (\Vec{I}+\Vec{A})^{-1}}{d \rho} = - (\Vec{I}+\Vec{A})^{-1}\frac{d (\Vec{A})}{d \rho} (\Vec{I}+\Vec{A})^{-1} 
+\end{equation}{}
+
+And when applying that to the differentiation of $\Vec{A}_w$
+\begin{equation}
+ \frac{d \Vec{A}_w}{d \rho} = \frac{4}{T} (\Vec{I}+\Vec{A}_z)^{-1}\frac{d (\Vec{A}_z)}{d \rho} (\Vec{I}+\Vec{A}_z)^{-1}
+\end{equation}{}
+But this is where the fun ends. $A_z$ comes from a combination several different submatrices with different dynamics. Luckily, when differentiating a matrix with respect to a scalar, the sub-matrices can be differentiated independantly. If the impulse-response of $\Vec{A_s}$ is defined as $\gls{impulse_resp}\gls{_s}$, step-response is defined as $\gls{step_resp}\gls{_s}$, then the matrix $\Vec{A_z}$ can be defined as: 
+
+\begin{equation}
+ \Vec{A_z} = 
+ \begin{bmatrix}
+ \gls{impulse_resp}\gls{_s} & \gls{step_resp}\gls{_s}\Vec{B_s} & \Vec{0}\\
+ \Vec{K_1} & \Vec{0} & \Vec{K_2}\\
+ \Vec{K_3} & \Vec{0} & \Vec{K_4}
+ \end{bmatrix}{}
+\end{equation}{}
+
+All matrices $\Vec{K_i}$ can be differentiated directly and should not result in any problems. Meanwhile, the impulse-response is always:
+\begin{equation}
+ \gls{impulse_resp} = e^{\Vec{A} T_s}
+\end{equation}
+The step-response is allways defined, but if $\Vec{A_s}$ is invertible, then it can be written as in \cref{eq:easy_step_resp}. If not, it has to be found as in \cref{sec:solving_for_uninvertible_matrices}
+\begin{equation}
+ \gls{step_resp}_s = \Vec{A_s}^{-1}\left( e^{\Vec{A_s}T_s} - \Vec{I}\right)
+ \label{eq:easy_step_resp}
+\end{equation} 
+
+
+% As long as $\Vec{A}_s$ has full rank, its inverse can be differentiated like what had been done in the previous section. If $\Vec{A_s}$ does not have full rank, it is still possible to find out how the system responds to constant inputs, and it may still be possible to differentiate the expression under certain conditions, as will be discussed in \cref{sec:differentiating_step_response_from_input}. But, since electrical grids usually are passive, it is quite likely that $\Vec{A_s}$ has an empty null-space. 
+
+
+During this project, no general method was found for differentiating $\Vec{e^{A_s T_s}}$ with respect to $\rho$
+% \begin{equation}
+% \frac{d }{d \rho} \left( \Vec{e^{A_s T_s}} \right)
+% \end{equation}{}
+There might not exist a way to perform the differentiation. But there is still be hope if our goal just is to get an upper bound on the sensitivity. 
+
+\noindent 
+
+
+The matrix $e^{\Vec{A_s} t}$ is defined as 
+\begin{equation}
+ e^{A_s t} = I + At + \frac{A^2 t^2}{2!} + ... + \frac{A^n t^n}{n!} + ...
+\end{equation}{}
+
+During this project, no better method was found for differentiating Taylor-series. As a result, we simply use the product rule, which gives. 
+
+\begin{equation}
+ \frac{d (\Vec{A})^n}{a_{i,j}} = \sum_{k=1}^{n}\Vec{A}^{k-1} \frac{d \Vec{A}}{d a_{i,j}} \Vec{A}^{n-k}
+\end{equation}{}
+
+Since it is not possible to compute such an infinite sum numerically, it is necessary to make an approximation by dropping the terms after a certain point.
+
+\begin{equation}
+ \frac{d\hat{\gls{impulse_resp}}}{d\rho} = \frac{d}{d \rho} \sum_{i=0}^{N} \frac{A^i t^i}{i!}
+\end{equation}
+
+The step-response suffers from similair problems. If $\Vec{A_s}$ is invertible, the best estimate can be given by: 
+\begin{dmath}
+ \hat{\gls{step_resp}}_s = \Vec{A_s}^{-1}\frac{d\hat{\gls{impulse_resp}}}{d\rho} - \Vec{A_s}^{-1}\frac{d A_s}{d\rho}\hat{\gls{step_resp}}_s
+\end{dmath}
+If not, the method from \cref{sec:differentiating_step_response_from_input}, has to be used instead, if the conditions are met.
+The error bound is discussed in \cref{sec:how_bad_can_it_go}. We define the estimated derivative of a matrix $\frac{\Vec{A}}{d \rho}$ as a matrix $\Delta \Vec{A}$. The resulting approximation for the derivative of $\frac{d \Vec{A_z}}{d \rho}$ becomes: 
+\begin{equation}
+ \Delta\Vec{A_z} = 
+ \begin{bmatrix} 
+ \frac{d \hat{\gls{impulse_resp}}_s}{d \rho} & \frac{d \hat{\gls{step_resp}}_s}{d \rho}\Vec{B} + \gls{step_resp}_s\frac{d \Vec{B_s}}{d \rho} & 0\\
+ \frac{d \Vec{K_1}}{d \rho} & 0 & \frac{d \Vec{K_2}}{d \rho}\\
+ \frac{d \Vec{K_3}}{d \rho} & 0 & \frac{d \Vec{K_4}}{d \rho}
+ \end{bmatrix}
+ \label{eq:approx_dA_z}
+\end{equation}{}
+
+The the derivatives of the sub-matrices $\frac{d \Vec{K_1}}{d \rho} $, $ \frac{d \Vec{K_2}}{d \rho}\frac{d \Vec{K_3}}{d \rho} $, $ \frac{d \Vec{K_4}}{d \rho}$ can all be found directly, and will usually be equal to 0.
+
+
+The explicit solution for $\hat{\gls{impulse_resp}}_s$ is: 
+\begin{equation}
+ \frac{d \hat{\gls{impulse_resp}}_s}{d \rho} =
+ \sum_{n=0}^N \sum_{k=1}^n \frac{(T_s)^n}{n!} \Vec{A_s}^{k-1} \frac{d \Vec{A_s}}{d \rho} \Vec{A_s}^{n-k}
+\end{equation}
+
+
+Electrical circuits that are only made of resistors, inductors capacitors, and voltage/current-sources without any state feedback are always passive. For linear systems, this will mean that all states will go towards 0. As a result, $\Vec{A_s}$ must have full rank, which means $\Vec{A_s}$ is invertible. If there are more converters or generators in the grid, they may cause issues, but it is quite unlikely. 
+
+
+After the long process of differentiating the expression, we can avoid the almost impossible task of having to symbolically find the values in the w-domain, but it did cost some precision. Since we were unable to find the actual derivative of the matrix $\Vec{e^{At}}$, even though the rest of the matrix $\Vec{A_z}$ was found exactly. 
+
+
+Finally, after approximating the derivative of $\frac{d e^{\Vec{A}t}}{d a_{i,j}}$, we can look at how the different elements in $\Vec{A_s}$ and $\Vec{B_s}$ can change, depending on the changes in parameters. If this is multiplied by the expected difference between the real and the estimated value of the components, it will be possible to get an idea of how robust the system is. Actual estimates of the robustness will most likely also require some statistical analysis. 
+
+
+\section{Giving upper bounds to the error}
+\label{sec:how_bad_can_it_go}
+We were not able to differentiate $\frac{d e^{A(x) T_s}}{d \rho}$, so now it will be necessary to give an upper bound to how far the estimated eigenvalues can be from the real ones. In order to do that, it will be necessary to have an upper bound for how much the eigenvalues might change because of the error. This can be done by using matrix-norms, as seen in \cite{Triangle_inequality_source} and \cref{sec:induced_matrix_norms}. Additionally, it will also be necessary to traverse backwards through the transformations when taking the norm between the real derivative of the eigenvalues, and the estimated ones, similar to how it was done when differentiating the eigenvalues. 
+
+\subsection{An upper bound on the error of \texorpdfstring{$\frac{d e^{\Vec{A}t}}{d\rho}$}{TEXT}}
+\label{sec:upper_bound_norm_eAt}
+In order to estimate the error, we will define the error of the simplified Taylor-series as: 
+\begin{equation}
+ \tilde{\mathbb{A}} = \sum_{i = N}^\infty \Vec{A}^{i}\frac{\left(T_s \right)^i }{i!}
+\end{equation}
+As a result: 
+\begin{equation}
+ \frac{d\tilde{\mathbb{A}}}{d\rho} = \sum_{i=N}^\infty \sum_{k=1}^i \Vec{A}^{k-1}\frac{d \Vec{A}}{d \rho}\Vec{A}^{i-k}\frac{\left(T_s \right)^i }{i!}
+\end{equation}
+
+We will use the fact that $\norm{\Vec{AB}}\leq \norm{\Vec{A}} \cdot \norm{\Vec{B}}$ for all operator norms, as mentioned in \cite{Triangle_inequality_source} and shown in \cref{sec:induced_matrix_norms}. As a result of this inequality, an upper vound can be given for $\frac{d\tilde{\mathbb{A}}}{d\rho}$
+\begin{equation}
+ \norm{\frac{d}{d\rho} \sum_{n=N}^\infty \frac{T_s^n}{n!}\Vec{ A}^n} \leq \sum_{n=N}^\infty \frac{T_s^n}{n!} n\left( \norm{\frac{d\Vec{ A}}{d x}} \cdot \norm{\Vec{ A}}^{n-1}\right)
+\end{equation}{}
+
+$\norm{\Vec{ A}}$ and $\norm{\frac{d\Vec{ A}}{d x}}$ can both be calculated, while $T_s$ is known beforehand. Therefore, the series may be upper bounded by: 
+
+\begin{equation}
+ \norm{\frac{d}{d\rho} \sum_{n=N}^\infty \frac{T_s^n}{n!}\Vec{ A}^n} \leq \frac{\norm{\frac{d\Vec{ A}}{d x}}}{|T_s|} \left( e^{\norm{\Vec{A}} T_s} - \sum_{n=0}^{N-1} \frac{\left(\norm{\Vec{A}} T_s \right)^n}{n!}\right)
+ \label{eq:upper_bound_deAt}
+\end{equation}{}
+
+In this project, we will be using the $\mathcal{L}_1$ operator norm, since it is easy, and allows for some simplifications when calculating norms of matrices when the norms of the submatrices are known. But the analysis still holds for other operator norms as well. 
+
+\subsection{An upper bound for the derivative of \texorpdfstring{$\lambda$}{TEXT}}
+Given a perfect estimate $\Delta\Vec{A_w^*}$ of $\frac{d \Vec{A_w}}{d\rho}$, the eigenvalues can be found exactly. 
+\begin{equation} 
+ \frac{d \lambda_{i}}{d \rho} = \frac{1}{|\psi\phi|} \phi_i \Delta\Vec{A_w^*} \phi_i 
+\end{equation}{}
+\todo[inline]{Sørg for at phi og psi er riktig transponert}
+
+The perfect estimate can be divided int two parts 
+\begin{equation}
+ \Delta\Vec{A_w^*} = \Delta\Vec{A_w} + \tilde{\Delta\Vec{A_w}}
+\end{equation}
+Where $\Delta\Vec{A_w}$ is our estimate of $\frac{d \Vec{A_w}}{d\rho}$, and $\tilde{\Delta\Vec{A_w}}$ is the error. 
+The estimates are given by the equation: 
+\begin{equation}
+ \Delta\Vec{A_w^*} = - ( \Vec{I}+\Vec{A}_z)^{-1} \Vec{\Delta A_z^{*}} ( \Vec{I}+\Vec{A}_z)^{-1}
+\end{equation}{}
+
+As a result, the two matrices can be described by the estimate of $\Delta\Vec{A_w}$ and the error. 
+\begin{align}
+ \Delta\Vec{A_w} = - ( \Vec{I}+\Vec{A}_z)^{-1} \Vec{\Delta A_z}( \Vec{I}+\Vec{A}_z)^{-1}\\
+ \Delta\Vec{\Tilde{A}_w} = - ( \Vec{I}+\Vec{A}_z)^{-1} \Vec{\Delta \Tilde{A}_z}( \Vec{I}+\Vec{A}_z)^{-1}
+\end{align}{}
+
+$\Vec{\Delta A_z}$ is given by \cref{eq:approx_dA_z}, which has an exact solution. $\Vec{\Delta \Tilde{A}_z}$ is the differentiation of the remaining terms and must be given an upper bound instead. 
+
+
+In order to give an upper bound to the change that results form $\Vec{\Delta \Tilde{A}_z}$, it is possible to use the submultiplicative property of operator norms. As explained in \cite{Triangle_inequality_source}, and re elaborated in \Cref{sec:induced_matrix_norms}, any incuced operator norm will satisfy.
+\begin{equation}
+ ||\Vec{AB}|| \leq ||\Vec{A}|| \cdot ||\Vec{B}|| \quad \forall \Vec{A}, \Vec{B} \in \Re^{n \times n}
+ \label{eq:submultiplicativity}
+\end{equation}
+
+For simplicity, it is possible to just use the $\mathcal{L}_1$-norm, which is given by: 
+
+\begin{equation}
+ \norm{\Vec{A}}_1 = \max_j \sum_{i}\left|\Vec{A}_{i,j}\right|
+\end{equation}
+
+\todo[inline]{Sørg for at det some er før og etter her passer sammen}
+\begin{equation}
+ \norm{ \Vec{ \Delta \Tilde{A}_w} } \leq \norm{( \Vec{I}+\Vec{A}_z)^{-1}} \cdot \norm{\Vec{\Delta \Tilde{A}_z}} \cdot \norm{( \Vec{I}+\Vec{A}_z)^{-1}}
+\end{equation}{}
+
+The norm of $\norm{( \Vec{I}+\Vec{A}_z)^{-1}}$ can be found easily. So the only issue is $\norm{\Vec{\Delta \Tilde{A}_z}}$, which has several sub-matrices where $e^{\Vec{A_s}T_s}$ is a factor. 
+
+If an upper bound of a matrix-norm has to be given, based on the norm of the sub-matrices, it will depend on the type of norm. When using the $\mathcal{L}_1$-norm, an upper bound can be found by treating  the norms of the sub-matrices  as elements instead, i.e.
+
+\begin{equation}
+ \norm{\begin{bmatrix}
+ \Vec{A_{1,1}} & \cdots & \Vec{A_{1,n}}\\
+ \vdots & \ddots & \vdots \\ 
+ \Vec{A_{n,1}} & \cdots & \Vec{A_{n,n}}
+ \end{bmatrix}}_1
+ \leq \max_j \left( \sum_{i=1}^n\norm{\Vec{A_{i,j}}}\right)
+\end{equation}
+
+
+As a result, an upper bound can be found for each sub-matrix separately. 
+
+\noindent
+As seen in \cref{eq:A_z}, only the first two sub-matrices are dependant on $\Vec{A}_s$. As a result, only the remainder of $\gls{impulse_resp}_s$ and of $\gls{step_resp}_s\Vec{B}_s$ will give non-zero sub-matrices. 
+
+If the error between the real step-response $\gls{step_resp}_s$ of the continuous system, and the estimate used for the differentiation $\hat{\gls{step_resp}}_s$, the derivative of the error has the notation
+\begin{equation}
+ \frac{d \tilde{\gls{step_resp}}}{d\rho}
+\end{equation}
+
+If the matrix $\Vec{A_s}$ is invertible, finding $\frac{d \tilde{\gls{step_resp}}}{d\rho}$ is relatively easy.
+\begin{equation}
+ \frac{d \tilde{\gls{step_resp}}}{d\rho} = \Vec{A_s}^{-1}\left(\frac{d \tilde{\gls{impulse_resp}}}{d\rho}\right)
+\end{equation}
+If the matrix $\Vec{A}_s$ does not have full rank, the method in \cref{sec:upper_bound_for_errors_in_noninvertible_systems} describes how the norm is found. 
+
+The resulting matrix becomes. 
+\begin{equation}
+ \Vec{\Delta \tilde{A}_z} = 
+ \begin{bmatrix}
+ \frac{d\tilde{\gls{impulse_resp}}_s}{d\rho}
+ & 
+ \frac{d \tilde{\gls{step_resp}}}{d\rho}\Vec{B}
+ & 0\\ 
+ 0&0&0\\
+ 0&0&0\\
+ \end{bmatrix}
+\end{equation}
+
+
+\begin{equation}
+ \norm{\Vec{\Delta \Tilde{A}_z}}_1 \leq \max \left(\norm{\frac{d}{dx} \sum_{n=N}^\infty \frac{T_s^n}{n!}\Vec{ A_s}^n}_1 , \norm{\frac{d \tilde{\gls{step_resp}}}{d \rho} \Vec{B_s}}_1 \right)
+\end{equation}{}
+
+Using \cref{eq:upper_bound_deAt}, the expression can instead be rewritten as
+
+
+
+
+
+\begin{equation}
+ \norm{\Vec{\Delta \Tilde{A}_z}}_1 \leq \max \left(
+ \frac{\norm{\frac{d\Vec{ A_s}}{d x}}}{|T_s|} \left( e^{\norm{\Vec{A_s}} T_s} - \sum_{n=0}^{N-1} \frac{\left(\norm{\Vec{A_s}} T_s \right)^n}{n!}\right) , \norm{\frac{d \tilde{\gls{step_resp}}}{d \rho} \Vec{B_s}}_1 \right)
+\end{equation}{}
+
+If $\Vec{A_s}$ is invertible, the upper bound can even be written as: 
+
+\begin{equation}
+ \norm{\Vec{\Delta \Tilde{A}_z}}_1 \leq \max \left(1, \norm{\Vec{A_s}^{-1}}_1 \cdot \norm{\Vec{B_s}}_1 \right) 
+ \cdot \left(
+ \frac{\norm{\frac{d\Vec{ A_s}}{d x}}}{|T_s|} \left( e^{\norm{\Vec{A_s}} T_s} - \sum_{n=0}^{N-1} \frac{\left(\norm{\Vec{A_s}} T_s \right)^n}{n!}\right) \right)
+\end{equation}{}
+
+Which means the upper bound of $|\frac{d \lambda}{d \rho}|$ can be found

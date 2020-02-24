@@ -1,0 +1,19 @@
+Hit:1 http://packages.microsoft.com/repos/vscode stable InRelease
+Ign:2 http://packages.linuxmint.com sylvia InRelease
+Ign:3 https://dl.bintray.com/pony-language/ponyc-debian pony-language InRelease
+Hit:4 http://packages.linuxmint.com sylvia Release
+Hit:5 http://master.dl.sourceforge.net/project/d-apt d-apt InRelease
+Hit:7 https://dl.bintray.com/pony-language/ponyc-debian pony-language Release
+Hit:9 http://archive.ubuntu.com/ubuntu xenial InRelease
+Hit:10 http://archive.ubuntu.com/ubuntu xenial-updates InRelease
+Hit:11 http://archive.ubuntu.com/ubuntu xenial-backports InRelease
+Hit:12 http://security.ubuntu.com/ubuntu xenial-security InRelease
+Hit:13 http://archive.canonical.com/ubuntu xenial InRelease
+Hit:14 http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu xenial InRelease
+Hit:15 http://ppa.launchpad.net/shutter/ppa/ubuntu xenial InRelease
+Hit:16 http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu xenial InRelease
+Hit:17 https://packagecloud.io/AtomEditor/atom/any any InRelease
+Reading package lists...
+Building dependency tree...
+Reading state information...
+All packages are up to date.

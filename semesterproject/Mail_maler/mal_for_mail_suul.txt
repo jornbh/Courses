@@ -1,0 +1,20 @@
+Jeg vil gjerne søke på semesterprosjktene: 
+
+Energy management systems for hybrid ships
+Control of Virtual Synchronous Machines in hybrid ship power systems
+Utilization of battery systems for load disturbance rejection in ship power systems
+Representation of time-delay in state-space models of power electronic systems
+
+Etter et semester med litt for mange datafag har jeg veldig lyst på et semesterprosjekt som går mer tilbake til kybernetikk. regulering og kontroll av energi-systemer virker som en veldig spennende og god måte å gå gjøre dette. 
+Jeg bør sannsynligvis advare om at jeg  tar digital signalbehandling på utveksling,så fokuset kan være litt anderledes enn NTNU sitt fag. Si ifra om dette er et prolem for å kunne ta prosjektet. 
+
+Jeg har også iritert meg alt for lenge over at jeg ikke kjenner til en god måte å ressonere om tidsforsinkelse i dynamiske systemer, så jeg har ekstremt lyst til å prøve meg på et prosjekt hvor jeg prøver å endre på dette. 
+
+
+Signal processing for communications
+http://edu.epfl.ch/coursebook/en/signal-processing-for-communications-COM-303-1
+
+(Jeg må virkelig beklage for at jeg sender denne mailen så absurd sent. )
+
+mvh 
+- Jørn Bøni Hofstad

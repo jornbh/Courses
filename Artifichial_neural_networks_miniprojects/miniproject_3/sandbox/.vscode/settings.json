@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "/home/jorn/anaconda3/envs/cs456env/bin/python",
+    "wolf.disableHotModeWarning": true,
+    "python.formatting.provider": "autopep8"
+}

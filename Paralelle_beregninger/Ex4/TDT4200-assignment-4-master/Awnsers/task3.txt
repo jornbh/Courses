@@ -1,0 +1,61 @@
+Task 3
+
+a)
+
+
+INITIAL assumption
+-----------------------------|
+|  0-> tot items             | med:     (26^d) (Long if large depth)
+-----------------------------|
+|  --------------------------|
+|  | 0 -> Mesh count         | short:   (each cluster of objects only contains a handful of them) [ 1.. 20] |
+|  --------------------------|
+|  |  -----------------------|
+|  |  | 0 -> vertexCount/3   | med:     Depends on the triangle count [1.. 200]|
+|  |  -----------------------|
+|  |  |  --------------------|
+|  |  |  | minX -> maxX      | med:     The largest spheres take 1/10 of the picture => [1..1000]|
+|  |  |  --------------------|
+|  |  |  |  -----------------|
+|  |  |  |  | minY -> maxY   | med:     Exactly the same as for minX -> maxX
+|  |  |  |  -----------------|
+
+
+
+
+
+When probing with the standard input:
+Number of items to be rendered: 703
+meshCount 5
+meshes[0].vertexCount 2880
+
+I tried to print the differences between max x and min x, but atom crashed.
+I managed to open it with gedit, and the result was: allways less than 15 with 1080 x 1920. Thus, the actual result is closer to:
+
+Input from the bash
+-----------------------------|
+|  0-> tot items             | med:     (exponential with depth)
+-----------------------------|
+|  --------------------------|
+|  | 0 -> Mesh count         | short:   (constant)
+|  --------------------------|
+|  |  -----------------------|
+|  |  | 0 -> vertexCount/3   | long:     (Constant)
+|  |  -----------------------|
+|  |  |  --------------------|
+|  |  |  | minX -> maxX      | short:     (quadratic with resolution)
+|  |  |  --------------------|
+|  |  |  |  -----------------|
+|  |  |  |  | minY -> maxY   | short:     (quadratic with resolution)
+|  |  |  |  -----------------|
+
+
+GPUs have problems with programs of variable execution length, so it might be advantageous to parallelize the min->max loops with expanded limits
+  (They can not do any harm)
+  Paralelixing on the vertexCount might also work
+
+
+Parallelizing with the regards to the total number of items is a very bad idea, since the workload would be quite unbalanced, and the number of jobs would be far less than the number of threads that can run concurrently.
+
+We decided to parallelize the rendering of the triangles. This would ensure spreading out the workload and having enough jobs that cores would not stay idle.
+The two innermost loops would then stay intact, but the three outer ones would be dismantled. Because we can launch a three dimensional grid of thread blocks, this fits nicely with our three loops.

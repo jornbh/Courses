@@ -1,0 +1,87 @@
+Vikeplikt bir plutselig mening når man ser på krysset som fire ressurser man reserverer fra nærmest til lengst unna
+
+
+Forskjellige nivårer av critical
+    Life-critical 
+    Mission-critical 
+    Non-critical
+De forskjellige gradene av viktighet kan ofte være innendor det samme systemet
+    Logging i et fly, (Veldig criticality mellom reguleringen og loggingen)
+
+
+For komplekisteten av prosjektet: 
+    Ingen scheduler => Free RTOS => µCLinux => Real TIme Linux
+
+
+FreeRTOS består av tre hoved-kodefiler
+    Pluss kode som er spesifikk for arkitekturer
+
+Kan brukes på små mikrokontrollere
+
+
+FreeRTOSk: 
+
+    Man må dokumentere at man bruker det
+    Endringer til kernel-en må gjøres offentlig kjent 
+
+OpenRTOS:
+    Samme kode, men med komersiell lisens=> Suport 
+
+SafeRTOS:
+    ??
+
+Tasks har sine egne stacks
+    Preemptive og prioritert 
+
+Co-routines
+    Ment å bruke på smp systemer med krftig RAM-constraints 
+    Deler en felles stack.
+
+FreeRTOS task Model:
+    Running:
+
+    Ready:
+
+    Blocked: De venter på interrupts eller semaforer
+    
+    Suspended:
+        Man må aktivt kalle vTaskSuspend().
+        Bare noen andre kan vekke den opp med å kalle task resume
+    Idle task:
+        Jobber med å frigjøre allokert minne.
+        Man kan feste det bakpå tasks 
+            Det kjører bare når ingen andre tasks kjører 
+            => Ikke mulig å forutsi noe om respons-tid, eller liknende
+
+FreeRTOS kan være cooperative eller preemptive
+Det er tre forskjellige implementerte synkroniseringsmetoder i FreeRTOS
+    Semaphore binding and countig 
+    Mutex 
+    Queue
+        Litt som mesage-passing 
+    Mutex er basert på Queue
+
+Queues er hovedformen for inter-task communication.
+Queuene kan ha items av en gitt størrelse
+    Man deffinerer størrelesen av køen når nden lages. 
+Items er lagt i køen by copy i stedet for by refference
+
+Aksess til køer er enten blocking eller non-blocking 
+    
+Køene kan settes til blocking eller non-blocking
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+#include <iostream>
+#include <cstring>
+#include "utilities/OBJLoader.hpp"
+#include "utilities/lodepng.h"
+#include "rasteriser.hpp"
+#include "openmpi/mpi.h"
+#include "mpi.h"
+// #include <openmpi/mpi.hpp>
+#define MASTER 0
+#define f(A) ((A*4535435 + 15423443)%200)
+
+// Declarations
+
+int main(int argc, char **argv) {
+	MPI_Init ( &argc, &argv );
+
+	std::string input("../input/spheres.obj");
+	std::string output("../output/spheres.png");
+	unsigned int width = 1920;
+	unsigned int height = 1080;
+	unsigned int depth = 3;
+
+	for (int i = 1; i < argc; i++) {
+		if (i < argc -1) {
+			if (std::strcmp("-i", argv[i]) == 0) {
+				input = argv[i+1];
+			} else if (std::strcmp("-o", argv[i]) == 0) {
+				output = argv[i+1];
+			} else if (std::strcmp("-w", argv[i]) == 0) {
+				width = (unsigned int) std::stoul(argv[i+1]);
+			} else if (std::strcmp("-h", argv[i]) == 0) {
+				height = (unsigned int) std::stoul(argv[i+1]);
+			} else if (std::strcmp("-d", argv[i]) == 0) {
+				depth = (int) std::stoul(argv[i+1]);
+			}
+		}
+	}
+
+	std::cout << "Loading '" << input << "' file... " << std::endl;
+
+	std::vector<Mesh> meshs = loadWavefront(input, false);
+	
+
+	int rank, nProcesses;
+	MPI_Comm_rank ( MPI_COMM_WORLD, &rank );
+    MPI_Comm_size ( MPI_COMM_WORLD, &nProcesses );
+	int rotationAngle; 
+	output[ output.length() -5] = 'A'+ (rank %26); 
+
+	// Manage rotation angles
+	if(rank == MASTER){
+		std::cout<<"MAster\n";
+		//Master stuff
+		int* rotations = new int[nProcesses];
+		for(int i =0; i< nProcesses; ++i){
+			if(i != MASTER){
+				rotations[i] = f(i); 
+				MPI_Send(&rotations[i], 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+			}
+		}
+		for(int i =0; i< nProcesses; ++i){
+			// get ack
+			if(i != MASTER){
+				MPI_Recv(&rotationAngle,1 , MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+			}
+		}
+		delete[] rotations;
+
+		rotationAngle= f(MASTER); 
+
+	}
+	else{
+		std::cout<<"Slave\n";
+		
+		MPI_Recv(&rotationAngle,1 , MPI_INT, MASTER,  0,  MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		MPI_Send( &rotationAngle, 1, MPI_INT, MASTER, 0,  MPI_COMM_WORLD); // Return an ack
+
+		//Ask for stuff
+	}
+
+	std::cout<< "Altered output: "<< output << "\n"; 
+	std::vector<unsigned char> frameBuffer = rasterise(meshs, width, height, depth, rotationAngle);
+	std::cout << rank<<": FInished!\n";
+	MPI_Barrier(MPI_COMM_WORLD);
+
+	std::cout << "Waiting for others\n";
+	MPI_Barrier(MPI_COMM_WORLD);
+	std::cout << "Writing image to '" << output << "'..." << std::endl;
+
+	unsigned error = lodepng::encode(output, frameBuffer, width, height);
+
+	if(error)
+	{
+		std::cout << "An error occurred while writing the image file: " << error << ": " << lodepng_error_text(error) << std::endl;
+	}
+	
+	std::cout<< "Done Rank" << rank<< " Rotation "<< rotationAngle<<"\n"; 
+	MPI_Finalize();
+	return 0;
+}

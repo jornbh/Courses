@@ -1,0 +1,39 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+Ex4/TDT4200-assignment-4-master/.vscode/settings.json
+Ex1/task_1
+Ex1/task_2
+Ex1/task_3
+Ex4/TDT4200-assignment-4-master/utilities/OUTPUT~1.TXT
+Ex2/mpitest/mpitest
+Ex4/TDT4200-assignment-4-master/utilities/OUTPUT.txt

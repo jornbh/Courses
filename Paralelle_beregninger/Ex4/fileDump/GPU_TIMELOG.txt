@@ -1,0 +1,175 @@
+
+Number of devices = 1
+Device name GeForce GTX 1080 Ti
+Warps size 32
+Max threads per block 1024
+Max threads dim 1024-1024-64
+Max grid size 2147483647-65535-65535
+Rendering an image on the GPU..
+Loading '../input/spheres.obj' file... 
+Frame buffer size:51840000
+db-	 0: 16777216
+db-	 1: 16777216
+db-	 2: 16777216
+db-	 3: 16777216
+db-	 4: 16777216
+db-	 5: 16777216
+db-	 6: 16777216
+db-	 7: 16777216
+db-	 8: 16777216
+db-	 9: 16777216
+Rendering image... 
+Number of items to be rendered: 1
+Tot items: 1, Meshes: 5, maxTriangleCount 960 
+Rendered from GPU?
+Entire rasterization  =405 ms
+Writing image to '../output/sphere.png'...
+With main: 8402
+real	0m8.438s
+user	0m8.098s
+sys	0m0.299s
+Number of devices = 1
+Device name GeForce GTX 1080 Ti
+Warps size 32
+Max threads per block 1024
+Max threads dim 1024-1024-64
+Max grid size 2147483647-65535-65535
+Rendering an image on the GPU..
+Loading '../input/spheres.obj' file... 
+Frame buffer size:51840000
+db-	 0: 16777216
+db-	 1: 16777216
+db-	 2: 16777216
+db-	 3: 16777216
+db-	 4: 16777216
+db-	 5: 16777216
+db-	 6: 16777216
+db-	 7: 16777216
+db-	 8: 16777216
+db-	 9: 16777216
+Rendering image... 
+Number of items to be rendered: 27
+Tot items: 27, Meshes: 5, maxTriangleCount 960 
+Rendered from GPU?
+Entire rasterization  =379 ms
+Writing image to '../output/sphere.png'...
+With main: 8907
+real	0m8.941s
+user	0m8.541s
+sys	0m0.260s
+Number of devices = 1
+Device name GeForce GTX 1080 Ti
+Warps size 32
+Max threads per block 1024
+Max threads dim 1024-1024-64
+Max grid size 2147483647-65535-65535
+Rendering an image on the GPU..
+Loading '../input/spheres.obj' file... 
+Frame buffer size:51840000
+db-	 0: 16777216
+db-	 1: 16777216
+db-	 2: 16777216
+db-	 3: 16777216
+db-	 4: 16777216
+db-	 5: 16777216
+db-	 6: 16777216
+db-	 7: 16777216
+db-	 8: 16777216
+db-	 9: 16777216
+Rendering image... 
+Number of items to be rendered: 703
+Tot items: 703, Meshes: 5, maxTriangleCount 960 
+Rendered from GPU?
+Entire rasterization  =427 ms
+Writing image to '../output/sphere.png'...
+With main: 13982
+real	0m14.036s
+user	0m13.216s
+sys	0m0.272s
+Number of devices = 1
+Device name GeForce GTX 1080 Ti
+Warps size 32
+Max threads per block 1024
+Max threads dim 1024-1024-64
+Max grid size 2147483647-65535-65535
+Rendering an image on the GPU..
+Loading '../input/spheres.obj' file... 
+Frame buffer size:51840000
+db-	 0: 16777216
+db-	 1: 16777216
+db-	 2: 16777216
+db-	 3: 16777216
+db-	 4: 16777216
+db-	 5: 16777216
+db-	 6: 16777216
+db-	 7: 16777216
+db-	 8: 16777216
+db-	 9: 16777216
+Rendering image... 
+Number of items to be rendered: 18279
+Tot items: 18279, Meshes: 5, maxTriangleCount 960 
+Rendered from GPU?
+Entire rasterization  =555 ms
+Writing image to '../output/sphere.png'...
+With main: 22670
+real	0m22.704s
+user	0m20.876s
+sys	0m0.361s
+Number of devices = 1
+Device name GeForce GTX 1080 Ti
+Warps size 32
+Max threads per block 1024
+Max threads dim 1024-1024-64
+Max grid size 2147483647-65535-65535
+Rendering an image on the GPU..
+Loading '../input/spheres.obj' file... 
+Frame buffer size:51840000
+db-	 0: 16777216
+db-	 1: 16777216
+db-	 2: 16777216
+db-	 3: 16777216
+db-	 4: 16777216
+db-	 5: 16777216
+db-	 6: 16777216
+db-	 7: 16777216
+db-	 8: 16777216
+db-	 9: 16777216
+Rendering image... 
+Number of items to be rendered: 475255
+Tot items: 475255, Meshes: 5, maxTriangleCount 960 
+Rendered from GPU?
+Entire rasterization  =1847 ms
+Writing image to '../output/sphere.png'...
+With main: 31583
+real	0m31.619s
+user	0m27.910s
+sys	0m0.747s
+Number of devices = 1
+Device name GeForce GTX 1080 Ti
+Warps size 32
+Max threads per block 1024
+Max threads dim 1024-1024-64
+Max grid size 2147483647-65535-65535
+Rendering an image on the GPU..
+Loading '../input/spheres.obj' file... 
+Frame buffer size:51840000
+db-	 0: 16777216
+db-	 1: 16777216
+db-	 2: 16777216
+db-	 3: 16777216
+db-	 4: 16777216
+db-	 5: 16777216
+db-	 6: 16777216
+db-	 7: 16777216
+db-	 8: 16777216
+db-	 9: 16777216
+Rendering image... 
+Number of items to be rendered: 12356631
+Tot items: 12356631, Meshes: 5, maxTriangleCount 960 
+Rendered from GPU?
+Entire rasterization  =34517 ms
+Writing image to '../output/sphere.png'...
+With main: 68563
+real	1m8.607s
+user	0m53.412s
+sys	0m10.121s

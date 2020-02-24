@@ -1,0 +1,44 @@
+2.
+
+
+a) 
+    If a data is not in the cache, it takes a significant amont of time to reeive it.
+    If it does not fufill the requirements for temporal and spachial locality, it will inrease the number of cache-misses.
+    More cache-misses will lead to drastically decreased performance. Simple code-example:
+
+        int** M; // N * N matirix (Initialized)
+
+        for( int i =0; i< N; ++i){
+            for(int j =0; j< N; ++j){
+                M[j][i] = 0; 
+     
+    For each step in j, a differnet of the N arrays is needed, causing the need to have pointers in memory that are far apart form eachother.
+    This will increase the number of cache-misses if N is large enough, making the program much slower than if the order of iteration was reversed
+
+
+b) 
+    Each itteration of the loop requires a compare-operation, a jump, and an incrementation. 
+    By using unrolling, you decrese the numver of compares and jumps require, leading to faster code.
+    The compiler is capable of doing this itself, so it is usually not nececary
+
+
+c) Memory management:
+    Calling new or define requires the OS to alocate a chunck of memory for the process. 
+    By not reserving a new chunck of memory for each iteration, less OS-calls are done, reducing the runtime
+
+    The cache is based on temporal and spachial locality.
+    By changing the order of iteration, it is possible to reduce the amount of cache-misses.
+        If the outer loop is the one causing the large jumps
+    
+d) Inlining
+    Inlining functions causes them to leap less,  makes the program faster.
+    The drawback is that the program becomes larger, and some profiling-tools become less effective
+
+
+e) Algorithmic improvements:
+    Requirs that you understand the problem somewhat. 
+
+    Change the matrix multiplications(?) (Only if there are very specific types of multiplications happening) max improvement~factor 4
+    Limit which pixels are searched when checing a triangle:
+        Variable benefit (From none to proportional to the resolution)
+            => Caused more than 10x speedup (Measuring any closer just seemed painfull...)

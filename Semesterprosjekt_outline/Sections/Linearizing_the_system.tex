@@ -1,0 +1,266 @@
+\chapter{A linearized model of the grid and controller}
+\label{chp:linearize_the_system}
+Setting up the linear system can be cumbersome job, and has to be done in two parts if the goal is to get a solution that is as exact as possible. First, the continuous system has to be linearized and solved exactly, and then, we must assume that all inputs from the controller are zero-order hold elements. If they are, it is possible to get an exact solution of the dynamics in the z-domain. In order to linearize the continuous system, the easiest way to do it is to write it in the dq-reference frame. The resulting equations for one VSC are: 
+
+For the filter-side of the converter
+\begin{align}
+ \frac{d}{dt}&\Vec{v_o} = \frac{\omega_b}{c_f}\Vec{i_{cv}} - \frac{\omega_b}{c_f}\Vec{i_o} - j\cdot\omega_b \omega_g \Vec{v_o}\\
+ \frac{d}{dt}&\Vec{i_{cv}} = \frac{\omega_b}{l_f}\Vec{v_{cv}} - \frac{\omega_b}{l_f}\Vec{v_o} -\omega_b \left( \frac{r_{l_f}}{l_f} + j\cdot \omega_g \right)\Vec{i_{cv}}\\
+ \frac{d}{dt}&\Vec{i_o} = \frac{\omega_b}{l_g}\Vec{v_{o}} - \frac{\omega_b}{l_g}\Vec{v_g} -\omega_b \left( \frac{r_g}{l_g} + j\cdot \omega_g \right)\Vec{i_o}\\
+\end{align}{}
+
+If $\Vec{v_g}$ is constant, it can be considered as an input. If not, the rest of the grid has to be added as states and solved for as well. 
+
+For the DC-side of the converter
+\begin{align}
+ \frac{d}{dt}&v_{dc} = \frac{\omega_b}{c_{dc}}i_{dc,s} - \frac{\omega_b}{c_{dc}}i_{dc}\\
+ \frac{d}{dt}&i_{dc,s} = \frac{\omega_b}{l_{dc}}v_{dc,s} -\frac{\omega_b}{l_{dc}}v_{dc} - \omega_b \frac{ r_{dc}}{l_{dc}}i_{dc,s} \\
+\end{align}{}
+
+
+The system will have to be linearized around some stationary operating point. This means that $\Vec{x^{true}} = \Vec{x_0}+ \Vec{x}$. The vector $\Vec{x}$ will be used to reffer to the deviation of the states from the stationary operating point.Because a linear operating point is suposed to mean that $0 = \Vec{A}\Vec{x_0} + \Vec{B}\Vec{u_0}$, the states of the linear system can be written as:
+
+\begin{equation}
+\Vec{x}_{cont}=
+\begin{bmatrix}
+ \Delta v_{o,d}\\
+ \Delta v_{o,q}\\
+ \Delta i_{cv,d}\\
+ \Delta i_{cv,q}\\
+ \Delta i_{o,d}\\
+ \Delta i_{o,q}\\
+ \Delta v_{dc} \\
+ \Delta i_{dc,s}
+\end{bmatrix}{}
+, \Vec{u}_{cont}
+\begin{bmatrix}
+ \Delta v_{cv,d}\\
+ \Delta v_{cv,q}\\
+ \Delta v_{g,d}\\
+ \Delta v_{g,q}\\
+ \Delta i_{dc}\\
+ \Delta v_{dc,s}\\
+\end{bmatrix}{}
+\end{equation}{}
+Where the $\Delta$s mean that the variables signify the difference from the linear operating point.
+\begin{equation}
+\Dot{\Vec{x}}_{cont}= 
+\Vec{A}_{cont} \Vec{x}_{cont} + \Vec{B}_{cont}\Vec{u}_{cont}
+\end{equation}{}
+The system-matrix is so big that it does not fit on one page, so we have to define 
+\begin{equation}
+ \Vec{A}_{cont}= 
+ \begin{bmatrix}
+ \Vec{A}_{cont, 1} & \Vec{A}_{cont,2}
+ \end{bmatrix}
+\end{equation}
+Where: 
+\begin{equation}
+ \Vec{A}_{cont,1}=
+ \begin{bmatrix}
+ 0 & \omega_b\omega_g & \frac{\omega_b}{c_f} & 0 \\
+ -\omega_b\omega_g & 0 & 0 & \frac{\omega_b}{c_f} \\
+ -\frac{\omega_b}{l_f}&0 &- \omega_b\frac{r_{l_f}}{l_f} & \omega_b\omega_g \\
+ 0 &-\frac{\omega_b}{l_f} &-\omega_b\omega_g & -\omega_b\frac{r_{l_f}}{l_f} \\
+ \frac{\omega_b}{l_g} & 0 & 0 & 0 \\
+ 0 & \frac{\omega_b}{l_g} & 0 & 0 \\
+ 0 &0 &-\frac{\omega_b}{c_{dc}}\frac{v_{cv,d,0}}{v_{dc,0}}&-\frac{\omega_b}{c_{dc}}\frac{v_{cv,d,0}}{v_{dc,0}}\\
+ 0 &0 &0 &0 \\
+ 
+ \end{bmatrix}{}
+\end{equation}{}
+\begin{equation}
+ \Vec{A}_{cont,2}=
+ \begin{bmatrix}
+
+& -\frac{\omega_b}{c_f} & 0 & 0 & 0\\
+& 0 & -\frac{\omega_b}{c_f} & 0 & 0 \\
+& 0 & 0 & 0 & 0\\
+& 0 & 0 & 0 & 0 \\
+& -\omega_b\frac{r_g}{l_g} & \omega_b \omega_g & 0 & 0\\
+& -\omega_b \omega_g & -\omega_b\frac{r_g}{l_g} & 0 & 0\\
+&0 &0 & \omega_b \frac{i_{cv,d,0}v_{cv,d,0} + i_{cv,q,0}v_{cv,q,0} }{v_{dc,0}^2} &\frac{\omega_b}{c_{dc}} \\
+&0 &0 &- \frac{\omega_b}{l_{dc}} & - \omega_b \frac{r_{dc}}{l_{dc}} \\
+ 
+\end{bmatrix}{}
+\end{equation}{}
+The matrix for the input can be written as: 
+\begin{equation}
+ \Vec{B}_{cont} = 
+ \begin{bmatrix}
+ \frac{\omega_b}{l_f} & 0&0&0&0&0\\
+ 0 & \frac{\omega_b}{l_f}&0&0&0&0\\
+ 0 &0 &0&0&0&0\\
+ 0 &0 &0&0&0&0\\
+ 0 &0 &-\frac{\omega_b}{l_g} & 0&0&0\\
+ 0 &0 &0&-\frac{\omega_b}{l_g}&0&0\\
+ 0 &0 &0&0& -\frac{\omega_b}{c_{dc}} & 0\\
+ 0 &0 &0&0& 0 & \omega_b \frac{r_{dc}}{l_{dc}}\\
+ 
+ 
+ \end{bmatrix}{}
+\end{equation}{}{}
+
+But the controller only has two degrees of freedom in controlling $v_{cv,d}$ and $v_{cv,q}$ and the current $i_{dc}$ is limited by the power-balance. The resulting $\Vec{B}$-matrix that represents how the controller can influence the system becomes somewhat simpler. 
+
+The controller will always be affected by a power-balance between the DC and the AC-side.
+\begin{equation}
+ v_{dc} i_{dc} = v_{cv,d} i_{cv,d} + v_{cv,q}i_{cv,q}
+\end{equation}{}
+The voltage $v_{dc}$ must be the same as the voltage over the capacitor, since there are no components between the input-voltage of the \gls{VSC} on the DC-side and the capacitor $C\gls{_dc}$. Also, if the constraints given by the power-balance are linearized, the resulting equation becomes: 
+\begin{equation}
+ i_{dc,cv} = \frac{v_{cv,d}i_{cv,d} + v_{cv,q}i_{cv,q}}{v_{dc}}
+\end{equation}{}
+The resulting differential equation for the voltage $v_{dc}$ gives 
+\begin{equation}
+ \dot{v}_{dc} = \frac{\omega_b}{c_{dc}} \left( i_{dc,s} - \frac{v_{cv,d}i_{cv,d} + v_{cv,q}i_{cv,q} }{v_{dc}} \right) 
+\end{equation}{}
+When this is linearized around some operating point $\Vec{x}_0$, the result will be: 
+
+\begin{dmath}
+ \dot{v}_{dc} = \Delta \dot{v}_{dc} \approx \frac{\omega_b \Delta i_{dc,s}}{c_{dc}} - \frac{\omega_b}{c_{dc}}\left( \frac{v_{cv,d,0} \Delta i_{cv,d}}{v_{dc,0}} + \frac{i_{cv,d,0} \Delta v_{cv,d}}{v_{dc,0}} - \frac{i_{cv,d,0}v_{cv,d,0}}{\left(v_{dc,0}\right)^2}\Delta v_{dc,0}\\
+ + \frac{v_{cv,q,0} \Delta i_{cv,q}}{v_{dc,0}} + \frac{i_{cv,q,0} \Delta v_{cv,q}}{v_{dc,0}} - \frac{i_{cv,q,0}v_{cv,q,0}}{\left(v_{dc,0}\right)^2}\Delta v_{dc,0}
+ \right)
+\end{dmath}{}
+
+
+
+
+
+% This means that the voltages $v_{cv}$ will also affect the DC-current when the system is linearized. 
+After extracting the terms relating $v_{cv,d}$ and $v_{cv,q}$, the matrix $\Vec{B_s}$ can be found. (The effects of the power-balance were already added to $\Vec{A_{cont}}$) 
+\begin{equation}
+ \Vec{B_s} = 
+ \begin{bmatrix}
+ \frac{\omega_b}{l_f} & 0\\
+ 0 & \frac{\omega_b}{l_f}\\
+ 0&0\\
+ 0&0\\
+ 0&0\\
+ 0&0\\
+ -\frac{\omega_b}{c_{dc}}\frac{i_{cv,d,0}}{v_{dc,0}}&-\frac{\omega_b}{c_{dc}}\frac{i_{cv,q,0}}{v_{dc,0}}\\
+ 0&0\\
+ \end{bmatrix}{}
+\end{equation}{}
+
+To get more consistent notation, we also say that
+\begin{equation}
+ \Vec{A_s} = \Vec{A_{cont}}
+\end{equation}
+If the converter is a part of a larger grid, then $v_g$ has to be replaced with a state from the grid, and all continuous components simply have to be solved in the same manner, but overall, the method will not change. Since it is assumed that all actuators on the system are zero-order hold elements, it is possible to make a new state $x_z$, which contains $x_{cont}$, as well as all internal states in the controller, and the delayed inputs from the controller to the system. The discretised system can be written as: 
+\begin{equation}
+ z {x}_z = 
+ \begin{bmatrix}
+ e^{\Vec{A}_s T_s} & \Vec{A}_s^{-1}( e^{\Vec{A}_s T_s} - \Vec{I}) \Vec{B_s} & \Vec{0}\\
+ \Vec{K_1} & \Vec{0} & \Vec{K_2} \\
+ \Vec{K_3} \hat{T_s} & 0 & \Vec{K_4} \hat{T_s}
+ \end{bmatrix}{}
+ x_z
+ \label{eq:A_z}
+\end{equation}{}
+Where $\Vec{K_1}$ is the matrix representing how the measured states will affect the output at the next timestep. $\Vec{K_2}$ represents how the internal states affect the output of the controller. $\Vec{K_3}$ and $\Vec{K_4}$ shows how the internal states are affected by the measured states and the internal states respectively. $\hat{T_s}$ represents the estimated sampling, frequency, is assumed to be the same as $T_s$, but may differ from the real one. Since the controller is sampled, the inputs will also be delayed before affecting the system. As a result, $\Vec{x_z}$ can be divided into three parts. 
+
+\begin{equation}
+ \Vec{x_z} = 
+\begin{bmatrix}
+ \Vec{x_{cont}} \\
+ \Vec{x_{u}} \\
+ \Vec{x_{controller}} \\
+\end{bmatrix}{}
+\end{equation}{}
+
+When looking at the state-space representation in \cite{Suul_paper_1}, the inputs to the system can be seen directly in the state-space, resulting in a vector.
+\begin{equation}
+ \Vec{x_u} = 
+ \begin{bmatrix}
+ v_{cv,d}\\ v_{cv,q}\\
+ \end{bmatrix}{}
+\end{equation}{}
+The simplest controller is a current-controller without active damping. To implement this, the internal states of the controller need to be at contain the following parameters: 
+\begin{equation}
+ \Vec{x_{controller}} = 
+ \begin{bmatrix}
+ \delta\theta_{PLL} \\ \gamma_d \\ \gamma_q \\ v_{PLL,d} \\ v_{PLL,q} \\ \epsilon_{PLL} \\
+ \end{bmatrix}{}
+\end{equation}{}
+
+$\delta\theta_{PLL}$ is the error in the estimate of the grid-phase that the \gls{PLL} gives out. $\gamma_d$ and $\gamma_q$ are the integrators used PI current-controller. $v_{PLL, d}$, $v_{PLL, q}$ are the internal states of the low-pass filter used by the \gls{PLL}, and finally, $\epsilon_{PLL}$ is the integrator- used by the PI-controller in the \gls{PLL}
+
+
+
+Since all these states are integrators of the deviation from some kind of reference, the stationary reference point should mean that $\Vec{x}_{controller, 0} =0$. So there is no need for using terms using $\Delta$ here. 
+
+\section{Describing the internal states in a current-controller}
+
+Since no more information is given than the measured data-points, the controller will simply be implemented by first-order forward Euler. 
+
+Depending on the type of controller, the states in $\Vec{x_{controller}}$, as well as the control-laws that are described in the $\Vec{K}$-matrices may be replaced by something else. But, in this case, we will simply use a current controller without active damping, but with a decoupling-term between the two parts of $\Vec{v}\gls{_cv}$. The resulting matrices will be:
+
+
+\begin{equation}
+ \Vec{\dot{x}}_{controller}=
+ \begin{bmatrix}
+ \frac{\omega_b k_{p,PLL}}{v_{o,0}} v_{PLL, q} + \omega_b k_{i,PLL} \epsilon_{PLL}\\
+ - i_{cv,d} + i_{cv,d}^* \\
+ - i_{cv,q} + i_{cv,d}^* \\
+ \omega_{LP,PLL}(v_{o,d} - v_{PLL,d})\\
+ \omega_{LP,PLL}(v_{o,q} - v_{PLL,q})\\
+ \frac{1}{v_{o,d,0} }v_{PLL,q}\\
+ \end{bmatrix}{}
+\end{equation}{}
+
+\begin{equation}
+ \Vec{K_3} = 
+ \begin{bmatrix}
+ 0 &0&0&0 &0 &0&0&0\\
+ 0 & 0 & -1&0 &0&0&0&0\\
+ 0 & 0 & 0 & -1& 0 &0&0&0\\
+ \omega_{LP, PLL} & 0 & 0&0 &0&0&0&0\\
+ 0 & \omega_{LP, PLL} &0 &0&0&0&0&0\\
+ 0 &0&0&0&0 &0&0&0\\
+ \end{bmatrix}{}
+\end{equation}{}
+
+\begin{equation}
+ \Vec{K_4} = 
+ \begin{bmatrix}
+ 0 &0&0&0 &0 &0&\frac{\omega_b k_{i,PLL}}{v_{o,d,0}}&\omega_b k_{i,PLL}\\
+ 0&0&0&0&0&0&0&0\\
+ 0&0&0&0&0&0&0&0\\
+ 0 & 0 & 0&0 &0&-\omega_{LP, PLL}&0&0\\
+ 0 & 0&0 & 0&0 &0&-\omega_{LP, PLL}&0\\
+ 0 & 0 &0 &0&0&0&\frac{1}{v_{o,d,0}}&0
+ \end{bmatrix}{}
+ \end{equation}{}
+As a result, the reference voltage will become
+
+
+\begin{equation}
+ z\Vec{x_u}= 
+ \begin{bmatrix}
+ -k_{pc} i_{cv,d} + \omega_g l_f i_{cv,q} + k_{ic} \gamma_d 
+ -l_f \frac{k_{p,PLL}i^*_{cv,q,0}}{v_{o,d,0}} v_{PLL, q} - l_f k_{i,PLL} i_{cv,q,0}^* \epsilon_{PLL } \\
+ -k_{pc} i_{cv,q} - \omega_g l_f i_{cv,d} +k_{ic} \gamma_q +
+ l_f \frac{k_{p,PLL}i^*_{cv,q,0}}{v_{o,d,0}} v_{PLL, q} + l_f k_{i,PLL} i_{cv,q,0}^* \epsilon_{PLL }\\
+ \end{bmatrix}{}
+\end{equation}{}
+
+Because of this, the matrices describing the two values in $v_{cv}$ become:
+
+\begin{equation}
+ \Vec{K_1} = 
+ \begin{bmatrix}
+ 0 & 0& -k_{pc} & \omega_g l_f & 0 & 0 & 0&0\\
+ 0 & 0& -\omega_g l_f &k_{pc} & 0 & 0 & 0&0
+ \end{bmatrix}
+\end{equation}{}
+\begin{equation}
+\Vec{K_2} =
+\begin{bmatrix}
+ 0&k_{ic}&0 & 0 & -l_f \frac{k_{p,PLL}i^*_{cv,q,0}}{v_{o,d,0}}&l_f k_{i,PLL}i^*_{cv,q,0}\\
+ 0& 0&k_{ic}&0 & l_f \frac{k_{p,PLL}i^*_{cv,q,0}}{v_{o,d,0}}&l_f k_{i,PLL}i^*_{cv,q,0}
+\end{bmatrix}
+\end{equation}{}
+
+\todo[inline]{Explain the assumption that angular error has to be treated as a continuous state (Or does it?) }
+

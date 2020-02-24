@@ -1,0 +1,11 @@
+\chapter{Introduction}
+
+
+\section{Abstract}
+Normally, when handling time-delays, Padé-approximations are used to estimate the delay. Although they asymptotically give the same response as a time-delay, there are no guarantees for how they will act in reality when they are interconnected. Discretising the system into the z-domain provides exact solutions, but the space is quite distorted and very dependent on the sampling rate. Analysis in the z-domain tends to be difficult as a result. This project report proposes the usage of the w-transform with to give estimates that may provide a more accurate analysis of robustness, and who provide stronger guarantees for the quality of the estimate.
+
+The way this will be done will be to give exact solutions for all continuous parts by assuming that all outputs from the controllers are zero-order hold. After that, the exact solutions will be used together with the control laws for the internal states in the controller, as well as a state, representing the delayed input. The resulting closed-loop system will then be transformed into the w-domain, where it can be analysed. When analyzing the sensitivity to modeling errors, the eigenvalues of the closed-loop matrix is differentiated with respect to a physical parameter. Which means stepping back through the transformation by using the chain-rule. The expression can not be differentiated exactly, so an estimate is given instead, as well as an upper bound on the magnitude of the error. 
+
+\section{Sammendrag}
+\todo[inline]{Legg inn et sammendrag som sier det samme som abstractet}
+Når man jobber med tidsforsinkelser tar man som oftest i bruk padé-approksomasjoner. Selv om de asymptotisk gir samme respons som en tids-forsinkelse er det ingen garantier for hvordan de vil fungere i praksis om flere er koblet sammen i et lineært system. Det er mulig å ta i bruk diskretisering, siden det gir eksakte løsninger, men z-domenet er ganske forvrengt, og veldig avhengig av samplings-rate. På grunn av dette kan det være vanskelig å bruke z-domenet til stabilitetsanalyse. I dette prosjektet foreslås det å bruke w-transformasjonen i stabilitetsanalysen for å få estimater som forhåpentilgvis er mer presise, og som også kan gi sterkere garantier for kvaliteten av estimatet. 

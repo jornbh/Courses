@@ -1,0 +1,91 @@
+
+a)
+Chose valgrind because it was suggested
+
+It is able to extract how much time that is being spent inside one function.
+    Both including and excluding all subroutine-calls.
+
+
+
+
+The results form valgrind are in the task-folders, but they are not very readable without kcachegrind
+
+
+
+
+
+
+
+
+
+
+____________________________________
+
+b)
+
+we use #include<chrono> for the internal profiling
+
+By reading the code, comments and printed text, we are able to deduce that:
+
+
+We want to look at Loading the mesh, rastearixing and saving it to PNG
+    -The loading happens in:
+        loadObj()
+    -rasterizing the image happens in:
+        rasteraize() 
+            (excluding the time used for saving the image)
+    - Saving happens in:
+            lodepng::encode()
+
+
+
+
+When doing the profiling we see: 
+
+Test (-h,-w)=(100,100)
+Results:
+    Total:            100    %
+    loadObj():          0.11 %
+    rastearize():      99.87 %
+    lodepng::encode():  0.18 %
+
+
+=> Rastearize dominates everything else. There is no reason to try to optimize anything else as of now. 
+Increasing the size causes the program to run so slowly that it takes too long to profile
+
+
+(when running normal valgrind, it says that there is memory that leaks (I do not why) ) 
+
+
+
+ADDING THE EXTERNAL PROFILER:
+
+No external profiler: 
+Total 101
+Time used:
+Shading	0%
+Rastearizing triangles	75 (74% )
+Bary-stuff	24 ( 23% )
+
+
+With external profiler:
+Total 3023
+Time used:
+Shading	0%
+Rastearizing triangles	2599 (85% )
+Bary-stuff	347 ( 11% )
+
+
+Adding the external profiler increased the run-time significantly. 
+It also affected which the relative times the differnet modules needed. 
+
+
+
+c) 
+
+Rendering the full HD image takes a lot of time. 
+
+cout is piped to tee, and the result is filtered and written to a text-file
+for 10x20 the result is
+Normal: 126 ms 
+External profiler: 5447

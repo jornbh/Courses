@@ -1,0 +1,80 @@
+% !TeX root = ./main.tex
+
+\documentclass[10pt,b5paper,twoside,openright, english]{book}
+
+
+\usepackage[utf8]{inputenc}
+
+
+\title{Semesterprojekt}
+\author{Jørn Bøni Hofstad}
+
+\date{\today}
+
+
+\usepackage{semester_project_packages}
+\addbibresource{main.bib} % This is for biblatex to know what the bibliography file is
+
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        \Large
+        \textbf{Representation of time-delay in state-space models of power electronic systems}
+  
+        \vspace{0.5cm}
+        
+        \normalsize
+        \textbf{Jørn Bøni Hofstad}
+        \vspace{1.5cm}
+        
+        Semester-project
+        \vspace{1.8cm}
+
+        Supervisor:\\
+        Jon Are Wold Suul\\
+        Associate professor\\
+        Department of Engineering Cybernetics
+  
+        \vfill
+  
+  
+        \vspace{0.8cm}
+  
+        
+        Department of Engineering Cybernetics\\
+        Norwegian University of Science and Technology \\
+        Norway\\
+        \today
+
+        \includegraphics[width=0.4\textwidth]{Figures/university.pdf}
+  
+    \end{center}
+ \end{titlepage}
+
+\frontmatter
+\tableofcontents
+% \newpage
+\printglossary[type=\acronymtype,title={List of Acronyms}]{}
+\printglossary[title={List of symbols}]{}
+\include{Sections/Abstract}
+\include{Sections/Preface}
+\include{Sections/Introduction}
+\mainmatter
+\include{Sections/Modeling_the_grid}
+\include{Sections/Voltage_Source_converter}
+\include{Sections/The_z_transformation}
+\include{Sections/The_w_transformation}
+\include{Sections/Linearizing_the_system}
+\include{Sections/My_own_findings}
+\include{Sections/Discussion}
+\include{Sections/Conclusion_and_future_work}
+\appendix
+\include{Sections/Appendix}
+
+
+
+\printbibliography
+\end{document}

@@ -1,0 +1,16 @@
+Jeg vil gjerne søke på semesterprosjktene: 
+
+Experimental design; Optimal input sequences for rapid parameter estimation
+Parametric uncertainty in model-based control
+Kalman filter for sensor fusion in biomedical applications
+
+
+Jeg er mest interesert i prosjektet som er knyttet til adaptiv regulering, men er også veldig interesert i å prøve meg på prosjektet om parametrisk usikkerhet i modellbassert kontroll.
+Med tanke på kallman-oppgaven  bør jeg sannsynligvis advare om at jeg ikke har hatt digital signalbehandling ved NTNU, og  signalbehandlingsfaget jeg tar på uveksling ikke går over Kallman-filtere, men jeg er fremdeles veldig intresert i oppgaven.
+
+
+
+(Jeg må virkelig beklage for at jeg sender denne mailen så absurd sent. )
+
+mvh 
+- Jørn Bøni Hofstad

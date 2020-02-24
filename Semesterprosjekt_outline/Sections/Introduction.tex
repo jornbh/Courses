@@ -1,0 +1,67 @@
+\chapter{Introduction}
+
+
+\section{Problem description} %#TODO See if this is a part is needed \todo[inline]{See if this is a part is needed}
+Power electronic converters are increasingly utilized as the grid interface of generation systems and loads in ac power systems. The tuning of conventional cascaded control systems for such power electronic converters can have a significant impact on the stability and dynamic response of the converter as well as local power systems. Linearised state-space models are commonly utilized for assessing the small-signal stability and controller tuning of traditional power systems as well as for modern power systems with increasing share of power electronic converters. However, the time-delays in the control system implementation for power electronic converters have a significant influence on stability but cannot be easily represented in continuous time state-space models. Accurate stability analysis of power electronic converters with low sampling frequency can be based on discrete-time models, but such models of individual power electronic converters in the z-domain cannot be easily integrated with continuous-time state-space models (or s-domain models) of larger systems. Furthermore, many of the tools for eigenvalue-based analysis of small-signal dynamics, parametric sensitivity and interaction analysis by participation factors are not easily applicable in the z-domain. This project should evaluate how bilinear transformations can be utilized for an accurate representation of time delays in traditional state-space models of power electronic converters that will be suitable for integration in larger system models for eigenvalue-based analysis of small-signal dynamics.
+
+
+\section{Motivation}
+
+\todo[inline]{What is the motivation for considering the problems/questions that you approach in your work? Why is this an interesting problem? The motivation should instead describe why it is interesting from a societal point of view, and/or from a scientific point of view.
+
+Remember to clearly cite what has been done earlier on the topic, to put your work in the correct context: In source(1) a control law is defined which..., while source(2) considers the particular case of... However, in these works... and in this work we will extend this by... / we will instead .... In "Reference to your own pre-project" a literature review was performed, showing that there is a need for ... Moreover, a preliminary controller was developed which ..., but has the drawback that... In this thesis, we will instead ... / we will further develop this control law by utilizing the control method XX... 
+
+Figures are referred to as follows: In Fig.~1 you see an interesting curve. There is also a table in this sample report: Table~1.
+}
+%! Here starts my own part 
+The issues concerning sampled systems and the problems that arise from the resulting time-delays is something that has been thoroughly explored \cite{Suul_paper_2,RegTek_boken}. Usually, analysis of sampled systems is either done in continuous time with an estimation of the delay \cite{RegTek_boken} or in the discrete-time-domain\cite{Suul_paper_2, Disc_paper}. Although Padé-approximations can give excellent estimates in \gls{SISO}-systems, it can be difficult to know all the consequences of using it in the \gls{MIMO} case. Whereas in the discrete-time domain, the tools that are normally used don't work anymore, since the stability region is within the unit circle instead of the left half-plane. This Project-report, we will propose a method for finding pessimistic estimates for the stability margins of mixed continuous-discrete systems with high requirements for robustness. 
+
+\section{Literature review}
+All required details to model a three-phase system were given in \cite{eth_paper, Suul_paper_1,Suul_paper_2,Suul_electro_presentation_1}. The mathematical background for Jordan-blocks and eigenvalues was given in \cite{LinSys_boken}. Background for analysis of robustness, as well as the w-transform, came from \cite{RegTek_boken}. Information about matrix-norms and operator norms was found in \cite{Triangle_inequality_source}. Whereas methods for differentiating matrices came from \cite{Matrix_differentiation_source}
+\noindent
+It is quite possible that there already exist methods in the literature that are similar to what has been proposed in this project-report, but as of when \todo[inline]{Hvordan bør dette formuleres} the methods were developed, no such methods were known, beyond the fact that several of the results seem to come rather naturally from the already known tools that were known and that were needed for the project. 
+
+%#TODO Left off here (Bør denne være her)
+\section{Assumptions}
+In order to make the analysis somewhat feasible to perform, it was assumed that all components in the grid were ideal. Additionally, it was also assumed that the sampling-rate was constant and that there were no other sampled systems affecting the same continuous subsystems. Most importantly, it was assumed that the system was sufficiently linear for small-signal analysis to be applicative. Finally, it is also assumed that all matrices $\Vec{A}$ are dependant on some unspecified parameter $\rho$ that acts as a placeholder for any of the physical parameters. 
+\noindent 
+Unless stated otherwise, all figures are made by me. All mathematical proofs were not credited to somebody else were made as a part of this project, without the knowledge of how the original proofs were made, or if they existed. \todo[inline]{Dette betyr at jeg må gå over alle bevisene og refferer de til kilder. Dette kan bli problematisk}%#TODO Formulering med tid, og riktig person-form, og muligens hvordan dette egentlig skal formuleres. 
+
+
+\todo[inline]{Include this section if it is necessary to state some assumptions that you have made to restrict the scope of the thesis.}
+
+\section{Related work}
+The idea of using the w-transform when analyzing discrete-time systems has already been proposed in \cite{Suul_paper_2}. But, there, the main focus was on- tuning, instead of stability analysis.
+\noindent
+The entire concept of transforming three-phase systems so that they can be perceived as time-invariant problems seems to be thoroughly explored\cite{Suul_paper_1,Suul_paper_2,eth_paper}. The same goes for Phase-locked loop \cite{Suul_paper_1, eth_paper} and the derivatives of matrices with respect to specific parameters \cite{Matrix_differentiation_source}. Everything about matrix-norms is a part of classical linear algebra and has probably not been anywhere near relevant or new in the last hundred years \todo[inline]{Hvor fritt bør jeg formulere meg}. 
+
+
+\section{Contributions}
+
+The main contribution of this project is joining all the required steps needed to get a decent transformation of a sampled, continuous \gls{MIMO}-system with a discrete controller into the w-domain. More importantly, was the development of a non-general method to give an upper bound to the derivative of the system-matrix in the w-domain with respect to physical parameters in the continuous time-domain. The results of this project are limited to systems where, if the continuous-time system-matrix has any eigenvalues equal to 0, the eigenvectors of such a subspace must be unaffected by all uncertain parameters. 
+\noindent 
+The appendix also contains a method for finding exact responses of linear time-invariant systems that work for inputs that are described by arbitrary, finite polynomials. Although no mention of the technique was found elsewhere, it is highly unlikely that this has not already been discovered. Simply because of how intuitively a general proof comes from proving the exact solution of a step-response by using a Taylor-series.
+
+Finally, in order to model the controller connected to the continuous grid, a model had to be provided, where everything was translated into the dq-reference frame and where the parameters of the controller were separated from the dynamics of the continuous system. 
+\noindent
+\todo[inline]{Bør jeg legge til delen med vilkårlige polnom, og delen med den oppsatte modellen. Det er høyst sannsynlig at den ikke er unik }
+\todo[inline]{Hva man selv har utviklet}
+
+
+
+\section{Outline}
+The report is organized as follows: \todo[inline]{Kanskje ha en bedre formulering på dette}
+\begin{itemize}
+ \item \Cref{chp:Modeling_the_grid}: All the necessary background is given for modeling a three-phase grid as a time-invariant system. There is also information on how to write the system on per unit-form, which allows for making a generalized grid, that can be scaled to arbitrary frequencies and operational values later. 
+ \item \Cref{chp:VSC}: Describes a \gls{VSC}, both in structure, and what the different components do. As a part of this, the \gls{PLL} is described. In addition, en example of a current-controller is given, although, it is possible to have several different kinds of architecture, depending on the control objective, so a current-controller is not always the thing that is used. 
+ \item \Cref{chp:z_transform}: How to perform the z-transformation, both by the trapezoidal rule from the z-domain and with an exact solution from the continuous-time domain. 
+ \item \Cref{chp:w_transformation}: Explains the w-transformation, as well as some intuitive explanations on why analysis in the w-domain might be preferable to analysis in the z-domain. 
+ \item \Cref{chp:linearize_the_system}: How to linearize the nonlinear equations that describe the controller and the grid, while also including the linearized control laws in the z-domain. Finally, the chapter sets up the entire closed-loop system on matrix-form 
+ \item \Cref{chp:new_findings}: Explains the new contributions from this project and most of the algorithm for performing stability-analysis if the system-matrix is invertible. 
+ \item \Cref{chp:conclusion}: Conclusion, as well as potential further work
+ \item \Cref{chp:discussion}: Goes over some of the consequences of the findings that were made. It also covers part of what kinds of problems that can be solved with the methods derived in this project. 
+ \item \Cref{chp:appendix}: Mostly contains some of the proofs and explanations that were a bit too long or involved to be in the main text. But they are still essential for the results. The response for polynomial inputs, as well as what to do if the system-matrix is non-invertible or defective is here. Finally, an explanation of a PWM is delegated to the appendix, since is expected to already be known by most readers. 
+ 
+\end{itemize}
+% \todo[inline]{The report is organized as follows. In Chapter~1 a mathematical model is developed to describe the system... In Chapter}
+

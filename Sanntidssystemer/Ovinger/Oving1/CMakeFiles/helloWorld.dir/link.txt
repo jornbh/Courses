@@ -1,0 +1,1 @@
+/usr/bin/cc     CMakeFiles/helloWorld.dir/src/taskD.c.o CMakeFiles/helloWorld.dir/src/time_operators.c.o CMakeFiles/helloWorld.dir/src/taskA.c.o CMakeFiles/helloWorld.dir/src/taskB.c.o CMakeFiles/helloWorld.dir/src/taskE.c.o CMakeFiles/helloWorld.dir/src/array.c.o CMakeFiles/helloWorld.dir/src/main.c.o CMakeFiles/helloWorld.dir/src/taskC.c.o  -o helloWorld -rdynamic 

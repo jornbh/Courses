@@ -1,0 +1,3 @@
+/home/jorn/Documents/Fag/Sanntidssystemer/Ovinger/Oving1/CMakeFiles/edit_cache.dir
+/home/jorn/Documents/Fag/Sanntidssystemer/Ovinger/Oving1/CMakeFiles/helloWorld.dir
+/home/jorn/Documents/Fag/Sanntidssystemer/Ovinger/Oving1/CMakeFiles/rebuild_cache.dir

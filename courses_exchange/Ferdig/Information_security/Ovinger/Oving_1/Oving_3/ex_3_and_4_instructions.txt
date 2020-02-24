@@ -1,0 +1,14 @@
+I have changed the names of the interceptor-files by adding _ex3 and _ex4. Other than that, not much has changed
+
+
+
+
+Running the programs:
+
+    bash run_docker.sh jorn.hofstad@epfl.ch
+
+    docker exec attacker /bin/bash -c 'iptables -t nat -A POSTROUTING -j MASQUERADE'
+    docker exec attacker /bin/bash -c 'iptables -A FORWARD -s 172.16.0.2 -p tcp --dport 80 -j NFQUEUE --queue-num 0'
+
+    # To run inteceptor.py from on the docker-machine
+    docker exec -it attacker python3 shared/interceptor<_ex3 or _ex4>.py

@@ -1,0 +1,6 @@
+The 4th exercise is very much buildt on the third one, except for that we have to do some filtering. 
+The correct, non-verbose way of doing this would be to use regex-es for the different formats.
+But I don't know how they work, so I used normal python instead. 
+First we filter out all packets that don't seem relavant (non-TCP and those from exercise 3)
+After that, we look for the desired prefix, check that they contain the signs we are looking for, in the right format, and save the onew we want to keep to a set
+Finally, when the set is large enough (6), we create a packet which we send to the server,
