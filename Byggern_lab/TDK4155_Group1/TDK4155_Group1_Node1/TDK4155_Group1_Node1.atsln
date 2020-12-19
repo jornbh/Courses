@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "TDK4155_Group1_Node1", "TDK4155_Group1_Node1\TDK4155_Group1_Node1.cproj", "{D5F892EF-FF9D-4DCD-B6FB-6923A4AE65A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5F892EF-FF9D-4DCD-B6FB-6923A4AE65A5}.Debug|AVR.ActiveCfg = Debug|AVR
+		{D5F892EF-FF9D-4DCD-B6FB-6923A4AE65A5}.Debug|AVR.Build.0 = Debug|AVR
+		{D5F892EF-FF9D-4DCD-B6FB-6923A4AE65A5}.Release|AVR.ActiveCfg = Release|AVR
+		{D5F892EF-FF9D-4DCD-B6FB-6923A4AE65A5}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

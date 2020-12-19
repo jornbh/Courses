@@ -1,0 +1,9 @@
+
+
+
+
+
+Pseudocode
+    1) Make simplified test input
+    2) Make recursive search 
+    3) Make a hash-implementation 

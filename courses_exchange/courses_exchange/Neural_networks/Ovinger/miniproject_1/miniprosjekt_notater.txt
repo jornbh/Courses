@@ -1,0 +1,46 @@
+Man kan vise alle environmentsene ved å skrice 
+    conda info --envs
+Man starter environmentet med 
+    source activate cs456env
+Man kan gi inn batch_size til et av lagene for å si hvor stor den er 
+
+
+
+Sørger batch normalizattion for at man trener mer på tingene man ikke har fått muligehten til å trene på før om de kommer 
+    Man kan trene raskere ved hjelp av det
+    Man kan ha høyere læringsrate 
+    Det legger også til litt støy, så man må ha lavere dropout. 
+
+    .. Man trekker fra batch meanen, og deler på batchens standardavvik
+    Man har to variabler som kan trenes på hvert lag
+
+
+Regularizers
+    Gir en straff på lagene 
+    Gis inn som kwargs på hvert lag
+        kerdel_regulariser= 
+        activity_regulariser= 
+        bias_regulariser= 
+    Typene er regularisers.l1 eller regularisers.l2 
+        De tar inne et argument som er ... 
+    l1 er regnet ut av summen av absoluttverdiene, mens l2 er summen av kvadratene 
+
+    Et vanlig Dense-lag har også en bias. 
+
+
+
+
+Feed forward nett kalles av og til multilayer perceptrons
+Leaky ReLu er litt som vanlig ReLu, men den har istedet en liten negativ slope ved den negative delen, slik at man unngår at de "Dør(?)"
+    Dette skjer om en gradient har vært så negativ at ingen datapunkter gir et utslag igjen. 
+
+
+Adam optimizeren er en utvidelse av stocastic gradient descent.
+
+Hele task 5 ser ut til å være absolutt forferdelig. 
+    Kanskje det finnes en løsning på det hele
+        Labelingen var helt feil... 
+
+
+
+Dropout dobler vanligvis antall itterasjoner man må gjennomføre, men det tar mindre tid å gjøre hver itterasjon

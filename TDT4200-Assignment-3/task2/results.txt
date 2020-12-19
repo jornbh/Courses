@@ -1,0 +1,487 @@
+Task 2 b
+Iteration, blockDim, Pixel 256 1 256 Type: 
+
+real	0m0.590s
+user	0m1.653s
+sys	0m0.000s
+Iteration, blockDim, Pixel 256 1 512 Type: 
+
+real	0m0.588s
+user	0m1.597s
+sys	0m0.004s
+Iteration, blockDim, Pixel 256 1 1024 Type: 
+
+real	0m0.680s
+user	0m1.677s
+sys	0m0.012s
+Iteration, blockDim, Pixel 256 1 2048 Type: 
+
+real	0m0.772s
+user	0m1.696s
+sys	0m0.008s
+Iteration, blockDim, Pixel 256 2 256 Type: 
+
+real	0m0.699s
+user	0m1.580s
+sys	0m0.016s
+Iteration, blockDim, Pixel 256 2 512 Type: 
+
+real	0m0.587s
+user	0m1.590s
+sys	0m0.004s
+Iteration, blockDim, Pixel 256 2 1024 Type: 
+
+real	0m0.567s
+user	0m1.518s
+sys	0m0.004s
+Iteration, blockDim, Pixel 256 2 2048 Type: 
+
+real	0m0.711s
+user	0m1.691s
+sys	0m0.008s
+Iteration, blockDim, Pixel 256 3 256 Type: 
+
+real	0m0.725s
+user	0m1.663s
+sys	0m0.015s
+Iteration, blockDim, Pixel 256 3 512 Type: 
+
+real	0m0.656s
+user	0m1.692s
+sys	0m0.012s
+Iteration, blockDim, Pixel 256 3 1024 Type: 
+
+real	0m0.583s
+user	0m1.597s
+sys	0m0.004s
+Iteration, blockDim, Pixel 256 3 2048 Type: 
+
+real	0m0.579s
+user	0m1.601s
+sys	0m0.004s
+Iteration, blockDim, Pixel 256 4 256 Type: 
+
+real	0m0.596s
+user	0m1.660s
+sys	0m0.016s
+Iteration, blockDim, Pixel 256 4 512 Type: 
+
+real	0m0.576s
+user	0m1.591s
+sys	0m0.008s
+Iteration, blockDim, Pixel 256 4 1024 Type: 
+
+real	0m0.578s
+user	0m1.589s
+sys	0m0.000s
+Iteration, blockDim, Pixel 256 4 2048 Type: 
+
+real	0m0.581s
+user	0m1.593s
+sys	0m0.012s
+Iteration, blockDim, Pixel 256 8 256 Type: 
+
+real	0m0.589s
+user	0m1.604s
+sys	0m0.000s
+Iteration, blockDim, Pixel 256 8 512 Type: 
+
+real	0m0.580s
+user	0m1.598s
+sys	0m0.004s
+Iteration, blockDim, Pixel 256 8 1024 Type: 
+
+real	0m0.641s
+user	0m1.618s
+sys	0m0.016s
+Iteration, blockDim, Pixel 256 8 2048 Type: 
+
+real	0m0.612s
+user	0m1.588s
+sys	0m0.004s
+Iteration, blockDim, Pixel 256 16 256 Type: 
+
+real	0m0.589s
+user	0m1.593s
+sys	0m0.004s
+Iteration, blockDim, Pixel 256 16 512 Type: 
+
+real	0m0.596s
+user	0m1.662s
+sys	0m0.012s
+Iteration, blockDim, Pixel 256 16 1024 Type: 
+
+real	0m0.557s
+user	0m1.507s
+sys	0m0.008s
+Iteration, blockDim, Pixel 256 16 2048 Type: 
+
+real	0m0.581s
+user	0m1.601s
+sys	0m0.004s
+Iteration, blockDim, Pixel 512 1 256 Type: 
+
+real	0m0.598s
+user	0m1.660s
+sys	0m0.020s
+Iteration, blockDim, Pixel 512 1 512 Type: 
+
+real	0m0.580s
+user	0m1.591s
+sys	0m0.012s
+Iteration, blockDim, Pixel 512 1 1024 Type: 
+
+real	0m0.620s
+user	0m1.661s
+sys	0m0.008s
+Iteration, blockDim, Pixel 512 1 2048 Type: 
+
+real	0m0.594s
+user	0m1.583s
+sys	0m0.000s
+Iteration, blockDim, Pixel 512 2 256 Type: 
+
+real	0m0.601s
+user	0m1.667s
+sys	0m0.012s
+Iteration, blockDim, Pixel 512 2 512 Type: 
+
+real	0m0.577s
+user	0m1.588s
+sys	0m0.012s
+Iteration, blockDim, Pixel 512 2 1024 Type: 
+
+real	0m0.594s
+user	0m1.672s
+sys	0m0.000s
+Iteration, blockDim, Pixel 512 2 2048 Type: 
+
+real	0m0.577s
+user	0m1.579s
+sys	0m0.012s
+Iteration, blockDim, Pixel 512 3 256 Type: 
+
+real	0m0.578s
+user	0m1.592s
+sys	0m0.008s
+Iteration, blockDim, Pixel 512 3 512 Type: 
+
+real	0m0.577s
+user	0m1.572s
+sys	0m0.020s
+Iteration, blockDim, Pixel 512 3 1024 Type: 
+
+real	0m0.599s
+user	0m1.608s
+sys	0m0.008s
+Iteration, blockDim, Pixel 512 3 2048 Type: 
+
+real	0m0.667s
+user	0m1.679s
+sys	0m0.012s
+Iteration, blockDim, Pixel 512 4 256 Type: 
+
+real	0m0.593s
+user	0m1.601s
+sys	0m0.008s
+Iteration, blockDim, Pixel 512 4 512 Type: 
+
+real	0m0.599s
+user	0m1.664s
+sys	0m0.016s
+Iteration, blockDim, Pixel 512 4 1024 Type: 
+
+real	0m0.584s
+user	0m1.582s
+sys	0m0.012s
+Iteration, blockDim, Pixel 512 4 2048 Type: 
+
+real	0m0.622s
+user	0m1.595s
+sys	0m0.012s
+Iteration, blockDim, Pixel 512 8 256 Type: 
+
+real	0m0.615s
+user	0m1.578s
+sys	0m0.016s
+Iteration, blockDim, Pixel 512 8 512 Type: 
+
+real	0m0.636s
+user	0m1.558s
+sys	0m0.020s
+Iteration, blockDim, Pixel 512 8 1024 Type: 
+
+real	0m0.622s
+user	0m1.579s
+sys	0m0.008s
+Iteration, blockDim, Pixel 512 8 2048 Type: 
+
+real	0m0.637s
+user	0m1.589s
+sys	0m0.004s
+Iteration, blockDim, Pixel 512 16 256 Type: 
+
+real	0m0.593s
+user	0m1.585s
+sys	0m0.012s
+Iteration, blockDim, Pixel 512 16 512 Type: 
+
+real	0m0.636s
+user	0m1.645s
+sys	0m0.008s
+Iteration, blockDim, Pixel 512 16 1024 Type: 
+
+real	0m0.688s
+user	0m1.776s
+sys	0m0.004s
+Iteration, blockDim, Pixel 512 16 2048 Type: 
+
+real	0m0.602s
+user	0m1.592s
+sys	0m0.004s
+Iteration, blockDim, Pixel 1024 1 256 Type: 
+
+real	0m0.606s
+user	0m1.602s
+sys	0m0.008s
+Iteration, blockDim, Pixel 1024 1 512 Type: 
+
+real	0m0.622s
+user	0m1.677s
+sys	0m0.012s
+Iteration, blockDim, Pixel 1024 1 1024 Type: 
+
+real	0m0.660s
+user	0m1.651s
+sys	0m0.020s
+Iteration, blockDim, Pixel 1024 1 2048 Type: 
+
+real	0m0.809s
+user	0m1.667s
+sys	0m0.004s
+Iteration, blockDim, Pixel 1024 2 256 Type: 
+
+real	0m0.658s
+user	0m1.683s
+sys	0m0.012s
+Iteration, blockDim, Pixel 1024 2 512 Type: 
+
+real	0m0.679s
+user	0m1.623s
+sys	0m0.012s
+Iteration, blockDim, Pixel 1024 2 1024 Type: 
+
+real	0m0.889s
+user	0m1.641s
+sys	0m0.024s
+Iteration, blockDim, Pixel 1024 2 2048 Type: 
+
+real	0m0.770s
+user	0m1.741s
+sys	0m0.008s
+Iteration, blockDim, Pixel 1024 3 256 Type: 
+
+real	0m0.793s
+user	0m1.630s
+sys	0m0.012s
+Iteration, blockDim, Pixel 1024 3 512 Type: 
+
+real	0m0.657s
+user	0m1.567s
+sys	0m0.012s
+Iteration, blockDim, Pixel 1024 3 1024 Type: 
+
+real	0m0.596s
+user	0m1.593s
+sys	0m0.008s
+Iteration, blockDim, Pixel 1024 3 2048 Type: 
+
+real	0m0.591s
+user	0m1.595s
+sys	0m0.004s
+Iteration, blockDim, Pixel 1024 4 256 Type: 
+
+real	0m0.705s
+user	0m1.655s
+sys	0m0.008s
+Iteration, blockDim, Pixel 1024 4 512 Type: 
+
+real	0m0.686s
+user	0m1.628s
+sys	0m0.008s
+Iteration, blockDim, Pixel 1024 4 1024 Type: 
+
+real	0m0.677s
+user	0m1.634s
+sys	0m0.012s
+Iteration, blockDim, Pixel 1024 4 2048 Type: 
+
+real	0m0.636s
+user	0m1.552s
+sys	0m0.004s
+Iteration, blockDim, Pixel 1024 8 256 Type: 
+
+real	0m0.697s
+user	0m1.782s
+sys	0m0.012s
+Iteration, blockDim, Pixel 1024 8 512 Type: 
+
+real	0m0.689s
+user	0m1.747s
+sys	0m0.008s
+Iteration, blockDim, Pixel 1024 8 1024 Type: 
+
+real	0m0.702s
+user	0m1.851s
+sys	0m0.004s
+Iteration, blockDim, Pixel 1024 8 2048 Type: 
+
+real	0m0.706s
+user	0m1.825s
+sys	0m0.020s
+Iteration, blockDim, Pixel 1024 16 256 Type: 
+
+real	0m0.689s
+user	0m1.839s
+sys	0m0.008s
+Iteration, blockDim, Pixel 1024 16 512 Type: 
+
+real	0m0.714s
+user	0m1.882s
+sys	0m0.008s
+Iteration, blockDim, Pixel 1024 16 1024 Type: 
+
+real	0m0.695s
+user	0m1.855s
+sys	0m0.012s
+Iteration, blockDim, Pixel 1024 16 2048 Type: 
+
+real	0m0.708s
+user	0m1.814s
+sys	0m0.016s
+Iteration, blockDim, Pixel 2048 1 256 Type: 
+
+real	0m0.674s
+user	0m1.711s
+sys	0m0.020s
+Iteration, blockDim, Pixel 2048 1 512 Type: 
+
+real	0m0.737s
+user	0m1.830s
+sys	0m0.016s
+Iteration, blockDim, Pixel 2048 1 1024 Type: 
+
+real	0m0.676s
+user	0m1.785s
+sys	0m0.012s
+Iteration, blockDim, Pixel 2048 1 2048 Type: 
+
+real	0m0.672s
+user	0m1.708s
+sys	0m0.024s
+Iteration, blockDim, Pixel 2048 2 256 Type: 
+
+real	0m0.761s
+user	0m1.947s
+sys	0m0.020s
+Iteration, blockDim, Pixel 2048 2 512 Type: 
+
+real	0m0.749s
+user	0m1.890s
+sys	0m0.016s
+Iteration, blockDim, Pixel 2048 2 1024 Type: 
+
+real	0m0.704s
+user	0m1.830s
+sys	0m0.008s
+Iteration, blockDim, Pixel 2048 2 2048 Type: 
+
+real	0m0.778s
+user	0m1.865s
+sys	0m0.024s
+Iteration, blockDim, Pixel 2048 3 256 Type: 
+
+real	0m0.756s
+user	0m1.924s
+sys	0m0.000s
+Iteration, blockDim, Pixel 2048 3 512 Type: 
+
+real	0m0.723s
+user	0m1.835s
+sys	0m0.012s
+Iteration, blockDim, Pixel 2048 3 1024 Type: 
+
+real	0m0.692s
+user	0m1.864s
+sys	0m0.000s
+Iteration, blockDim, Pixel 2048 3 2048 Type: 
+
+real	0m0.732s
+user	0m1.860s
+sys	0m0.000s
+Iteration, blockDim, Pixel 2048 4 256 Type: 
+
+real	0m0.720s
+user	0m1.777s
+sys	0m0.004s
+Iteration, blockDim, Pixel 2048 4 512 Type: 
+
+real	0m0.731s
+user	0m1.848s
+sys	0m0.016s
+Iteration, blockDim, Pixel 2048 4 1024 Type: 
+
+real	0m0.711s
+user	0m1.776s
+sys	0m0.012s
+Iteration, blockDim, Pixel 2048 4 2048 Type: 
+
+real	0m0.731s
+user	0m1.845s
+sys	0m0.016s
+Iteration, blockDim, Pixel 2048 8 256 Type: 
+
+real	0m0.717s
+user	0m1.840s
+sys	0m0.004s
+Iteration, blockDim, Pixel 2048 8 512 Type: 
+
+real	0m0.741s
+user	0m1.868s
+sys	0m0.016s
+Iteration, blockDim, Pixel 2048 8 1024 Type: 
+
+real	0m0.722s
+user	0m1.828s
+sys	0m0.012s
+Iteration, blockDim, Pixel 2048 8 2048 Type: 
+
+real	0m0.756s
+user	0m1.970s
+sys	0m0.004s
+Iteration, blockDim, Pixel 2048 16 256 Type: 
+
+real	0m0.756s
+user	0m1.968s
+sys	0m0.012s
+Iteration, blockDim, Pixel 2048 16 512 Type: 
+
+real	0m0.775s
+user	0m1.943s
+sys	0m0.012s
+Iteration, blockDim, Pixel 2048 16 1024 Type: 
+
+real	0m0.760s
+user	0m2.014s
+sys	0m0.004s
+Iteration, blockDim, Pixel 2048 16 2048 Type: 
+
+real	0m1.025s
+user	0m2.028s
+sys	0m0.004s
+Iteration, blockDim, Pixel 256 1 256 Type: -t
+
+real	0m1.069s
+user	0m2.141s
+sys	0m0.012s
+Iteration, blockDim, Pixel 256 1 512 Type: -t

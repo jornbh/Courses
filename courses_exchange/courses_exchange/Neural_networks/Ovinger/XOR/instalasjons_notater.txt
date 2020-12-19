@@ -1,0 +1,7 @@
+Man må bruke conda install -c conda-forge <Ting_å_installere>
+    For å kunne installere noe i virtualenv-et 
+
+source activate cs 456env
+
+
+Man kan gå inn i selve filen for jupyter notebook-filen for å sette cd456 i stedet 

@@ -1,0 +1,5 @@
+ex1="sgaxdVPqWvDynZfjy9VTGXUHvDLw0RpmypniGmhXM8o="
+
+ex2="y7l6v26ru+eeDGdUWOv5fxHdc80B5df+0mCOfJXdVrY="
+ex3a="7NdjfD+64//uCNxRXKJYrapzAKvty61i5S/ZRFcMfWc="
+ex3b = "VFV47u7fGTNOE+hlYyVgQDpboZmg1QAwvF2cDMdkOcE="

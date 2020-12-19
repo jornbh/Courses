@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Identify system from input steps</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="identify-system-from-input-steps">Identify system from input steps</h1>
+<p>Set of functions for system identification, using the step-responses of an unknown plant.</p>
+<h2 id="exports">Exports</h2>
+<ul>
+<li>Step_method_main</li>
+<li>ERA</li>
+</ul>
+<h2 id="step_method_main">Step_method_main</h2>
+<p>Takes constant and step-responses to produce a discrete linear model of the plant with m outputs and n inputs.</p>
+<h3 id="arguments">Arguments:</h3>
+<ul>
+<li>constant_response
+<ul>
+<li>[timeseries object] : Response with no change in inputs. (Uniform time-steps not required)</li>
+</ul>
+</li>
+<li>step_responses
+<ul>
+<li>[<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m \times n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> cell array of timeseries objects] : Index [i,j] is the response on output i to a step at input j.</li>
+</ul>
+</li>
+<li>step_amplitudes
+<ul>
+<li>[<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>-dimensional cell array ]</li>
+</ul>
+</li>
+<li>step_time
+<ul>
+<li>[Floating point number          ] : Time at which the input-steps occur</li>
+</ul>
+</li>
+<li>model_order
+<ul>
+<li>[Integer        ] : Desired order of the returned model</li>
+</ul>
+</li>
+<li>u_star
+<ul>
+<li>[Floating point array           ] :  Array, representing the constant input given to the model.</li>
+</ul>
+</li>
+<li>dt
+<ul>
+<li>[Floating point number] : Length of the discrete time-step in the estimated model.</li>
+</ul>
+</li>
+</ul>
+<h3 id="returns">Returns</h3>
+<ul>
+<li>approxomated_system
+<ul>
+<li>[state-space object] : LTI-model that matches an assumed impulse-response as well as possible</li>
+</ul>
+</li>
+<li>sigmas
+<ul>
+<li>[array] : Contributin from each additional state, as described in the thesis, or in the original ERA-source.</li>
+</ul>
+</li>
+<li>tau_filter
+<ul>
+<li>[Floating point number] : A low-pass filter is needed to prevent aliasing when estimating the model. That filter is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><msub><mi>τ</mi><mrow><mi>f</mi><mi>i</mi><mi>l</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mi>s</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">1/(\tau_{filter}s +1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10764em;">f</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<h2 id="era">ERA</h2>
+<p>Lower-level function used for making an approxomated LTI system, 3-dimensional matrix representing time-series with n inputs, m outputs, over N time-steps. The normal operating point of the inputs and outputs have to be 0.</p>
+<h3 id="arguments-1">Arguments:</h3>
+<ul>
+<li>yFull
+<ul>
+<li>[ <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>×</mo><mi>m</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">N \times m \times n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> matrix] : Element [i,j,k] should represent the response of output j, at time-step i to a step at input k.</li>
+</ul>
+</li>
+<li>r
+<ul>
+<li>[Integer] : Order of the returned model.</li>
+</ul>
+</li>
+<li>dt
+<ul>
+<li>[Float] : The uniform difference in time between each sample</li>
+</ul>
+</li>
+</ul>
+<h3 id="returns-1">Returns:</h3>
+<ul>
+<li>approx_sys
+<ul>
+<li>[Discrete state-space object] : Approxomated system</li>
+</ul>
+</li>
+<li>sigmas
+<ul>
+<li>[Float array] : Contribution of each state, as described in the ERA-source</li>
+</ul>
+</li>
+<li>U
+<ul>
+<li>[Float matrix] : <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span></span></span></span> from the SVD used in the ERA</li>
+</ul>
+</li>
+<li>Sigma
+<ul>
+<li>[Float matrix] : <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">Σ</span></span></span></span> from the SVD used in the ERA</li>
+</ul>
+</li>
+<li>V
+<ul>
+<li>[Float matrix] : <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span></span></span></span> from the SVD used in the ERA</li>
+</ul>
+</li>
+</ul>
+<h2 id="bonus-features">Bonus features</h2>
+<ul>
+<li>Uncomment the line &quot;run compare_approx&quot; to see the comparison between the real step-response and the approxomated one
+<ul>
+<li>The script also saves the figure as a coloured eps vetor picture.</li>
+</ul>
+</li>
+</ul>
+
+    </body>
+    </html>

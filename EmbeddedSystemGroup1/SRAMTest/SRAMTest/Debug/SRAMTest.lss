@@ -1,0 +1,625 @@
+
+SRAMTest.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000070  00800100  00000394  00000408  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000394  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000478  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000060  00000000  00000000  000004a8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000407  00000000  00000000  00000508  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 00000198  00000000  00000000  0000090f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000183  00000000  00000000  00000aa7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  000000dc  00000000  00000000  00000c2c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000001f5  00000000  00000000  00000d08  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000002dc  00000000  00000000  00000efd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000050  00000000  00000000  000011d9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 38 00 	jmp	0x70	; 0x70 <__ctors_end>
+   4:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+   8:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+   c:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  10:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  14:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  18:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  1c:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  20:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  24:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  28:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  2c:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  30:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  34:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  38:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  3c:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  40:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  44:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  48:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  4c:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  50:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  54:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  58:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  5c:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  60:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  64:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  68:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+  6c:	0c 94 4d 00 	jmp	0x9a	; 0x9a <__bad_interrupt>
+
+00000070 <__ctors_end>:
+  70:	11 24       	eor	r1, r1
+  72:	1f be       	out	0x3f, r1	; 63
+  74:	cf ef       	ldi	r28, 0xFF	; 255
+  76:	d4 e0       	ldi	r29, 0x04	; 4
+  78:	de bf       	out	0x3e, r29	; 62
+  7a:	cd bf       	out	0x3d, r28	; 61
+
+0000007c <__do_copy_data>:
+  7c:	11 e0       	ldi	r17, 0x01	; 1
+  7e:	a0 e0       	ldi	r26, 0x00	; 0
+  80:	b1 e0       	ldi	r27, 0x01	; 1
+  82:	e4 e9       	ldi	r30, 0x94	; 148
+  84:	f3 e0       	ldi	r31, 0x03	; 3
+  86:	02 c0       	rjmp	.+4      	; 0x8c <__do_copy_data+0x10>
+  88:	05 90       	lpm	r0, Z+
+  8a:	0d 92       	st	X+, r0
+  8c:	a0 37       	cpi	r26, 0x70	; 112
+  8e:	b1 07       	cpc	r27, r17
+  90:	d9 f7       	brne	.-10     	; 0x88 <__do_copy_data+0xc>
+  92:	0e 94 da 00 	call	0x1b4	; 0x1b4 <main>
+  96:	0c 94 c8 01 	jmp	0x390	; 0x390 <_exit>
+
+0000009a <__bad_interrupt>:
+  9a:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000009e <USART_Init>:
+#define BAUD 9600
+#define MYUBRR FOSC/16/BAUD-1
+
+void USART_Init( unsigned int ubrr ) {	
+	// set the baud rate
+	UBRR0H = (unsigned char)(ubrr>>8);
+  9e:	90 bd       	out	0x20, r25	; 32
+	UBRR0L = (unsigned char)(ubrr);
+  a0:	89 b9       	out	0x09, r24	; 9
+	// enable reciever and transmitter
+	UCSR0B = (1<<RXEN0) | (1<<TXEN0);
+  a2:	88 e1       	ldi	r24, 0x18	; 24
+  a4:	8a b9       	out	0x0a, r24	; 10
+  a6:	08 95       	ret
+
+000000a8 <USART_putchar>:
+	return UDR0;
+}
+
+void USART_putchar(unsigned char data) {
+	// wait for empty transmit buffer
+	while (!(UCSR0A & (1<<UDRE0)));
+  a8:	5d 9b       	sbis	0x0b, 5	; 11
+  aa:	fe cf       	rjmp	.-4      	; 0xa8 <USART_putchar>
+	// put data into buffer, sends the data
+	UDR0 = data;
+  ac:	8c b9       	out	0x0c, r24	; 12
+  ae:	08 95       	ret
+
+000000b0 <printf_char>:
+}
+
+void printf_char(char* string) {
+  b0:	cf 93       	push	r28
+  b2:	df 93       	push	r29
+  b4:	ec 01       	movw	r28, r24
+	for (int i = 0; string[i] != '\0'; ++i) {
+  b6:	88 81       	ld	r24, Y
+  b8:	88 23       	and	r24, r24
+  ba:	31 f0       	breq	.+12     	; 0xc8 <printf_char+0x18>
+  bc:	21 96       	adiw	r28, 0x01	; 1
+		USART_putchar(string[i]);
+  be:	0e 94 54 00 	call	0xa8	; 0xa8 <USART_putchar>
+	// put data into buffer, sends the data
+	UDR0 = data;
+}
+
+void printf_char(char* string) {
+	for (int i = 0; string[i] != '\0'; ++i) {
+  c2:	89 91       	ld	r24, Y+
+  c4:	81 11       	cpse	r24, r1
+  c6:	fb cf       	rjmp	.-10     	; 0xbe <printf_char+0xe>
+		USART_putchar(string[i]);
+	}
+}
+  c8:	df 91       	pop	r29
+  ca:	cf 91       	pop	r28
+  cc:	08 95       	ret
+
+000000ce <printf_int>:
+
+void printf_int(int input) {
+  ce:	cf 93       	push	r28
+  d0:	df 93       	push	r29
+  d2:	ec 01       	movw	r28, r24
+	if(input/10 > 0)
+  d4:	8a 30       	cpi	r24, 0x0A	; 10
+  d6:	91 05       	cpc	r25, r1
+  d8:	3c f0       	brlt	.+14     	; 0xe8 <printf_int+0x1a>
+		printf_int(input/10);
+  da:	6a e0       	ldi	r22, 0x0A	; 10
+  dc:	70 e0       	ldi	r23, 0x00	; 0
+  de:	0e 94 df 00 	call	0x1be	; 0x1be <__divmodhi4>
+  e2:	cb 01       	movw	r24, r22
+  e4:	0e 94 67 00 	call	0xce	; 0xce <printf_int>
+	USART_putchar((unsigned char) (input%10) + '0');
+  e8:	ce 01       	movw	r24, r28
+  ea:	6a e0       	ldi	r22, 0x0A	; 10
+  ec:	70 e0       	ldi	r23, 0x00	; 0
+  ee:	0e 94 df 00 	call	0x1be	; 0x1be <__divmodhi4>
+  f2:	80 5d       	subi	r24, 0xD0	; 208
+  f4:	0e 94 54 00 	call	0xa8	; 0xa8 <USART_putchar>
+}
+  f8:	df 91       	pop	r29
+  fa:	cf 91       	pop	r28
+  fc:	08 95       	ret
+
+000000fe <XMEM_Init>:
+
+void XMEM_Init() {
+	MCUCR |= (1<<SRE);
+  fe:	85 b7       	in	r24, 0x35	; 53
+ 100:	80 68       	ori	r24, 0x80	; 128
+ 102:	85 bf       	out	0x35, r24	; 53
+	SFIOR |= (1<<XMM2);
+ 104:	80 b7       	in	r24, 0x30	; 48
+ 106:	80 62       	ori	r24, 0x20	; 32
+ 108:	80 bf       	out	0x30, r24	; 48
+ 10a:	08 95       	ret
+
+0000010c <init>:
+}
+
+void init() {
+	USART_Init( MYUBRR );
+ 10c:	8f e1       	ldi	r24, 0x1F	; 31
+ 10e:	90 e0       	ldi	r25, 0x00	; 0
+ 110:	0e 94 4f 00 	call	0x9e	; 0x9e <USART_Init>
+	XMEM_Init();
+ 114:	0e 94 7f 00 	call	0xfe	; 0xfe <XMEM_Init>
+ 118:	08 95       	ret
+
+0000011a <SRAM_test>:
+}
+
+void SRAM_test(void) {
+ 11a:	ef 92       	push	r14
+ 11c:	ff 92       	push	r15
+ 11e:	0f 93       	push	r16
+ 120:	1f 93       	push	r17
+ 122:	cf 93       	push	r28
+ 124:	df 93       	push	r29
+	volatile char *ext_ram = (char *) 0x1800; // Start address for the SRAM
+	uint16_t ext_ram_size = 0x800;
+	uint16_t write_errors = 0;
+	uint16_t retrieval_errors = 0;
+	printf_char("Starting SRAM test...\n");
+ 126:	84 e0       	ldi	r24, 0x04	; 4
+ 128:	91 e0       	ldi	r25, 0x01	; 1
+ 12a:	0e 94 58 00 	call	0xb0	; 0xb0 <printf_char>
+	// rand() stores some internal state, so calling this function in a loop will
+	// yield different seeds each time (unless srand() is called before this function)
+	uint16_t seed = rand();
+ 12e:	0e 94 55 01 	call	0x2aa	; 0x2aa <rand>
+ 132:	8c 01       	movw	r16, r24
+	// Write phase: Immediately check that the correct value was stored
+	srand(seed);
+ 134:	0e 94 5a 01 	call	0x2b4	; 0x2b4 <srand>
+ 138:	c0 e0       	ldi	r28, 0x00	; 0
+ 13a:	d8 e1       	ldi	r29, 0x18	; 24
+}
+
+void SRAM_test(void) {
+	volatile char *ext_ram = (char *) 0x1800; // Start address for the SRAM
+	uint16_t ext_ram_size = 0x800;
+	uint16_t write_errors = 0;
+ 13c:	e1 2c       	mov	r14, r1
+ 13e:	f1 2c       	mov	r15, r1
+	// yield different seeds each time (unless srand() is called before this function)
+	uint16_t seed = rand();
+	// Write phase: Immediately check that the correct value was stored
+	srand(seed);
+	for (uint16_t i = 0; i < ext_ram_size; i++) {
+		uint8_t some_value = rand();
+ 140:	0e 94 55 01 	call	0x2aa	; 0x2aa <rand>
+		ext_ram[i] = some_value;
+ 144:	88 83       	st	Y, r24
+		uint8_t retreived_value = ext_ram[i];
+ 146:	98 81       	ld	r25, Y
+		if (retreived_value != some_value) {
+ 148:	98 17       	cp	r25, r24
+ 14a:	19 f0       	breq	.+6      	; 0x152 <SRAM_test+0x38>
+			printf_int(retreived_value);
+			printf_char(" (should be ");
+			printf_int(some_value);
+			printf_char(")\n");
+			*/
+			write_errors++;
+ 14c:	8f ef       	ldi	r24, 0xFF	; 255
+ 14e:	e8 1a       	sub	r14, r24
+ 150:	f8 0a       	sbc	r15, r24
+ 152:	21 96       	adiw	r28, 0x01	; 1
+	// rand() stores some internal state, so calling this function in a loop will
+	// yield different seeds each time (unless srand() is called before this function)
+	uint16_t seed = rand();
+	// Write phase: Immediately check that the correct value was stored
+	srand(seed);
+	for (uint16_t i = 0; i < ext_ram_size; i++) {
+ 154:	c1 15       	cp	r28, r1
+ 156:	80 e2       	ldi	r24, 0x20	; 32
+ 158:	d8 07       	cpc	r29, r24
+ 15a:	91 f7       	brne	.-28     	; 0x140 <SRAM_test+0x26>
+			*/
+			write_errors++;
+		}
+	}
+	// Retrieval phase: Check that no values were changed during or after the write phase
+	srand(seed); // reset the PRNG to the state it had before the write phase
+ 15c:	c8 01       	movw	r24, r16
+ 15e:	0e 94 5a 01 	call	0x2b4	; 0x2b4 <srand>
+ 162:	c0 e0       	ldi	r28, 0x00	; 0
+ 164:	d8 e1       	ldi	r29, 0x18	; 24
+
+void SRAM_test(void) {
+	volatile char *ext_ram = (char *) 0x1800; // Start address for the SRAM
+	uint16_t ext_ram_size = 0x800;
+	uint16_t write_errors = 0;
+	uint16_t retrieval_errors = 0;
+ 166:	00 e0       	ldi	r16, 0x00	; 0
+ 168:	10 e0       	ldi	r17, 0x00	; 0
+		}
+	}
+	// Retrieval phase: Check that no values were changed during or after the write phase
+	srand(seed); // reset the PRNG to the state it had before the write phase
+	for (uint16_t i = 0; i < ext_ram_size; i++) {
+		uint8_t some_value = rand();
+ 16a:	0e 94 55 01 	call	0x2aa	; 0x2aa <rand>
+		uint8_t retreived_value = ext_ram[i];
+ 16e:	98 81       	ld	r25, Y
+		if (retreived_value != some_value) {
+ 170:	98 17       	cp	r25, r24
+ 172:	11 f0       	breq	.+4      	; 0x178 <SRAM_test+0x5e>
+			printf_int(retreived_value);
+			printf_char(" (should be ");
+			printf_int(some_value);
+			printf_char(")\n");
+			*/
+			retrieval_errors++;
+ 174:	0f 5f       	subi	r16, 0xFF	; 255
+ 176:	1f 4f       	sbci	r17, 0xFF	; 255
+ 178:	21 96       	adiw	r28, 0x01	; 1
+			write_errors++;
+		}
+	}
+	// Retrieval phase: Check that no values were changed during or after the write phase
+	srand(seed); // reset the PRNG to the state it had before the write phase
+	for (uint16_t i = 0; i < ext_ram_size; i++) {
+ 17a:	c1 15       	cp	r28, r1
+ 17c:	80 e2       	ldi	r24, 0x20	; 32
+ 17e:	d8 07       	cpc	r29, r24
+ 180:	a1 f7       	brne	.-24     	; 0x16a <SRAM_test+0x50>
+			*/
+			retrieval_errors++;
+		}
+	}
+	//printf("SRAM test completed with \n%4d errors in write phase and \n%4d errors in retrieval phase\n\n", write_errors, retrieval_errors);
+	printf_char("SRAM test completed with \n");
+ 182:	8b e1       	ldi	r24, 0x1B	; 27
+ 184:	91 e0       	ldi	r25, 0x01	; 1
+ 186:	0e 94 58 00 	call	0xb0	; 0xb0 <printf_char>
+	printf_int(write_errors);
+ 18a:	c7 01       	movw	r24, r14
+ 18c:	0e 94 67 00 	call	0xce	; 0xce <printf_int>
+	printf_char(" errors in write phase and \n");
+ 190:	86 e3       	ldi	r24, 0x36	; 54
+ 192:	91 e0       	ldi	r25, 0x01	; 1
+ 194:	0e 94 58 00 	call	0xb0	; 0xb0 <printf_char>
+	printf_int(retrieval_errors);
+ 198:	c8 01       	movw	r24, r16
+ 19a:	0e 94 67 00 	call	0xce	; 0xce <printf_int>
+	printf_char(" errors in retrieval phase\n\n");
+ 19e:	83 e5       	ldi	r24, 0x53	; 83
+ 1a0:	91 e0       	ldi	r25, 0x01	; 1
+ 1a2:	0e 94 58 00 	call	0xb0	; 0xb0 <printf_char>
+}
+ 1a6:	df 91       	pop	r29
+ 1a8:	cf 91       	pop	r28
+ 1aa:	1f 91       	pop	r17
+ 1ac:	0f 91       	pop	r16
+ 1ae:	ff 90       	pop	r15
+ 1b0:	ef 90       	pop	r14
+ 1b2:	08 95       	ret
+
+000001b4 <main>:
+
+int main(void) {
+	init();
+ 1b4:	0e 94 86 00 	call	0x10c	; 0x10c <init>
+	SRAM_test();
+ 1b8:	0e 94 8d 00 	call	0x11a	; 0x11a <SRAM_test>
+ 1bc:	ff cf       	rjmp	.-2      	; 0x1bc <main+0x8>
+
+000001be <__divmodhi4>:
+ 1be:	97 fb       	bst	r25, 7
+ 1c0:	07 2e       	mov	r0, r23
+ 1c2:	16 f4       	brtc	.+4      	; 0x1c8 <__divmodhi4+0xa>
+ 1c4:	00 94       	com	r0
+ 1c6:	07 d0       	rcall	.+14     	; 0x1d6 <__divmodhi4_neg1>
+ 1c8:	77 fd       	sbrc	r23, 7
+ 1ca:	09 d0       	rcall	.+18     	; 0x1de <__divmodhi4_neg2>
+ 1cc:	0e 94 f3 00 	call	0x1e6	; 0x1e6 <__udivmodhi4>
+ 1d0:	07 fc       	sbrc	r0, 7
+ 1d2:	05 d0       	rcall	.+10     	; 0x1de <__divmodhi4_neg2>
+ 1d4:	3e f4       	brtc	.+14     	; 0x1e4 <__divmodhi4_exit>
+
+000001d6 <__divmodhi4_neg1>:
+ 1d6:	90 95       	com	r25
+ 1d8:	81 95       	neg	r24
+ 1da:	9f 4f       	sbci	r25, 0xFF	; 255
+ 1dc:	08 95       	ret
+
+000001de <__divmodhi4_neg2>:
+ 1de:	70 95       	com	r23
+ 1e0:	61 95       	neg	r22
+ 1e2:	7f 4f       	sbci	r23, 0xFF	; 255
+
+000001e4 <__divmodhi4_exit>:
+ 1e4:	08 95       	ret
+
+000001e6 <__udivmodhi4>:
+ 1e6:	aa 1b       	sub	r26, r26
+ 1e8:	bb 1b       	sub	r27, r27
+ 1ea:	51 e1       	ldi	r21, 0x11	; 17
+ 1ec:	07 c0       	rjmp	.+14     	; 0x1fc <__udivmodhi4_ep>
+
+000001ee <__udivmodhi4_loop>:
+ 1ee:	aa 1f       	adc	r26, r26
+ 1f0:	bb 1f       	adc	r27, r27
+ 1f2:	a6 17       	cp	r26, r22
+ 1f4:	b7 07       	cpc	r27, r23
+ 1f6:	10 f0       	brcs	.+4      	; 0x1fc <__udivmodhi4_ep>
+ 1f8:	a6 1b       	sub	r26, r22
+ 1fa:	b7 0b       	sbc	r27, r23
+
+000001fc <__udivmodhi4_ep>:
+ 1fc:	88 1f       	adc	r24, r24
+ 1fe:	99 1f       	adc	r25, r25
+ 200:	5a 95       	dec	r21
+ 202:	a9 f7       	brne	.-22     	; 0x1ee <__udivmodhi4_loop>
+ 204:	80 95       	com	r24
+ 206:	90 95       	com	r25
+ 208:	bc 01       	movw	r22, r24
+ 20a:	cd 01       	movw	r24, r26
+ 20c:	08 95       	ret
+
+0000020e <do_rand>:
+ 20e:	8f 92       	push	r8
+ 210:	9f 92       	push	r9
+ 212:	af 92       	push	r10
+ 214:	bf 92       	push	r11
+ 216:	cf 92       	push	r12
+ 218:	df 92       	push	r13
+ 21a:	ef 92       	push	r14
+ 21c:	ff 92       	push	r15
+ 21e:	cf 93       	push	r28
+ 220:	df 93       	push	r29
+ 222:	ec 01       	movw	r28, r24
+ 224:	68 81       	ld	r22, Y
+ 226:	79 81       	ldd	r23, Y+1	; 0x01
+ 228:	8a 81       	ldd	r24, Y+2	; 0x02
+ 22a:	9b 81       	ldd	r25, Y+3	; 0x03
+ 22c:	61 15       	cp	r22, r1
+ 22e:	71 05       	cpc	r23, r1
+ 230:	81 05       	cpc	r24, r1
+ 232:	91 05       	cpc	r25, r1
+ 234:	21 f4       	brne	.+8      	; 0x23e <do_rand+0x30>
+ 236:	64 e2       	ldi	r22, 0x24	; 36
+ 238:	79 ed       	ldi	r23, 0xD9	; 217
+ 23a:	8b e5       	ldi	r24, 0x5B	; 91
+ 23c:	97 e0       	ldi	r25, 0x07	; 7
+ 23e:	2d e1       	ldi	r18, 0x1D	; 29
+ 240:	33 ef       	ldi	r19, 0xF3	; 243
+ 242:	41 e0       	ldi	r20, 0x01	; 1
+ 244:	50 e0       	ldi	r21, 0x00	; 0
+ 246:	0e 94 65 01 	call	0x2ca	; 0x2ca <__divmodsi4>
+ 24a:	49 01       	movw	r8, r18
+ 24c:	5a 01       	movw	r10, r20
+ 24e:	9b 01       	movw	r18, r22
+ 250:	ac 01       	movw	r20, r24
+ 252:	a7 ea       	ldi	r26, 0xA7	; 167
+ 254:	b1 e4       	ldi	r27, 0x41	; 65
+ 256:	0e 94 84 01 	call	0x308	; 0x308 <__muluhisi3>
+ 25a:	6b 01       	movw	r12, r22
+ 25c:	7c 01       	movw	r14, r24
+ 25e:	ac ee       	ldi	r26, 0xEC	; 236
+ 260:	b4 ef       	ldi	r27, 0xF4	; 244
+ 262:	a5 01       	movw	r20, r10
+ 264:	94 01       	movw	r18, r8
+ 266:	0e 94 92 01 	call	0x324	; 0x324 <__mulohisi3>
+ 26a:	c6 0e       	add	r12, r22
+ 26c:	d7 1e       	adc	r13, r23
+ 26e:	e8 1e       	adc	r14, r24
+ 270:	f9 1e       	adc	r15, r25
+ 272:	f7 fe       	sbrs	r15, 7
+ 274:	06 c0       	rjmp	.+12     	; 0x282 <do_rand+0x74>
+ 276:	81 e0       	ldi	r24, 0x01	; 1
+ 278:	c8 1a       	sub	r12, r24
+ 27a:	d1 08       	sbc	r13, r1
+ 27c:	e1 08       	sbc	r14, r1
+ 27e:	80 e8       	ldi	r24, 0x80	; 128
+ 280:	f8 0a       	sbc	r15, r24
+ 282:	c8 82       	st	Y, r12
+ 284:	d9 82       	std	Y+1, r13	; 0x01
+ 286:	ea 82       	std	Y+2, r14	; 0x02
+ 288:	fb 82       	std	Y+3, r15	; 0x03
+ 28a:	c6 01       	movw	r24, r12
+ 28c:	9f 77       	andi	r25, 0x7F	; 127
+ 28e:	df 91       	pop	r29
+ 290:	cf 91       	pop	r28
+ 292:	ff 90       	pop	r15
+ 294:	ef 90       	pop	r14
+ 296:	df 90       	pop	r13
+ 298:	cf 90       	pop	r12
+ 29a:	bf 90       	pop	r11
+ 29c:	af 90       	pop	r10
+ 29e:	9f 90       	pop	r9
+ 2a0:	8f 90       	pop	r8
+ 2a2:	08 95       	ret
+
+000002a4 <rand_r>:
+ 2a4:	0e 94 07 01 	call	0x20e	; 0x20e <do_rand>
+ 2a8:	08 95       	ret
+
+000002aa <rand>:
+ 2aa:	80 e0       	ldi	r24, 0x00	; 0
+ 2ac:	91 e0       	ldi	r25, 0x01	; 1
+ 2ae:	0e 94 07 01 	call	0x20e	; 0x20e <do_rand>
+ 2b2:	08 95       	ret
+
+000002b4 <srand>:
+ 2b4:	a0 e0       	ldi	r26, 0x00	; 0
+ 2b6:	b0 e0       	ldi	r27, 0x00	; 0
+ 2b8:	80 93 00 01 	sts	0x0100, r24
+ 2bc:	90 93 01 01 	sts	0x0101, r25
+ 2c0:	a0 93 02 01 	sts	0x0102, r26
+ 2c4:	b0 93 03 01 	sts	0x0103, r27
+ 2c8:	08 95       	ret
+
+000002ca <__divmodsi4>:
+ 2ca:	05 2e       	mov	r0, r21
+ 2cc:	97 fb       	bst	r25, 7
+ 2ce:	1e f4       	brtc	.+6      	; 0x2d6 <__divmodsi4+0xc>
+ 2d0:	00 94       	com	r0
+ 2d2:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <__negsi2>
+ 2d6:	57 fd       	sbrc	r21, 7
+ 2d8:	07 d0       	rcall	.+14     	; 0x2e8 <__divmodsi4_neg2>
+ 2da:	0e 94 97 01 	call	0x32e	; 0x32e <__udivmodsi4>
+ 2de:	07 fc       	sbrc	r0, 7
+ 2e0:	03 d0       	rcall	.+6      	; 0x2e8 <__divmodsi4_neg2>
+ 2e2:	4e f4       	brtc	.+18     	; 0x2f6 <__divmodsi4_exit>
+ 2e4:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <__negsi2>
+
+000002e8 <__divmodsi4_neg2>:
+ 2e8:	50 95       	com	r21
+ 2ea:	40 95       	com	r20
+ 2ec:	30 95       	com	r19
+ 2ee:	21 95       	neg	r18
+ 2f0:	3f 4f       	sbci	r19, 0xFF	; 255
+ 2f2:	4f 4f       	sbci	r20, 0xFF	; 255
+ 2f4:	5f 4f       	sbci	r21, 0xFF	; 255
+
+000002f6 <__divmodsi4_exit>:
+ 2f6:	08 95       	ret
+
+000002f8 <__negsi2>:
+ 2f8:	90 95       	com	r25
+ 2fa:	80 95       	com	r24
+ 2fc:	70 95       	com	r23
+ 2fe:	61 95       	neg	r22
+ 300:	7f 4f       	sbci	r23, 0xFF	; 255
+ 302:	8f 4f       	sbci	r24, 0xFF	; 255
+ 304:	9f 4f       	sbci	r25, 0xFF	; 255
+ 306:	08 95       	ret
+
+00000308 <__muluhisi3>:
+ 308:	0e 94 b9 01 	call	0x372	; 0x372 <__umulhisi3>
+ 30c:	a5 9f       	mul	r26, r21
+ 30e:	90 0d       	add	r25, r0
+ 310:	b4 9f       	mul	r27, r20
+ 312:	90 0d       	add	r25, r0
+ 314:	a4 9f       	mul	r26, r20
+ 316:	80 0d       	add	r24, r0
+ 318:	91 1d       	adc	r25, r1
+ 31a:	11 24       	eor	r1, r1
+ 31c:	08 95       	ret
+
+0000031e <__mulshisi3>:
+ 31e:	b7 ff       	sbrs	r27, 7
+ 320:	0c 94 84 01 	jmp	0x308	; 0x308 <__muluhisi3>
+
+00000324 <__mulohisi3>:
+ 324:	0e 94 84 01 	call	0x308	; 0x308 <__muluhisi3>
+ 328:	82 1b       	sub	r24, r18
+ 32a:	93 0b       	sbc	r25, r19
+ 32c:	08 95       	ret
+
+0000032e <__udivmodsi4>:
+ 32e:	a1 e2       	ldi	r26, 0x21	; 33
+ 330:	1a 2e       	mov	r1, r26
+ 332:	aa 1b       	sub	r26, r26
+ 334:	bb 1b       	sub	r27, r27
+ 336:	fd 01       	movw	r30, r26
+ 338:	0d c0       	rjmp	.+26     	; 0x354 <__udivmodsi4_ep>
+
+0000033a <__udivmodsi4_loop>:
+ 33a:	aa 1f       	adc	r26, r26
+ 33c:	bb 1f       	adc	r27, r27
+ 33e:	ee 1f       	adc	r30, r30
+ 340:	ff 1f       	adc	r31, r31
+ 342:	a2 17       	cp	r26, r18
+ 344:	b3 07       	cpc	r27, r19
+ 346:	e4 07       	cpc	r30, r20
+ 348:	f5 07       	cpc	r31, r21
+ 34a:	20 f0       	brcs	.+8      	; 0x354 <__udivmodsi4_ep>
+ 34c:	a2 1b       	sub	r26, r18
+ 34e:	b3 0b       	sbc	r27, r19
+ 350:	e4 0b       	sbc	r30, r20
+ 352:	f5 0b       	sbc	r31, r21
+
+00000354 <__udivmodsi4_ep>:
+ 354:	66 1f       	adc	r22, r22
+ 356:	77 1f       	adc	r23, r23
+ 358:	88 1f       	adc	r24, r24
+ 35a:	99 1f       	adc	r25, r25
+ 35c:	1a 94       	dec	r1
+ 35e:	69 f7       	brne	.-38     	; 0x33a <__udivmodsi4_loop>
+ 360:	60 95       	com	r22
+ 362:	70 95       	com	r23
+ 364:	80 95       	com	r24
+ 366:	90 95       	com	r25
+ 368:	9b 01       	movw	r18, r22
+ 36a:	ac 01       	movw	r20, r24
+ 36c:	bd 01       	movw	r22, r26
+ 36e:	cf 01       	movw	r24, r30
+ 370:	08 95       	ret
+
+00000372 <__umulhisi3>:
+ 372:	a2 9f       	mul	r26, r18
+ 374:	b0 01       	movw	r22, r0
+ 376:	b3 9f       	mul	r27, r19
+ 378:	c0 01       	movw	r24, r0
+ 37a:	a3 9f       	mul	r26, r19
+ 37c:	70 0d       	add	r23, r0
+ 37e:	81 1d       	adc	r24, r1
+ 380:	11 24       	eor	r1, r1
+ 382:	91 1d       	adc	r25, r1
+ 384:	b2 9f       	mul	r27, r18
+ 386:	70 0d       	add	r23, r0
+ 388:	81 1d       	adc	r24, r1
+ 38a:	11 24       	eor	r1, r1
+ 38c:	91 1d       	adc	r25, r1
+ 38e:	08 95       	ret
+
+00000390 <_exit>:
+ 390:	f8 94       	cli
+
+00000392 <__stop_program>:
+ 392:	ff cf       	rjmp	.-2      	; 0x392 <__stop_program>

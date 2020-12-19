@@ -1,0 +1,53 @@
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!            
+!!   Norwegian notes, so that I can understand what in the world I am doing in this task            !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!            
+
+
+
+docker start -i hw2_ex4
+
+Man må kjøre en executable først 
+
+Kommandoer
+    nginx -s <kommando> 
+        stop   # Hard stopp
+        quit    # Pen stopp
+        reload  # Oppdater kode 
+
+
+Så lenge man er inne i dockeren får man ikke kommunisert fra nettleseren på utsiden via localhost 
+    Bruk IP-addressen fra ifconfig
+    Husk å også legge til /index.html for å aksessere filen index.html
+
+
+
+Implementasjonen av 4 a)
+
+    Generering av egene sertifikater  
+    1) Vi må lage et SSL-sertifikat 
+        openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out MyCertificate.crt -keyout MyKey.key
+            kilde: https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04
+            Betydninger:
+                -newkey rsa:4096
+                    Lager et RSA-sertifikat som er på 4096 bits ( 2048 er default på nye systemer)
+                -x509 
+                    Lag et selv-signert sertifikat
+
+                -days 
+                    Mengden tid man ber om sertifikatet (Kan økes)
+                -nodes 
+                    Lag et sertifikat som ikke trenger en "passphrase", ellers må man skrive et passord hver gang programmet startes på nytt
+
+    2) (Vi gjør ikke dette steget) Man bør sørge for at bare root har tilgang til sertifikatet 
+        chmod 400 /root/certs/MyKey.key
+    3) Man bør virkelig lagre nøkkelen på en ekstern plass
+        Ikke hopp over dette steget
+            Vi hopper over dette steget
+
+    
+
+
+
+     

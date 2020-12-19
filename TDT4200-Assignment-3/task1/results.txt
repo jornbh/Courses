@@ -1,0 +1,121 @@
+Task 2 b
+Iteration: 256 blockDim:  1 Pixel: 512 Type: .
+
+real	0m0.588s
+user	0m1.690s
+sys	0m0.004s
+Iteration: 256 blockDim:  1 Pixel: 2048 Type: .
+
+real	0m0.555s
+user	0m1.570s
+sys	0m0.004s
+Iteration: 256 blockDim:  4 Pixel: 512 Type: .
+
+real	0m0.579s
+user	0m1.661s
+sys	0m0.008s
+Iteration: 256 blockDim:  4 Pixel: 2048 Type: .
+
+real	0m0.576s
+user	0m1.588s
+sys	0m0.008s
+Iteration: 256 blockDim:  16 Pixel: 512 Type: .
+
+real	0m0.603s
+user	0m1.610s
+sys	0m0.008s
+Iteration: 256 blockDim:  16 Pixel: 2048 Type: .
+
+real	0m0.745s
+user	0m1.688s
+sys	0m0.008s
+Iteration: 1024 blockDim:  1 Pixel: 512 Type: .
+
+real	0m0.707s
+user	0m1.602s
+sys	0m0.011s
+Iteration: 1024 blockDim:  1 Pixel: 2048 Type: .
+
+real	0m0.611s
+user	0m1.578s
+sys	0m0.008s
+Iteration: 1024 blockDim:  4 Pixel: 512 Type: .
+
+real	0m0.582s
+user	0m1.591s
+sys	0m0.008s
+Iteration: 1024 blockDim:  4 Pixel: 2048 Type: .
+
+real	0m0.649s
+user	0m1.576s
+sys	0m0.024s
+Iteration: 1024 blockDim:  16 Pixel: 512 Type: .
+
+real	0m0.677s
+user	0m1.655s
+sys	0m0.020s
+Iteration: 1024 blockDim:  16 Pixel: 2048 Type: .
+
+real	0m0.731s
+user	0m1.736s
+sys	0m0.024s
+Iteration: 256 blockDim:  1 Pixel: 512 Type: -t.
+
+real	0m0.630s
+user	0m1.537s
+sys	0m0.016s
+Iteration: 256 blockDim:  1 Pixel: 2048 Type: -t.
+
+real	0m0.643s
+user	0m1.752s
+sys	0m0.008s
+Iteration: 256 blockDim:  4 Pixel: 512 Type: -t.
+
+real	0m0.605s
+user	0m1.551s
+sys	0m0.016s
+Iteration: 256 blockDim:  4 Pixel: 2048 Type: -t.
+
+real	0m0.640s
+user	0m1.650s
+sys	0m0.012s
+Iteration: 256 blockDim:  16 Pixel: 512 Type: -t.
+
+real	0m0.739s
+user	0m1.735s
+sys	0m0.016s
+Iteration: 256 blockDim:  16 Pixel: 2048 Type: -t.
+
+real	0m0.648s
+user	0m1.653s
+sys	0m0.008s
+Iteration: 1024 blockDim:  1 Pixel: 512 Type: -t.
+
+real	0m0.756s
+user	0m1.783s
+sys	0m0.000s
+Iteration: 1024 blockDim:  1 Pixel: 2048 Type: -t.
+
+real	0m0.577s
+user	0m1.588s
+sys	0m0.008s
+Iteration: 1024 blockDim:  4 Pixel: 512 Type: -t.
+
+real	0m0.616s
+user	0m1.602s
+sys	0m0.020s
+Iteration: 1024 blockDim:  4 Pixel: 2048 Type: -t.
+
+real	0m0.634s
+user	0m1.571s
+sys	0m0.004s
+Iteration: 1024 blockDim:  16 Pixel: 512 Type: -t.
+
+real	0m0.792s
+user	0m1.672s
+sys	0m0.004s
+Iteration: 1024 blockDim:  16 Pixel: 2048 Type: -t.
+
+real	0m0.784s
+user	0m1.725s
+sys	0m0.011s

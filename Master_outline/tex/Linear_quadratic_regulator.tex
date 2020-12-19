@@ -1,0 +1,88 @@
+\chapter{Linear Quadratic Regulator}
+\label{cha:LQR}
+The Linear Quadratic Regulator is a much-explored part of optimal control. It has the advantage of being able to minimize equation \ref{eq:discrete_lqr_cost} for any $x$, simply by pre-computing a state-feedback matrix $K_{lqr}$. This can be particularly useful, since a discrete MPC with an infinite time-horizon and an LQR will give the same sequence of inputs, given the same costs and same sequence of measurements. 
+
+\noindent
+The LQR minimizes a quadratic cost. 
+
+\begin{align}
+    J = \sum_{k=0}^\infty x_k^T Q x_k + u_k^T R u_k + x_k^T N u_k 
+    \label{eq:discrete_lqr_cost}
+\end{align}
+Most sources do not explain why the Riccati equation gives an optimal feedback matrix $K_{lqr}$, simply that it does. But \cite{disc_LQR_lecture} gives does give a proof. Since the source is a set of lecture notes, and not a piece of published work, the proof ill has to be reiterated here. 
+
+
+
+
+\noindent
+Given a controllable plant 
+
+\begin{align}
+    x_{k+1} = A x_k + B u_k
+\end{align}
+If the plant is controlable, for some $n \le \infty$
+
+\begin{align}
+    \exists u_1,u_2, \dots , u_n : x_n = 0
+    \label{eq:exists_zeros_sequence}
+\end{align}
+Since all linear systems have their equilibrium at 0, 
+\begin{align}
+    x_0 &= 0 \\
+    x_{k+1} &= A x_k + B 0\\
+    &\Rightarrow x_k =0 \forall k \geq 0
+    \label{eq:stable_zero}
+\end{align}
+This implies that if a plant is controllable, there exists an input sequence which ensures that $J \le \infty$. The way this optimal J is found is by a recursive function. Imagine a single-step horizon problem, where the cost $Q$ of the current state and of the symetric cost of the next state $P_1$ are both known. Then the problem looks like 
+
+\begin{align}
+    J_{1} = x^TQ x + u^T R u + (A + Bu)^TP_1(A + Bu) \\
+    Q = Q^T \geq 0, R = R^T \ge 0 
+\end{align}
+The best single input $u$ can be found by taking the gradient of $J$  with respect to $u$ and solving for 0. By using $\nabla_u ( u^TAu + b^Tu) = (A+A^T)u + b$ from \cite{Matrix_cookbook}, and the symetry of R and Q, $\nabla_u J$ becomes
+\begin{align}
+    \nabla_u J_1  = 2\left( R + B^RP_1 B \right)u + 2\left( B^TP_1 Ax \right)
+\end{align}
+Setting $\nabla_u J =0$, and separating u to the left-hand side gives 
+
+\begin{align}
+    \left( R + B^TP_1B \right)u = - \left( B^TP_1A \right)x
+\end{align}
+
+R is positive definite, while $P_1$ is guaranteed to be positive semidefinite. Therefore, no eigenvalue can be zeros and the matrix must be invertible. The optimal input u is proportional to the state x. The transformation from the current state to optimal input therefore becomes a trivial matrix-multiplication, with the matrix $K_{lqr,1}$
+
+\begin{align}
+    K_{lqr,1} = - \left( R + B^TP_1B \right)^{-1}\left( B^TP_1A \right)
+\end{align}
+
+\noindent
+As the reader might have guessed, the single-horizon cost can be used to recursively find the cost of an arbitrary number of steps.
+
+\begin{align}
+    P_{k+1} = \left( A - BK_{lqr,k} \right)^TP_k \left( A - BK_{lqr,k} \right)^T + K_{lqr,k}^TRK_{lqr,k} + Q
+\end{align}
+
+\noindent
+Because of equation \ref{eq:exists_zeros_sequence} and \ref{eq:stable_zero}, there exists a sequence of inputs that gives a finite infinite-horizon cost, so the optimal solution has to be just as good or better. Consequently $P$ should converge to some positive definite matrix $P_{\infty}$ as enough iterations have been done. After the cancelling the redundant terms, the equation for $P_{\infty}$ becomes the Riccati equation 
+
+\begin{align}
+    P = A^TPB \left( R + B^TPA \right)^{-1}B^TPA
+    \blacksquare 
+\end{align}
+The matrix equation will always have at least more than one valid solution, but only one of them is positive definite, and therefore the correct one. The state feedback gain can easily be found from the solution. 
+\begin{align}
+    K_{lqr} = - \left( R + B^TPB \right)^{-1}\left( B^TPA \right)
+\end{align}
+
+
+\noindent
+There is also a similair proof in \cite{cont_LQR_lecture}, which is based on the idea of approxomating the dynamics over a time-step $ h \rightarrow 0$, which gives an optimal input 
+\begin{align}
+    K_{lqr, cont}= - R^{-1}B^T P_t
+\end{align}
+And then also solving the Riccati differential equation \ref{eq:cont_riccati_equation} backwards in time
+\begin{align}
+    - \dot{P_t} =  A^TP_t + P_t A - P_t B R^{-1}B^T P_t + Q 
+    \label{eq:cont_riccati_equation}
+\end{align}
+The solution can also be found by setting $\dot{P}_t =0$, and simply solving the matrix equation. 

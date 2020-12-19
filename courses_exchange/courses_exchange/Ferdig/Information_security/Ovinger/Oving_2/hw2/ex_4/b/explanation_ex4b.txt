@@ -1,0 +1,19 @@
+
+
+This time we needed to add the CA well. We ended up using 
+
+openssl req -new -newkey rsa:4096 -days 365 -nodes -keyout example.com.key -out example.com.csr
+
+    (Major credits to https://www.linode.com/docs/security/ssl/obtain-a-commercially-signed-tls-certificate/ )
+    This creates a request for a certificte, as well as a private encryption key, written to the filenames following -our and -keyout respectively
+        The line specifies: 
+            
+            -newkey rsa:4096    : The new rsa-key will be 4096 bits (To prevent the implementation for accidentaly giving us a key that is too small)
+            -days               : How long we want the certificate to be valid
+            -nodes              : Makes it so that will not need to write a pass phrase each time we restart our server
+
+We have to specify localhost as the common name when making the request. Thre rest does not seem important, but I filled in my e-mail just in creates
+
+The hard part now was to realise that we simply had to post the request without any changes at the web-site. This gave us an actual certificate which we could use 
+    We only have one domain, and no linking of certificates, so we can simply use it as-is. 
+    Thus, we added the certificate to the config-file 

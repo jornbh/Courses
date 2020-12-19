@@ -1,0 +1,100 @@
+5        WALLE                                             
+5        The Sting                                         
+5        The Secret in Their Eyes                          
+5        The Philadelphia Story                            
+5        The Adventures of Robin Hood                      
+5        Lagaan: Once Upon a Time in India                 
+5        Incendies                                         
+5        Harold and Maude                                  
+5        Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb
+5        Battleship Potemkin                               
+5        Au Revoir Les Enfants                             
+5        Amelie                                            
+5        12 Years a Slave                                  
+4        Ugetsu monogatari                                 
+4        Tokyo Story                                       
+4        Three Colors: Red                                 
+4        The Right Stuff                                   
+4        The Man with No Name 2: For a Few Dollars More    
+4        The Bride of Frankenstein                         
+4        Sweet Smell of Success                            
+4        Sullivan's Travels                                
+4        Spring, Summer, Autumn, Winter... and Spring      
+4        Some Like It Hot                                  
+4        Saving Private Ryan                               
+4        Repulsion                                         
+4        Ratatouille                                       
+4        Persepolis                                        
+4        Once Upon a Time in America                       
+4        Jurassic Park                                     
+4        High and Low                                      
+4        Duck Soup                                         
+4        Chinatown                                         
+4        Aliens                                            
+3        To Be or Not to Be                                
+3        There Will Be Blood                               
+3        The Red Shoes                                     
+3        The Man Who Shot Liberty Valance                  
+3        The Hustler                                       
+3        The Graduate                                      
+3        The French Connection                             
+3        The Diving Bell and the Butterfly                 
+3        Stand by Me                                       
+3        Roman Holiday                                     
+3        Ran                                               
+3        Psycho                                            
+3        Nosferatu                                         
+3        Le Samoura                                        
+3        Le notti di Cabiria                               
+3        It Happened One Night                             
+3        Inside Out                                        
+3        High Noon                                         
+3        Finding Nemo                                      
+3        Double Indemnity                                  
+3        City of God                                       
+3        Being There                                       
+3        Before Sunrise                                    
+3        Annie Hall                                        
+2        Vertigo                                           
+2        The Searchers                                     
+2        The Lord of the Rings: The Return of the King     
+2        The Last Picture Show                             
+2        The Killer                                        
+2        The Iron Giant                                    
+2        The Great Dictator                                
+2        The Good, the Bad and the Ugly                    
+2        The Conformist                                    
+2        The Big Lebowski                                  
+2        The Army of Shadows                               
+2        Stalker                                           
+2        Rome, Open City                                   
+2        Reservoir Dogs                                    
+2        Pulp Fiction                                      
+2        Ordet                                             
+2        North by Northwest                                
+2        Los Olvidados                                     
+2        Les diaboliques                                   
+2        La rgle du jeu                                    
+2        Jules and Jim                                     
+2        Harakiri                                          
+2        Halloween                                         
+2        4 Months, 3 Weeks & 2 Days                        
+1        Wild Strawberries                                 
+1        The Usual Suspects                                
+1        The Princess Bride                                
+1        The Night of the Hunter                           
+1        The Mirror                                        
+1        The Maltese Falcon                                
+1        The Godfather: Part II                            
+1        Paths of Glory                                    
+1        Modern Times     
+1        Memento                                           
+1        King Kong                                         
+1        Harry Potter and the Deathly Hallows: Part 2      
+1        Grave of the Fireflies                            
+1        Goodfellas                                        
+1        Butch Cassidy and the Sundance Kid                
+1        Boyhood                                           
+1        Bicycle Thieves                                   
+1        Beauty and the Beast                              
+1        12 Angry Men                                      

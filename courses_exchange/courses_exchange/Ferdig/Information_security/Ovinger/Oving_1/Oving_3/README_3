@@ -1,0 +1,13 @@
+The hardest thing about this exercie is getting it to run properly.
+
+
+How one was suposed to interact with the NFQUEUE was at first not obvious, but it could be seen that the nfqueue-library in python handles all of that. 
+You are able to bind a function to it, which is called whenever a packet is sendt through the NFQUEUE. 
+
+After that, it was simply a matter of finding out how to extract the usefull information from a packet using scapy.
+In addition, it was also nececary to check if a packet actully had the contnets we were searching for (Like a TCP-layer, or if it was even transfering http)
+(The datatypes used to access the parts of the IP-packet were not consistent with the documentation scapy.Raw instead of scapy.RAW or scapy.raw )
+Finally, after finding the correct packet, we send a brand new? packet to the server. 
+The last step seems a bit fishy, since the sequence-number would be wrong if a new TCP-packet all of a sudden showed up from the same port and IP. Or it is on a different port, in which case, the server should have reacted slitly differently. 
+But, it works, so we are still happy. 
+    Also, it does not make sense that we are sending through the unalterd packet as well, but I am not complaining. 

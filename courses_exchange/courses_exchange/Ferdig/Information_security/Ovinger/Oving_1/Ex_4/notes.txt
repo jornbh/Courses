@@ -1,0 +1,29 @@
+list : Viser kode
+list fun_name : Viser en funksjon 
+backtrace : Viser funksjonspeker-ting, kan skrive bt 
+break 10 : Setter breakpoint på linje 10
+
+
+
+
+
+
+Adressen øker med 1 for hvert element
+
+
+&out = 0xbffff778
+list 
+
+
+on 64 bit machines it is epb, not rbp
+
+catch exec
+run
+break 50
+c
+p in
+p count
+list foo
+break 16
+c
+x/100x in

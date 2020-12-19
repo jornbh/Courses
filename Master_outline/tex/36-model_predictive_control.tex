@@ -1,0 +1,205 @@
+\chapter{Controllers}
+\label{cha:controllers}
+There are several methods for controlling multivariable systems. While basic PID-controllers or linear controllers may be employed, it may in some cases be more useful to use a controller that allows the user to prioritize certain control variables, as well as enforcing strict or semi-strict limits on both inputs and states. Since there are strict limits that dictate a minimum oxygen concentration in the flue gas, a Model Predictive Controller (MPC) will be tested in this project.
+
+
+
+\section{Model Predictive Control}
+\label{sec:MPC}
+
+The main idea of an MPC is that it contains some kind of model of the process that it is supposed to control. If we let $\vec{x}$ be a vector denoting the state of a system, $\vec{u}$ its input and $\vec{d}$ the disturbances, a model can be written as:
+
+\begin{align}
+  \vec{x}_{k+1}   = f_K\left( \vec{x}_{k} , \vec{u}_k , \vec{d}_{disturbance,k} \right)
+  \forall k \in \left[ T_0, ..., T_n \right]
+\end{align}
+
+\noindent
+Where $k$ represents all time-steps from the current time-step $T_0$ to some prediction horizon $T_n$ that may be defined by the one who makes the MPC. Even though the system is discretized, it is not required that an MPC has a uniform length between each time-step. As a result, each equation $f_k$ can be different, if there is a need for higher resolution at a shorter time-horizon. In this thesis, all time-steps will have the same length, so $f_i = f_j \forall i,j \in \left[ T_0,...,T_n] \right]$
+
+On a similar form to $f$, the expected output from the system will be given by:
+\begin{align}
+  \vec{y}_k = g_K\left( \vec{x}_k, \vec{u}_k , \vec{d}_{noise, k} \right)
+\end{align}
+
+\noindent
+The MPC always works on minimising some kind of objective function, that may take in a combination of inputs, outputs and states. as a result, it is necessary to make vectors containing all states in a prediction.
+\begin{align}
+  \vec{X} =
+  \begin{bmatrix}
+    \vec{x}_{T_0}^T & \vec{x}_{T_1}^T & \hdots & \vec{x}_{T_n}^T
+  \end{bmatrix}^T \\
+  \vec{U} =
+  \begin{bmatrix}
+    \vec{u}_{T_0}^T & \vec{u}_{T_1}^T & \hdots & \vec{u}_{T_n}^T
+  \end{bmatrix}^T \\
+  \vec{Y} =
+  \begin{bmatrix}
+    \vec{y}_{T_0}^T & \vec{y}_{T_1}^T & \hdots & \vec{y}_{T_n}^T
+  \end{bmatrix}^T
+\end{align}
+
+\noindent
+Finally, an MPC may also be under a set of equality constraints $h$ and inequality constraints $h$
+\begin{align}
+  g_i(\vec{X}, \vec{U}) \leq 0 \\
+  h_i(\vec{X}, \vec{U}) = 0
+\end{align}
+
+\noindent
+The constraints are normally only constraining the states or inputs at one time-step, but they can also be used to limit the rate of change of $\vec{u}_k$ or to lump together inputs if the MPC has a lower resolution closer to the prediction horizon.
+\todo[inline]{Formulate better}
+
+\noindent
+If the function $V$ is used to describe the cost the MPC tries to minimise. The resulting problem becomes:
+\begin{gather}
+\begin{split}
+  \text{min}_{\vec{U}} & V(\vec{X}, \vec{U}, \vec{Y})                                                      \\
+  s.t                                                                                               \\
+                & \vec{x}_{i+1} = f\left( \vec{x}_{k} , \vec{u}_k , \vec{d}_{disturbance,k} \right)\\
+                & g_i(\vec{X}, \vec{U}) \leq 0  \forall i \in \left[ 1, \dots , N_{ieq} \right]     \\
+                & h_i(\vec{X}, \vec{U}) = 0     \forall i \in \left[ 1, \dots , N_{eq} \right]      \\
+  \end{split}
+  \label{eq:generic_MPC_problem}
+\end{gather}
+
+\todo[inline]{This part should be written better}
+
+\noindent
+Equation \ref{eq:generic_MPC_problem} is quite generic and can represent a wide range of potential MPC-problems. Depending on the type of restriction that is set for the problem, more efficient algorithms may be used, which may speed up the speed of the MPC considerably. Because of the estimated model being linear, only linear MPCs will be considered in this thesis.
+
+
+
+% \subsection{Nonlinear MPC}
+
+% As was seen in Chapter \ref{cha:characteristics_of_process}, even the simplified model in \cite{waste_prof} has some nonlinearities in it. A priori, it will be somewhat difficult to say anything about how much these non-linearities will affect our ability to control the process. If no guarantees can be given for the operating point, it may be necessary to use a complex nonlinear MPC when optimizing the predicted system. A more complex model will take drastically longer to simulate and optimize, so this is something we want to avoid if possible.
+
+
+% \noindent
+% If a nonlinear problem is non-convex, it can become difficult to find a globally optimal solution through the use of iterative methods. This is because following a path from one local optimum to the global may require a solution to become temporarily worse. No proof is given that the control problem is of a convex form, but in \cite{waste_prof}, the problem was seemingly solved, partly by using simulated annealing, which can handle some non-convexity. If convexity can be guaranteed, then Sequential Quadratic Programming may be preferred. In this project, no non-linear model was found. Partly because of the complexity of the task, and partly because a linear model seemed serviceable and the biggest issues with the plant seemed to lie in how to effectively react to the disturbances while being affected by noise. 
+
+\subsection{Linear MPC}
+
+
+
+The Eigen-system Realisation Algorithm that was described in section \ref{sec:ERA} makes it possible to find a system representation from measured data. If such a model is combined with a Kalman-filter, it becomes possible to make a relatively fast model predictive controller. 
+
+\noindent
+The standard form for the problem that a linear MPC solves is on the form of a quadratic problem. Let m be the number of inputs and N is the number of prediction steps. H is a positive definite matrix $H \in \Re^{mN \times  mN}$ and F is some matrix $F \in \Re^{mN}$, while $U$ are all inputs over all timesteps within some prediction horizon, such that $\vec{U}\in \Re^{mN}$, then the problem can be described as: 
+
+\begin{gather}
+  \begin{split}    
+  min_{\vec{U}} &       \vec{U}^T H\vec{U} + F\left( x_0, \text{ref}\right)^T \vec{U} \\
+                & s.t:                                                                \\
+                &       A_{ge} \vec{U} \geq b_{ge}                                    \\
+                &       A_{eq} \vec{U} = b_{eq}                                       
+  \end{split}
+  \label{eq:linear_MPC_problem}
+\end{gather}
+
+\noindent
+Unlike a lot of other model predictive controllers, the sequence of states $X$ can be implicitly expressed by a linear function of $x_0$ and the sequence of inputs $\vec{U}$. If the model is discrete, then the exact solution can be found by matrix-multiplications with a set of pre-prepared matrices. 
+
+\begin{align}
+  \vec{x}_{ T_{i+1}} = A\vec{x}_{ T_{i}}  + Bu_{ T_{i}}
+\end{align}
+Simply by adding all the inputs, and multiplying with A an apropriate ammount of times, a general expression can be found.
+\begin{align}
+  \vec{x}_{ T_{i} } = A^{i}\vec{x}_{ T_{0} }  + \sum_{j=1}^{i-1} A^{i-j}Bu_{T_{j}}
+  \label{eq:multi_step_discrete_system}
+\end{align}
+
+\noindent
+So if one matrix $\mathfrak{M}$ is constructed for the response due to the initial state $x_0$, and another one, $\mathfrak{C}$ for the convolution between the input signal and $A$, then all states in $\vec{X}$ can be represented by a few simple matrix operations
+
+\begin{align}
+  \vec{X} = \mathfrak{M} x_0 + \mathfrak{C} \vec{U}
+\end{align}
+
+\noindent
+If $N$ is the number of time-steps that the MPC uses in its prediction, then the two matrices $\mathfrak{M}$ and $\mathfrak{C}$ are defined as:
+\begin{align}
+  \mathfrak{M} = \begin{bmatrix}
+    A      \\
+    A^2    \\
+    \vdots \\
+    A^{N}
+  \end{bmatrix}
+\end{align}
+
+\begin{align}
+  \mathfrak{C} =
+  \begin{bmatrix}
+    B        & 0        & \dots  & 0      & 0      \\
+    AB       & B        & \dots  & 0      & 0      \\
+    A^2B     & AB       & \dots  & 0      & 0      \\
+    \vdots   & \vdots   & \ddots & \vdots & \vdots \\
+    A^{N-2}B & A^{N-3}B & \dots  & B      & 0      \\
+    A^{N-1}B & A^{N-2}B & \dots  & AB     & B      \\
+  \end{bmatrix}
+\end{align}
+Because of this, any cost that would normally be written as a function the inputs and states can instead be expressed entirely by the inputs and the initial state. 
+\begin{align}
+  \vec{X}^T \hat{Q} \vec{X}
+  = \left( \mathfrak{C}  \vec{U + \mathfrak{M}x_0}\right)^T \hat{Q} \left( \mathfrak{C}  \vec{U + \mathfrak{M}x_0}\right)
+\end{align}
+
+The same goes for constraints as well
+
+\begin{align}
+  A_{eq}\vec{X} = A_{eq}\left( \mathfrak{C}  \vec{U} + \mathfrak{M}x_0\right) \geq b_{eq} \\
+  \Rightarrow A_{eq}\mathfrak{C}  \vec{U}  \geq b_{eq} - A_{eq}\mathfrak{M}x_0
+\end{align}
+
+Linear MPCs have the advantage of being able to use more efficient algorithms for solving the QP, than what would be possible for a generic non-linear problem. The result is that a faster sampling-frequency or longer prediction-horizons can be used. 
+
+\subsection{Stabilizing an MPC}
+
+A finite-horizon MPC is usually not guaranteed to stabilize a plant. Using a long prediction-horizon may solve this, but the number of prediction steps is dependant on the plant. Additionally, if the terminal state does not have a cost that reflects how the MPC will behave later, some strange behaviour might occur.  
+
+
+\noindent 
+Proof of unstability: Let $x\left[ T_{i+1} \right] = 2 \cdot x\left[ T_i \right] + u$ a scalar difference equation. If the cost-function is $J =x\left[ T_{i+1} \right]^2 + 3u^2$, simple differentiation gives that the best $u$ is $u = -\frac{1}{2} x\left[ T_i \right]$, which is not enough to stabilize the plant.
+
+
+\noindent
+As explained in appendix \ref{cha:LQR}, an LQR solves the same kind of problem an MPC does, but over an infinite horizon, and without constraints. If all constraints remain inactive  after the end of the prediction-horizon, and the terminal state-cost of the MPC is the same as the infinite-horizon state cost for the LQR, then the two controllers will have the exact same sequence of inputs. Since the LQR is guaranteed to stabilize the plant, the MPC will be guaranteed to do the same. 
+
+\noindent
+If only the state-feedback matrix $K_{\text{lqr}}$ is available, the infinite-horizon cost can be found by solving a Lyapunov-equation instead. 
+
+\begin{align}
+  \label{eq:Lyapunov_function}
+  Q_{\infty} = (A-BK_{\text{lqr}})^T Q_{\infty} (A-BK_{\text{lqr}}) + Q_{\infty} + K_{\text{lqr}}^T R K_{\text{lqr}}
+\end{align}
+Luckily, Matlab implemented methods for solving both equation Lyapunov-equations and Riccati equations
+\begin{align}
+  K_{\text{lqr}} &= \text{lqr}\left(A,B,Q,R\right)\\
+  Q_{\infty} &= \text{dlyap}((A-B*K_{\text{lqr}})^T, Q+K_{\text{lqr}}'*R*K_{\text{lqr}});
+\end{align}
+
+\subsection{Reference-tracking MPC}
+MPC systems do not inherently track references. The way this is normally done is by giving a cost for changing the inputs, instead of using a cost for allowing the inputs to deviate from the reference point. This can the MPC to act differently from how the LQR that is used to make the infinite-horizon cost would have acted. One solution to stationary feed-forward input $v_{ff}$ that would cause the closed-loop system with and LQR.
+
+\noindent
+If an LQR is to track a reference, it usually means that the linearization point has to be changed. One way to solve this easily is to find a matrix that would cause the closed-loop LQR to converge assymptotically to the wanted output. If the closed loop is assymptotically stable, then the stationary output measurements can be found by: 
+\begin{align}
+  Y_{\infty} = C \left(I + BK -A \right)^{-1}B
+\end{align}
+It is possible to simply use the pseudoinverse of $\left(C \left(I + BK -A \right)^{-1}B\right)$ to find a matrix that can transform the set of desired outputs into the corresponding set of required inputs. A better solution can be found by solving a constrained QP \footnote{Quadratic Problem} that causes the reference to be tracked as cheaply as possible according to the original cost function. 
+\begin{gather}
+  \begin{split}
+      min_{v_{ff}} & \left(\left( I +BK -A \right)^{-1} v_{ff}\right)^T \left(Q + K^T R K \right) \left( I + BK -A \right)^{-1}v_{ff} + v_{ff}^T R v_{ff} \\
+      st:          &                                                                                                                                      \\
+                  & C \left( I + BK - A  \right)^{-1} v_{ff} = y_{ref}                                                                                   
+  \end{split}
+\end{gather}
+Additional constraints may be added if the problem is constrained. No proof was found in this thesis was would have allowed for tracking $y_{ref}$ as cheaply as possible without recalculating the QP each time the reference changes.
+\todo[inline]{Check if this is true or not...}
+
+\noindent
+If the cost of the input-cost of an MPC is set to be given by $u - v_{ff}$, instead of $u$ and the state-cost is set to be given by $ x - \left( I + BK -A \right)^{-1}Bv_{ff}$, then the cost of the MPC will be zero when the system tracks the reference.
+
+% \todo[inline]{Using PRBS with constant amplitude gives bias (?) "https://www.researchgate.net/post/Chirp_input_vs_Pseudo_Random_Binary_Signal---which_is_better_for_system_identification_of_a_Twin_Rotor_MIMO_SystemTRMS"}
+
+% \todo[inline]{Iterating over one signal to excite at each time is usually also a bad idea since it introduces a bias}

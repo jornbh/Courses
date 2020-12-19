@@ -1,0 +1,25 @@
+Learning theory
+
+To forelesere (+ det finnes studasser)
+Antar at alle har tatt maskinlæringsklasser, og at man antar at man har kjennskap til statistikk og calculus
+
+Dette faget er mer om det teoretiske bak maskinlæring. 
+
+Lærebok: Understanding Machine Learning
+
+Pensum:
+    PAC Learning (kap 1-7)  ~4 uker     (Første lærebok)
+    Gradiant descent        ~3 uker     (Første lærebok)
+    Grafiske modeller       ~4 uker     (Annen lærebok (?), eller class notes om det ikke går)
+    Tensor metoder          ~3 uker     (Notater fra MIT) 
+
+INgen programmering, bare penn og papir
+    90% eksamen (Åpen bok (kanskje)) 
+    10% Øvinger
+
+
+PAC learning
+    Charracters (?) 
+        X domain set x in X (sample)
+        
+
