@@ -1,0 +1,14 @@
+MODIFICATIONS:
+
+Model:
+* Add Controller subsystem.
+* Move grate speed input into subsystem.
+* Add a ChooseInput block in front of every process value input, so that it
+  is possible to choose between, constant, experimental and controlled inputs.
+* Replace the interpreted Boiler/Pressure_SP with a Simulink function block to speed up simulation.
+* Put plant into separate subsystem (not important).
+* Set steam signal dimension explicitly to 1. Only relevant if you get simulation errors mentioning this.
+
+Simulation:
+* Enable accelerator mode to speed up the simulation.
+* Enable simulation optimizations (faster runs) to speed up the simulation.

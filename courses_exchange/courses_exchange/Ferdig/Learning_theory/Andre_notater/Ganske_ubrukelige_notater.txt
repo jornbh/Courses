@@ -1,0 +1,4 @@
+Manifold: Et topologisk rom som oppfører seg lokalt som et euklidisk et 
+
+Bayesian Network er en DAG
+	Bayesian networks som modellerer sekvenser av variabler kalles dynamiske Bayesiske nettverk 

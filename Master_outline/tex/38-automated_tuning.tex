@@ -1,0 +1,64 @@
+\chapter{Automated tuning}
+\label{cha:automated_tuning}
+The methods from Chapter \ref{cha:controllers} do not necessarily give controllers that work perfectly right away. Because of this, some manual tuning may be needed as well. Some of the required changes may be intuitive, while others may be dependant combinations of parameters, as well as some trial and error. As a result, the tuning process can be quite time-consuming. One solution to this is to make up some kind of measure of the quality of the system response, and then use an optimisation algorithm, like Nelder-Mead to minimise said cost.
+
+
+\section{Nelder-mead}
+The Nelder-Mead optimisation algorithm is a very popular method for optimising convex nonlinear problems. The main selling-point of Nelder-Mead is that the search of the optima is done entirely by a set of measured points and the corresponding values of the function, without the use of an approximated or an analytical gradient. This means that the algorithm tends to be a bit slower than most other optimisation algorithms, like SQP\footnote{SQP: Sequential Quadratic Programming}.Instead, it has the advantage of being usable on a wide set of convex functions without much prior knowledge about the function. It should be noted that according to \cite{Nelder_Mead_convergence_issues}, even though the algorithm works well in practice, it is possible for it to converge towards non-stationary points. 
+
+\subsection{Theory}
+\cite{Nelder_Mead_source} summarises the Nelder Mead algorithm quite nicely, so it will only be covered very briefly in this chapter. 
+
+\noindent
+Nelder-mead optimises an $N$-dimensional function by using a set $\mathbf{X} = \{x_1, x_{2}, \dots , x_{n+1}\}$ of $N+1$ points. The points are at all times sorted in such a way that
+\begin{align}
+    f(x_1) \leq f(x_2) \leq \dots \leq f(x_{n+1})
+\end{align}
+
+\noindent
+At iteration k, the set $\mathbf{X}^k$ is updated to $\mathbf{X}^{k+1}$ by replacing the worst the worst point $x_{n+1}^k$ in the set. $x_{n+1}^k$ is reflected over or drawn to the "center of mass" $\Bar{x} = \sum_{i=1}^N\frac{x_i}{N}$ off the other points, depending on of it improves the point or not. The new point $x_{\text{new}}^k$ will be given by 
+
+\begin{align}
+    x_{\text{new}}^k = \Bar{x}^k + \rho (\Bar{x}^k - x_{n+1}^k) 
+\end{align}
+Several possible candidates along the line are tested. If the function $g^k(\cdot)$ is defined as 
+
+\begin{align}
+    g^k(\rho) = f( \Bar{x}^k + \rho (\Bar{x}^k - x_{n+1}^k)  )
+\end{align}
+
+\noindent
+the update-rule for a single iteration is described in algorithm \ref{alg:update_simplex}. 
+\begin{algorithm}
+\label{alg:update_simplex}
+\caption{Find $x_{\text{new}}^k = \Bar{x} + \rho(\Bar{x}^k - x^k_{n+1})$}
+\begin{algorithmic}
+\REQUIRE $x^k_{n+1} $, $\Bar{x}^k$, $g^k(\cdot)$, $f(x^k_{n+1})$
+\ENSURE $y = x^n$
+\IF{$g(1) < f(x^k_{n+1})$}
+    \IF{$g(2) < g(1)$}
+        \STATE $\rho =2$
+    \ELSE
+        \STATE $\rho = 1$
+    \ENDIF
+\ELSIF{ $g(1/2) < f(x^k_{n+1})$}
+        \STATE $\rho =1/2$
+\ELSE 
+    \STATE $\rho = -1/2$
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+
+Afterwards, the new set $\mathbf{X}^{k+1}$ is given by 
+\begin{align}
+    \mathbf{X}^{k+1} = \{x^k_1,x^k_2, \cdots, x^k_n \} \cup \{x_{\text{new}}^k \}
+\end{align}
+
+\noindent
+\cite{Nelder_Mead_source} also expands the algorithm by adding tie-breaking rules for if two function values in $\mathbf{X}$ are the same. 
+
+\subsection{Issues}
+In the two-dimensional case \cite{Nelder_Mead_convergence_issues} proved that it is possible for the simplex shrink repeatedly into a line, and that this line can be orthogonal to the steepest decent direction. As a result, some precaution should be taken with the optimised function, since the underlying function of a simulation is unknown. 
+
+

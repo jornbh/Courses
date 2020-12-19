@@ -1,0 +1,36 @@
+./Final_simulator/slprj/*
+**/*NTNU19788*
+**/*pop-os*
+Final_simulator/slprj/_jitprj/*
+Final_simulator/slprj/*
+# **.jpg
+# **.png
+# **.jpeg
+Final_simulator/Summer_student_deps/Functions/slprj/*
+Final_simulator/Summer_student_deps/slprj/_jitprj/*
+Final_simulator/Summer_student_deps/slprj/_sfprj/*
+Final_simulator/Summer_student_deps/slprj/accel/*
+Final_simulator/JornDir/Figures/*.fig
+Final_simulator/JornDir/Figures/*.eps
+
+Final_simulator/Summer_student_deps/slprj/**
+Final_simulator/JornDir/Fig_dump/*
+Final_simulator/Furnace_2018.slx
+Final_simulator/Furnace_2017.slx
+**_acc.mexa64
+Final_simulator/*last_mpc_params.mat
+Final_simulator/weekend_MPC.mat
+**.autosave
+**.slxc
+Final_simulator/sandbox.slxc
+Final_simulator/JornDir/last_mpc_params.mat
+Final_simulator/Furnace_acc.mexw64
+Final_simulator/estimated_system_matrices.mat
+Final_simulator/Furnace.slxc
+Final_simulator/pre_computed_ss_state.mat
+Final_simulator/Furnace.slxc~common_create_MPC_params
+**.asv
+**.m~
+**-NTNU*.mat
+Final_simulator/JornDir/committed_best_params/Dump/*
+Final_simulator/doc/sphinx_doc/build/*

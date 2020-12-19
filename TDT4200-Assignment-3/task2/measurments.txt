@@ -1,0 +1,140 @@
+Baseline-trad:
+
+Center:         .28264677817862918490, .50018014374416028973
+Zoom:           814.02749386839761339208 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    5
+
+Moving by:      .00909090909090909024
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Traditional
+Rendering time: 0:04.82
+
+
+Baseline-mariani:
+
+Center:         .28264677817862918490, .50018014374416028973
+Zoom:           814.02749386839761339208 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    5
+
+Moving by:      .00909090909090909024
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:02.42
+
+
+
+Task 1 a)
+Trad multi-thread block:
+
+Center:         .28264677817862918490, .50018014374416028973
+Zoom:           814.02749386839761339208 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    5
+
+Moving by:      .00909090909090909024
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Traditional
+Rendering time: 0:01.48
+
+Task 1 b)
+Mariani multi-threaded border calc:
+Border calculation is a cheap operation compared to the overhead added by threading and atomic operations.
+
+Center:         .28264677817862918490, .50018014374416028973
+Zoom:           814.02749386839761339208 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    5
+
+Moving by:      .00909090909090909024
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:06.15
+
+
+
+Task 1c)
+Naive parallelizing.
+The hardware has a hard cap on how many threads can run in parallel. The lab PC used for this exercise had 12 cores each capable of running two threads in parallel for a total of 24 threads.
+The number of threads will rapidly increase as each threads spawns one thread for every subdivision within its area.
+Increasing the block dimension means the call tree reaches a leaf sooner. which decreases the overhead of keeping a huge number of threads.
+When trying to run more threads than the hardware allows, the operating system will deschedule the exceeding ones and reschedule them when the resources are available.
+
+Center:         .28245691947147344922, 0.5
+Zoom:           814.02749386839761153668 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    5
+
+Moving by:      .00122845973573672461
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:09.15
+
+
+
+Center:         .28245691947147344922, .49877154026426327539
+Zoom:           814.02749386839761153668 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    17
+
+Moving by:      .00122845973573672461
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:14.42
+
+
+
+Center:         .28245691947147344922, .49877154026426327539
+Zoom:           814.02749386839761153668 %
+Iterations:     208
+Colours:        3
+Block dim:      32
+Subdivision:    5
+
+Moving by:      .00122845973573672461
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:06.82
+
+
+
+Center:         .28245691947147344922, .49877154026426327539
+Zoom:           814.02749386839761153668 %
+Iterations:     208
+Colours:        3
+Block dim:      62
+Subdivision:    5
+
+Moving by:      .00122845973573672461
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:03.27

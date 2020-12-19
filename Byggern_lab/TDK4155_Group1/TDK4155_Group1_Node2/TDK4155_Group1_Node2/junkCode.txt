@@ -1,0 +1,43 @@
+
+
+void interrupt_usart_getStatus(){
+
+
+    // UCSRnA – USART Control and Status Register A
+
+    // • Bit 7 – RXCn: USART Receive Complete
+    // • Bit 6 – TXCn: USART Transmit Complete
+    // • Bit 5 – UDREn: USART Data Register Empty
+    // • Bit 4 – FEn: Frame Error
+    // • Bit 3 – DORn: Data OverRun
+    // • Bit 2 – UPEn: USART Parity Error
+
+}
+
+
+
+
+void usart_checkInterruptFlags(){
+
+    //  -The USART Transmitter has two flags that indicate its state: 
+    //   USART Data Register Empty (UDREn) and Transmit Complete (TXCn). 
+
+
+    //     The USART Transmitter has two flags that indicate its state: USART Data Register Empty (UDREn) and Transmit
+    //       Complete (TXCn). 
+
+
+
+
+    // The Transmit Complete (TXCn) Flag bit is set one when the entire frame in the Transmit Shift Register has been
+    // shifted out and there are no new data currently present in the transmit buffer
+
+
+
+    //  When
+    // the transmit complete interrupt is used, the interrupt handling routine does not have to clear the TXCn Flag, this is
+    // done automatically when the interrupt is executed
+
+
+
+}

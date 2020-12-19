@@ -1,0 +1,38 @@
+%!TEX root = ../Thesis.tex
+\chapter{Conclusions and future work}\label{cha:conclusions}
+
+\todo[inline]{
+This is a summary of the results of the report, and here you also describe future work (For the preliminary project: what you are going to do in your MSc project work, and for the master´s project: what you would do if you had 6 more months to work on this topic.)
+}
+\section{Conclustion}
+\todo[inline]{@@@ This is the most important part to add @@@}
+
+The task of controlling an MSW combustion process proved to be a difficult one. This project provided the luxury of working with a simulator, which gave a rich source of potential data, as well as possibilities to verify the results. This also proved to be at the core of the issue, since certain kinds of controllers could not be implemented, due to the simulation time going towards infinity, or the simulator crashing with unknown errors, if the controller had discrete samples that were too frequent. 
+
+\noindent
+In the project, the ERA  was implemented, allowing for estimating the dynamics of a linear system with unmeasured internal states was implemented. Furthermore, several different LQR and MPC controllers were implemented. Hard limits on the input-variables were also added to the MPC to better allow it to handle saturation, but this never became relevant with the disturbance test-data that was available. Hard limits on the measured outputs, with slack variables  were also implemented, but the results were never discussed properly, due to them never being enforced. Due to what is assumed to be minor errors in implementation, the LQR-controller was not able to outperform the PID-controllers. There were, however several more positive outcomes. A root-locus method was implemented for estimating the stability of a closed-loop estimated system. Additionally, a simple method for automatically tuning the PID- controller and the optimal controllers was also implemented. 
+
+\noindent 
+
+
+
+\section{Future work}
+The purpose of this project was to develop a controller that could outperform the current PID-controller. This was only achieved in part since the current PID-controller was improved by the process of automated tuning. 
+There are a multitude of different things that could be done if more time is was available. 
+\begin{itemize}
+    \item The most important improvement is the fact that there was most likely something wrong in how the estimated plant was made into an observed plant, a controlled plant, and how these states were used afterwards. 
+    \item Implement some estimate for the robustness of the current PID-controller. Most likely by using the ERA to make open-loop models that can be analyzed. 
+    \item Feed-forward control on the plant was implemented, but had some strange behaviour, even in the most ideal of cases. Further exploration of that could have been useful, but even the most idealized cases were somewhat limited in what they could achieve. 
+    \item Using integrators instead of low-pass filters could, in theory, implement a better way to limit the controller from changing the inputs too quickly. 
+\end{itemize}
+
+\section{Conditionally useful improvements}
+Some of the potential future work are relatively large tasks, and should not be pursued unless there are explicit observations that prove them to be needed. 
+\begin{itemize}
+    \item If the true test-data make the nonlinearities in the plant more prominent, a simplified nonlinear model could be implemented with nonlinear methods like simple linear regression, or the more advanced SINDy-algorithm. But these methods usually require full-state measurement. 
+    \item Proper analysis of process-disturbances and measurement-noise should be implemented since it might show the need for specialized band-stop filters. 
+    \item Exploration of how the performance degrades if the estimated HHV-value is not available. 
+    \item An exploration of what measurement-techniques are available, and if those measures could be made to behave well in combination with a linear controller. 
+    \item If the simulator for some reason proves to be inaccurate, Observer Kalman Filter Identification may be used to perform closed-loop system identification. Or an entirely different method may be chosen. It should be noted that linear regression and adaptive methods were attempted, but did not lead to anything. Closed-loop system identification would also still require exciting the plant in an experiment
+\end{itemize}
+

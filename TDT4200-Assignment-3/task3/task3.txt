@@ -1,0 +1,47 @@
+All comparisons are form the mandelNav.sh-file when moving the initial image with the initial step vaules
+
+When trying to paralelize the loop with the reutrn statement, the compiler started complaining, since openMP does not allow early termination from loops
+
+
+1) Adding #pragma omp parallel
+    Initial rendering time of the full image: ~0.4 seconds
+    Rendering time when using openMP on the small loops: ~0.9 seconds
+
+    Removing pragma from the inner loops:
+        => Running time ~0.54 seconds
+
+    Checking the pragmas by trying to remove them and checking the difference 
+        Most of them did not do much of a difference, but removing the one in fillBlock() bot the speed back to the old level
+
+
+
+    This implies that there is too much overhead compared to the work that is done 
+        => We need to find a larger loop to use openMP in
+            The "main" loop form task 1 and 2 seems like a good choice
+
+
+2) Adding static parelelism to the recursive branching
+
+Adding pragma to meraniSilver caused the time to go from 
+    ~0.43 -> ~0.56 seconds
+        => It became slower
+        This might be because of overhead above a small loop that is run a lot of times, 
+        or it might also be because of unbalanced load. 
+    This is probably due to the fact that the size of the parallelized workload can vary quite a bit
+    Therefore, some of the processes might risk standing idle for quite some time
+
+
+3) Adding dtnamic paralelism to the recursive branching
+
+
+We try to add #pragma omp for schedule(dynamic,1)
+    We do this because the program operates in a tree-structure, with variable work, so there will be variable execution time
+    Asking for load balance might alleviate this problem
+        The runtime went from 
+            ~0.43->~0.29 seconds
+            => Noticeable improvement
+                Now most of the program is paralelized. The only thing we can do is increase the granularity
+
+Adding the dynamic threading in the branching casued a significant speedup
+    Finding the relations between all the possible pragmas is somewhat more difficult
+    

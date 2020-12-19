@@ -1,0 +1,19 @@
+There was not all that much source code for this one. 
+
+1) I did not expect something as stupid as having the password being saved in clear text within the html-document, with an encrtyption algorithm that was accessable for the one who was running it, so I was expectiong something like doing tricks with the url or wireshark packets, but that was not the awnser. 
+
+
+2) In the javascript code, the seed for the password is saved in clear text, and it is maped together with the username in order to get the secret password. It is somewhat difficult to see what is hapening, so we will not try to resolve the algorithm by hand. 
+
+3) Instead of solving it by hand, we can try to find a way to run it with the input from the program, since they are saved without any form of encryption, etc. At first I tried to find somewhere to run the function, like a sandbox, or translate it to Python, but then I remembered a much simpler solution 
+
+4) Your browser can read html from your own computer, so all I had to do was copy the source code into a .html document, add an extra allert thet printed out the variable enc (The enctypted password), and then it was displayed quite nicely in the browser as soon as I tried to write in a password. 
+
+
+
+
+
+This example might be somewhat unrealistic, but the real life counterpart of sending an encrypted string has to be matched might happen if someone programs carelessly. 
+
+
+the token is "Bn4dswJum7oKCAHjKQtH8/J75qfU60s3SY1ecWUSJTk"

@@ -1,0 +1,135 @@
+Baseline-trad:
+
+Center:         .28264677817862918490, .50018014374416028973
+Zoom:           814.02749386839761339208 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    5
+
+Moving by:      .00909090909090909024
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Traditional
+Rendering time: 0:04.82
+
+
+Baseline-mariani:
+
+Center:         .28264677817862918490, .50018014374416028973
+Zoom:           814.02749386839761339208 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    5
+
+Moving by:      .00909090909090909024
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:02.42
+
+
+
+Task 1 a)
+Trad multi-thread block:
+
+Center:         .28264677817862918490, .50018014374416028973
+Zoom:           814.02749386839761339208 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    5
+
+Moving by:      .00909090909090909024
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Traditional
+Rendering time: 0:01.48
+
+Task 1 b)
+Mariani multi-threaded border calc:
+
+Center:         .28264677817862918490, .50018014374416028973
+Zoom:           814.02749386839761339208 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    5
+
+Moving by:      .00909090909090909024
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:06.15
+
+
+
+Task 1c)
+Naive parallelizing.
+
+Center:         .28245691947147344922, 0.5
+Zoom:           814.02749386839761153668 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    5
+
+Moving by:      .00122845973573672461
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:09.15
+
+
+
+Center:         .28245691947147344922, .49877154026426327539
+Zoom:           814.02749386839761153668 %
+Iterations:     208
+Colours:        3
+Block dim:      16
+Subdivision:    17
+
+Moving by:      .00122845973573672461
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:14.42
+
+
+
+Center:         .28245691947147344922, .49877154026426327539
+Zoom:           814.02749386839761153668 %
+Iterations:     208
+Colours:        3
+Block dim:      32
+Subdivision:    5
+
+Moving by:      .00122845973573672461
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:06.82
+
+
+
+Center:         .28245691947147344922, .49877154026426327539
+Zoom:           814.02749386839761153668 %
+Iterations:     208
+Colours:        3
+Block dim:      62
+Subdivision:    5
+
+Moving by:      .00122845973573672461
+Step:           10.00 %
+Resolution:     1400x1400
+
+Algorithm:      Mariani-Silver
+Rendering time: 0:03.27

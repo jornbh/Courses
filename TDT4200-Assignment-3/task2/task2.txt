@@ -1,0 +1,28 @@
+Taks 2
+a) 
+In each iteration of the meraniSilver algorithm, the algorith branches. Therefore, it is not nececarily easy to distribute the work without traversing the recursion-tree.
+    Instead, we will make each thread work both as a producer and a consumer.
+    In order to minimixe the ammount of overhead form scheduling, and form context-swithces, we will be using a constant number of thread. 
+    In order order for the threads to be able to share their work, a queue of structs, containing all the nececary parameters needed for starting a job. 
+    Each of the threads loop around in, while poping jobs form the queue. When they reach the point where a recursive call would have been made earlier. The parameters for the call are instead pushed to the queue
+
+
+b) 
+    Since the queue is not thread-safe, it is nececary to ensure that all interactions with the queue are searialized. 
+    If they are not added, it will be possible for two thread to pop the same job, and then remove an unfinished job.
+    By adding mutexes, it is possible to make sure that a thread will wait untill another thread has finished using a mutex. As a result. If there is not a predefined way all mutexes are locked, or a priority-ceiling, there is a chance that there will be a cycle of request between threads hoding and requesting mutexes. 
+    If this happens, no-one will be able to proceec, and the system will deadlock.
+    Furthermore, there are possibly some race conditions when it comes to distingushing between if all the potiential work has been completed, or if only the queue is temporarily empty.
+
+
+We implement each worker as a loop that locks the queue to pop from it and the performs some work. If it is empty, the thread checks a global int that represents the number of unblocked threads, before sleeping if the number it larger than 0 or termination if it is. 
+    The queue and the task-counter are locked by the same mutex, since they are being acted on right after each other. The lock is released before sleeping or starting the work. 
+    In order to make the implementation of waiting, before continuing the work easier, we use a condition variable to suspend ourselves if we need to sleep. It is easier than unlocking the mutex, before suspending, and leads to fewer possible race conditions.
+
+
+Since the thread-count is locked toghether with the queue, there is no reson to use an atomic datatype, but we can implement it anyways. 
+    It would also have been possible to have both the queue and the thread-count be atomic, and only have the condition variable be a mutex, 
+
+
+
+Finlly, we are able to compare the processing-times between the paralelized and the unparalelized algorithm.

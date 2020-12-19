@@ -1,0 +1,7 @@
+1) Like in exercise 2, we will use (Warnign, new filename)
+    (Make sure to use this one, and not the one frow Hw2_ex4)
+    openssl req -new -newkey rsa:4096 -days 365 -nodes -keyout example.com.key -out example.com.csr
+    I used the password: password when creating the certificate
+
+
+    

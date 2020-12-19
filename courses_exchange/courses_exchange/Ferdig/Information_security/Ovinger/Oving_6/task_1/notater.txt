@@ -1,0 +1,2 @@
+We need to set the GOPATH variable 
+    export GOPATH=$(pwd)

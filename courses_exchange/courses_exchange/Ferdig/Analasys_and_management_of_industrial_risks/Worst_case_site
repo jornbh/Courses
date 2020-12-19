@@ -1,0 +1,28 @@
+1 barrel : 7.99 GJ
+1 barrel : 159 litres
+
+
+
+liters_per_barrel = 159
+J_per_barrel = 7.99 * (10**6)
+liters_petrol = 2* 25000
+
+
+Joules = (liters_petrol / liters_per_barrel) * J_per_barrel
+
+
+Giga_joules = 2512.5786163522016 # Output
+
+(Barrel) 
+http://www.businessdictionary.com/definition/barrel-bbl.html
+
+
+(Joules /Barrel) 
+https://hypertextbook.com/facts/2009/BennyWong.shtml
+
+
+Entalpy
+Petrol = 47,30 kJ/g
+Disel =  44,80 kJ/g.
+
+

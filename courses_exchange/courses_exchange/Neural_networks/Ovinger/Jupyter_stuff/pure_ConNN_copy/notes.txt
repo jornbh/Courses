@@ -1,0 +1,11 @@
+Loss kan være a flere typer.
+    For eksempel mean squared error
+
+Loss brukes når man trener modellen, andre metrics, som accuracy brukes ikke 
+
+
+
+Loss blir bedre når predictorene blir mer selvsikre, selv om accuracyenforblir den samme. 
+
+Accuracy er lettere å tolke, men det er ikke deriverbart. 
+Accuracy har en diskret true eller false for hver verdi. 

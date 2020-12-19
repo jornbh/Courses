@@ -1,0 +1,1012 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>FurnaceParameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-15"><meta name="DC.source" content="FurnaceParameters.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">INTEGRATION PARAMETERS</a></li><li><a href="#3">AMBIENT CONDITIONS</a></li><li><a href="#4">SOLID WASTE PARAMETERS</a></li><li><a href="#5">GAS PARAMETERS</a></li><li><a href="#6">LIQUID WATER PARAMETERS</a></li><li><a href="#7">WASTE IN</a></li><li><a href="#8">GRATE</a></li><li><a href="#9">Zone dimensions</a></li><li><a href="#10">FREE BOARD</a></li><li><a href="#11">PRIMARY AIR</a></li><li><a href="#12">Primary air fan</a></li><li><a href="#13">Secondary air fan</a></li><li><a href="#14">INITIAL CONDITIONS</a></li><li><a href="#15">EVAPORATOR GEOMETRY (need data here)</a></li><li><a href="#16">GLOBAL HEAT EXCHANGER EFFICIENCY</a></li><li><a href="#17">ECONOMIZER</a></li><li><a href="#18">HEAT EXCHANGER WITH UTILITIES</a></li><li><a href="#19">SUPERHEATER</a></li><li><a href="#20">DRUM</a></li><li><a href="#21">TURBINE</a></li><li><a href="#22">HEAT OF REACTIONS</a></li><li><a href="#23">GAS CLEANING SYSTEM</a></li><li><a href="#24">DYNAMIC PARAMETERS FROM PROCESS DATA</a></li><li><a href="#25">Primary air</a></li><li><a href="#26">Secondary air</a></li><li><a href="#27">Waste</a></li><li><a href="#28">Grate cooling</a></li><li><a href="#29">District heating water</a></li><li><a href="#30">Controller</a></li><li><a href="#31">Additional part added by Jorn</a></li></ul></div><pre class="codeinput">[p_sat,T_sat,rho_vap,h_w,~,c_p]=SatWater;
+k.n_cell    = 15;
+k.switch    = -1;
+</pre><h2 id="2">INTEGRATION PARAMETERS</h2><pre class="codeinput"><span class="comment">%k.T         = 3600*24;</span>
+k.T         = 2000*1;
+</pre><h2 id="3">AMBIENT CONDITIONS</h2><pre class="codeinput">k.p_amb     = 1E05;             <span class="comment">% Ambient pressure [Pa]</span>
+k.T_amb     = 10 + 273.15;      <span class="comment">% Ambient temperature [K]</span>
+</pre><h2 id="4">SOLID WASTE PARAMETERS</h2><p>Molar mass of the waste elemental components [kg/kmol] in the combustable fraction</p><pre class="codeinput">k.Mw_w      = [12.011;         <span class="comment">% C</span>
+               1.0079;         <span class="comment">% H</span>
+               32.06;          <span class="comment">% S</span>
+               35.45;          <span class="comment">% Cl</span>
+               14.007;         <span class="comment">% N</span>
+               15.999;         <span class="comment">% O</span>
+               18.998];        <span class="comment">% F</span>
+k.nc_w      = length(k.Mw_w);
+
+<span class="comment">% Specific heat capacity [J/kgK]</span>
+k.cp_w      = 2.26e+03;
+</pre><h2 id="5">GAS PARAMETERS</h2><p>Molar mass [kg/kmol]</p><pre class="codeinput">k.Mw_gas    = [k.Mw_w(2)*2+k.Mw_w(6);         <span class="comment">% H2O</span>
+               k.Mw_w(5)*2;                   <span class="comment">% N2</span>
+               k.Mw_w(1)+k.Mw_w(6)*2;         <span class="comment">% CO2</span>
+               k.Mw_w(6)*2;                   <span class="comment">% O2</span>
+               k.Mw_w(1)+k.Mw_w(2)*4;         <span class="comment">% CH4</span>
+               k.Mw_w(2)*2;                   <span class="comment">% H2</span>
+               k.Mw_w(1)+k.Mw_w(6);           <span class="comment">% CO</span>
+               k.Mw_w(3)+k.Mw_w(6)*2;         <span class="comment">% SO2</span>
+               k.Mw_w(2)+k.Mw_w(4);           <span class="comment">% HCl</span>
+               k.Mw_w(2)+k.Mw_w(7);           <span class="comment">% HF</span>
+               k.Mw_w(5)+k.Mw_w(6)*2;         <span class="comment">% NO2</span>
+               k.Mw_w(5)+k.Mw_w(2)*3];        <span class="comment">% NH3</span>
+k.nc_gas    = length(k.Mw_gas);
+<span class="comment">% Specific heat capacity [J/kgK]</span>
+k.cp_fg     = 1.23e+03;
+<span class="comment">% Universal gas constant [J/kmol K]</span>
+k.R         = 8.314462175*1E3;
+</pre><h2 id="6">LIQUID WATER PARAMETERS</h2><pre class="codeinput">k.cp_water  = 4.2E+03; <span class="comment">% [J/kg K]</span>
+k.rho_water = 1E+03;   <span class="comment">% [kg/m3]</span>
+k.Mw_water  = k.Mw_gas(1);
+</pre><h2 id="7">WASTE IN</h2><pre class="codeinput">k.w_w_in    = [26;                          <span class="comment">% Moisture (H2O)</span>
+               20.8;
+               3;
+               0.3;
+               0.2;
+               0.4;
+               17.5;
+               0.01;
+               23.8]./100;                  <span class="comment">% Ashes</span>
+k.w_w_in    = k.w_w_in./sum(k.w_w_in);
+</pre><h2 id="8">GRATE</h2><p>GEOMETRY data from "Ryu, C., Yang, Y.B., Nasserzadeh, V. and Swithenbank, J., 2004 "Thermal reaction modeling of a large municipal solid waste incinerator." Combustion Science and Technology, 176(11), pp.1891-1907.</p><pre class="codeinput">k.W         = 3.76;             <span class="comment">% Width of the grate</span>
+k.L         = 9.84;             <span class="comment">% total grate lenght</span>
+k.A         = k.W*k.L;
+k.v_grate   = 7.38./3600;       <span class="comment">% [m/s]</span>
+k.rho_w     = 500;              <span class="comment">% density of waste [kg/m3]</span>
+h_grate     = 0.3;              <span class="comment">% Height of the grate[m] --&gt; assumed value</span>
+k.A_grate   = k.W.*h_grate;
+<span class="comment">% Waste and methal conductivity</span>
+k.k_w       = 0.1;
+k.k_grate   = 50;
+<span class="comment">% Other data</span>
+k.sigma     = 5.67051e-8;       <span class="comment">% Stefan-Boltzmann constant [J/(m2 s K4)]</span>
+k.epsilon_gt= 0.88;             <span class="comment">% Emissivity of flue gas  (WHAT VALUES SHOULD BE HERE??)</span>
+k.alpha_gt  = k.epsilon_gt;     <span class="comment">% Absorptivity of flue gas (WHAT VALUES SHOULD BE HERE??)</span>
+</pre><h2 id="9">Zone dimensions</h2><pre class="codeinput">k.M_steel_grate = 1500;             <span class="comment">% Mass of steel in the different zones of the furnace (this is just a random number)</span>
+</pre><h2 id="10">FREE BOARD</h2><pre class="codeinput">k.V_FreeBoard = k.W.*k.L*1.5;
+k.M_steel_FB  = 2000;               <span class="comment">% Mass of steel in the free board (this is just a random number)</span>
+</pre><h2 id="11">PRIMARY AIR</h2><pre class="codeinput">RH_aI       = 90;               <span class="comment">% The air is taken from the waste bunker --&gt; very humid</span>
+k.w_a       = CALC_w_ha(k.T_amb,RH_aI,k.Mw_gas);  <span class="comment">% The temperature of the air in the bunker is assumed equal to ambient temperature</span>
+k.T_aI      = 110 +  273.15;    <span class="comment">% Pre-heating of primary air</span>
+y_a         = CALC_y_a(k.w_a,k.Mw_gas);
+Mw_a        = sum(k.Mw_gas.*y_a);
+</pre><h2 id="12">Primary air fan</h2><pre class="codeinput">k.Pmax_aI = 114.1.*1e3; <span class="comment">% maximum power the fan can deliver [W]</span>
+k.I_aI = 82.8; <span class="comment">% moment of inertia [kg*m^2]</span>
+rpm_T_p = 400; <span class="comment">% lowest value of rpm for which Torque equals Power/omega</span>
+k.omega_T_aI = rpm_T_p*2*pi/60;
+<span class="comment">% estimating volume flow as function of rpm, assuming a linear relationship</span>
+
+<span class="comment">% insert data points from fan data</span>
+Q_est = [1136 747 447]; <span class="comment">% [m^3/min]</span>
+rpm_est1 = [1383 931 560]; <span class="comment">% [rpm]</span>
+k.map_aI = mean(Q_est./rpm_est1); <span class="comment">% propornality constant [m^3/(min*rpm)]</span>
+
+<span class="comment">% estimating torque drag function, assumed to be quadratic (T =</span>
+<span class="comment">% alpha*omega^2)</span>
+
+<span class="comment">% insert datapoints from torque diagram</span>
+torq_est_fg = [370]; <span class="comment">% [N*m]</span>
+<span class="comment">% insert corresponding rpm</span>
+rpm_est2_fg= [931]; <span class="comment">% [rpm]</span>
+omega_est_fg = rpm_est2_fg.*(2*pi/60); <span class="comment">% change to angular velocity [rad/s]</span>
+k.alpha_est_aII = mean(torq_est_fg./(omega_est_fg.^2)); <span class="comment">% estimated propotionality constant [J*s]</span>
+
+rpm_in_p = 1; <span class="comment">% initial rotation</span>
+omega_in_p = rpm_in_p*2*pi/60;
+
+k.mu_eff    = 0.8;
+</pre><h2 id="13">Secondary air fan</h2><pre class="codeinput">k.Pmax_aII = 34.4; <span class="comment">% maximum power the fan can deliver [kW]</span>
+k.I_aII = 3.13; <span class="comment">% moment of inertia [kg*m^2]</span>
+rpm_T_s = 500; <span class="comment">% lowest value of rpm for which Torque equals Power/omega</span>
+k.omega_T_aII = rpm_T_s*2*pi/60;
+
+<span class="comment">% estimating volume flow as function of rpm, assuming a linear relationship</span>
+
+<span class="comment">% insert data points from fan data</span>
+Q_est = [333]; <span class="comment">% [m^3/min]</span>
+rpm_est1 = [2960]; <span class="comment">% [rpm]</span>
+k.map_aII = mean(Q_est./rpm_est1); <span class="comment">% propornality constant [m^3/(min*rpm)]</span>
+
+<span class="comment">% estimating torque drag function, assumed to be quadratic (T =</span>
+<span class="comment">% alpha*omega^2)</span>
+
+<span class="comment">% insert datapoints from torque diagram</span>
+torq_est_fg = [111.4]; <span class="comment">% [N*m]</span>
+<span class="comment">% insert corresponding rpm</span>
+rpm_est2_fg= [2960]; <span class="comment">% [rpm]</span>
+omega_est_fg = rpm_est2_fg.*(2*pi/60); <span class="comment">% change to angular velocity [rad/s]</span>
+k.alpha_est_s = mean(torq_est_fg./(omega_est_fg.^2)); <span class="comment">% estimated propotionality constant [J*s]</span>
+
+rpm_in_s = 1; <span class="comment">% initial rotation</span>
+omega_in_s = rpm_in_s*2*pi/60;
+</pre><h2 id="14">INITIAL CONDITIONS</h2><p>Zone 1</p><pre class="codeinput">k.T_0       = 850+273.15;
+k.M_fg_IC   = k.p_amb.*k.V_FreeBoard./(k.R.*k.T_0).*Mw_a;
+</pre><h2 id="15">EVAPORATOR GEOMETRY (need data here)</h2><pre class="codeinput">k.p_drum    = 51e5;
+M_H2O_l     = 148e3;            <span class="comment">% Mass of liquid water in the boiler [kg] at T=T_amb</span>
+k.V_H2O     = M_H2O_l./k.rho_water; <span class="comment">% Volume of the vessel occupied by water [m3]</span>
+k.V_EVA     = 203;              <span class="comment">% Volume of vessel</span>
+k.V_gas     = k.V_EVA-k.V_H2O;  <span class="comment">% Volume of the vessel eccupied by air</span>
+y_sat       = CALC_xsat(k.T_amb);
+p_vap       = y_sat*k.p_amb;
+rho_steam   = interp1(T_sat,rho_vap,k.T_amb,<span class="string">'linear'</span>,<span class="string">'extrap'</span>);
+p_steam     = interp1(T_sat,p_sat,k.T_amb,<span class="string">'linear'</span>,<span class="string">'extrap'</span>);
+Z_steam     = p_steam.*k.Mw_water./(rho_steam.*k.R.*k.T_amb);
+M_H2O_v     = p_vap.*k.V_gas./(Z_steam.*k.R.*k.T_amb).*k.Mw_water;
+k.M_H2O     = M_H2O_l + M_H2O_v;
+k.x_vap_0   = M_H2O_v/k.M_H2O;
+k.epsilon_EVA=0.7;             <span class="comment">% Evaporator effectiveness</span>
+k.M_steel   = 200000;           <span class="comment">% Total mass of metal in the boiler [kg]</span>
+k.cp_steel  = 460;              <span class="comment">% Heat capacity steel [J/kg K]</span>
+
+k.N_air     = (k.p_amb-p_vap).*k.V_gas./(k.R.*k.T_amb);
+k.Mw_air    = 28.014.*0.79 + 15.999*0.21;
+k.M_air     = k.N_air.*k.Mw_air;
+</pre><h2 id="16">GLOBAL HEAT EXCHANGER EFFICIENCY</h2><pre class="codeinput">k.eff_HE    = 0.96;
+</pre><h2 id="17">ECONOMIZER</h2><pre class="codeinput">k.epsilon_ECO= 0.72;            <span class="comment">% Economizer effectiveness</span>
+k.eta_ECO   = 0.9;
+</pre><h2 id="18">HEAT EXCHANGER WITH UTILITIES</h2><pre class="codeinput">k.epsilon_HE= 0.953;            <span class="comment">% HE effectiveness</span>
+</pre><h2 id="19">SUPERHEATER</h2><pre class="codeinput">k.epsilon_SH= 0.95;
+</pre><h2 id="20">DRUM</h2><p>Liquid water enthalpy</p><pre class="codeinput">h_w_sat     = interp1(p_sat,h_w,k.p_amb,<span class="string">'linear'</span>,<span class="string">'extrap'</span>);
+h_water     = h_w_sat - k.cp_water.*(373.15-k.T_amb);
+<span class="comment">% Vapour water enthalphy</span>
+h_vap       = interp1(T_sat,h_w,k.T_amb,<span class="string">'linear'</span>,<span class="string">'extrap'</span>);
+<span class="comment">% Initial energy stored in the boiler</span>
+k.A_0       = (k.M_H2O.*(1-k.x_vap_0).*h_water + k.M_H2O.*k.x_vap_0.*h_vap - k.p_amb.*k.V_EVA );
+k.T_guess   = 300;
+k.x_guess   = 0;
+</pre><h2 id="21">TURBINE</h2><pre class="codeinput">k.p_HP      = (-0.256 + 1).*1e5;
+k.p_LP      = (-0.546 + 1).*1e5;
+k.eta_TURB  = 0.9;
+</pre><h2 id="22">HEAT OF REACTIONS</h2><pre class="codeinput">k = CALC_DeltaH(k);
+</pre><h2 id="23">GAS CLEANING SYSTEM</h2><pre class="codeinput">k.epsilon_HE1 = 0.054;
+k.epsilon_HE2 = 0.70;
+k.eff_HE2     = 0.83;
+k.epsilon_HE3 = 0.47;
+k.epsilon_HE4 = 0.69;
+</pre><h2 id="24">DYNAMIC PARAMETERS FROM PROCESS DATA</h2><pre class="codeinput">data2       = importdata(<span class="string">'Data_Boiler.txt'</span>);
+data3       = importdata(<span class="string">'Data_Fg.txt'</span>);
+data4       = importdata(<span class="string">'Data_Turbine.txt'</span>);
+
+<span class="comment">% Time (in seconds) between data points in the excel files, and also the</span>
+<span class="comment">% total time span of the process data</span>
+delta_t     = 5*60;
+max_t       = 60*60*24;
+</pre><h2 id="25">Primary air</h2><p>temperature</p><pre class="codeinput">data_ex = Find_val(<span class="string">'1HLA30DT001_PV'</span>,data2); <span class="comment">% Read process data from t=0 to</span>
+<span class="comment">% t = max_t</span>
+T_aI.signals.values = data_ex + 273.15; <span class="comment">% Celsius to Kelvin</span>
+T_aI.time = delta_t*[0:(length(T_aI.signals.values)-1)]';
+<span class="comment">% Flow rate of primary air to the different zones. each zone is given a</span>
+<span class="comment">% struct</span>
+data_ex = Find_val(<span class="string">'1HLA41FF001_'</span>,data2); <span class="comment">%left 1</span>
+data_ex_r = Find_val(<span class="string">'1HLA51FF001_'</span>,data2);
+<span class="comment">% merge and scale to [kg/s]</span>
+F_aI_z1.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;
+F_aI_z1.time = delta_t*[0:(length(F_aI_z1.signals.values)-1)]';
+<span class="comment">% repeat for the other 4</span>
+data_ex = Find_val(<span class="string">'1HLA42FF001_'</span>,data2); <span class="comment">%left 2</span>
+data_ex_r = Find_val(<span class="string">'1HLA52FF001_'</span>,data2); <span class="comment">% right 2</span>
+F_aI_z2.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;
+F_aI_z2.time = delta_t*[0:(length(F_aI_z2.signals.values)-1)]';
+data_ex = Find_val(<span class="string">'1HLA43FF001_'</span>,data2); <span class="comment">%left 1</span>
+data_ex_r = Find_val(<span class="string">'1HLA53FF001_'</span>,data2); <span class="comment">% right 1</span>
+F_aI_z3.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;
+F_aI_z3.time = delta_t*[0:(length(F_aI_z3.signals.values)-1)]';
+data_ex = Find_val(<span class="string">'1HLA44FF001_'</span>,data2); <span class="comment">%left 1</span>
+data_ex_r = Find_val(<span class="string">'1HLA54FF001_'</span>,data2); <span class="comment">% right 1</span>
+F_aI_z4.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;
+F_aI_z4.time = delta_t*[0:(length(F_aI_z4.signals.values)-1)]';
+data_ex = Find_val(<span class="string">'1HLA45FF001_'</span>,data2); <span class="comment">%left 1</span>
+data_ex_r = Find_val(<span class="string">'1HLA55FF001_'</span>,data2); <span class="comment">% right 1</span>
+F_aI_z5.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;
+F_aI_z5.time = delta_t*[0:(length(F_aI_z5.signals.values)-1)]';
+<span class="comment">% merge all to one struct as well</span>
+F_aI.signals.values = [F_aI_z1.signals.values, F_aI_z2.signals.values, F_aI_z3.signals.values, F_aI_z4.signals.values, F_aI_z5.signals.values];
+F_aI.signals.dimensions = 5;
+F_aI.time = delta_t*[0:(length(F_aI_z5.signals.values)-1)]';
+<span class="comment">% total air flow from primary air source</span>
+F_aI.totave = sum(mean(F_aI.signals.values));
+<span class="comment">% total primary air struct</span>
+F_aI_tot.signals.values = sum(F_aI.signals.values,2);
+F_aI_tot.time = F_aI.time;
+</pre><h2 id="26">Secondary air</h2><pre class="codeinput">data_ex = Find_val(<span class="string">'1HLA81CF001_F_'</span>,data2);                             <span class="comment">% Flow secondary air front wall</span>
+data_ex_r = Find_val(<span class="string">'1HLA82CF001_F_'</span>,data2);                           <span class="comment">% Flow secondary air rear wall</span>
+F_aII.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;    <span class="comment">% Secondary air flows from both walls are summed</span>
+F_aII.time = delta_t*[0:(length(F_aII.signals.values)-1)]';
+F_aII.totave = mean(F_aII.signals.values);
+F_a_tot = (F_aII.signals.values+F_aI_tot.signals.values).*(3600*22.414)./28.966;
+<span class="comment">% Temperature</span>
+data_ex = Find_val(<span class="string">'1HLA80CT001_F_'</span>,data2); <span class="comment">%(correct??)</span>
+T_aII.signals.values = data_ex + 273.15;                                <span class="comment">% Celsius to Kelvin</span>
+T_aII.time = delta_t*[0:(length(T_aII.signals.values)-1)]';
+</pre><h2 id="27">Waste</h2><pre class="codeinput">data_ex = Find_val(<span class="string">'1HFB10FF002'</span>,data2); <span class="comment">% rear wall</span>
+F_w_in.signals.values = (data_ex) ./3.6;
+F_w_in.time = delta_t*[0:(length(F_aII.signals.values)-1)]';
+</pre><h2 id="28">Grate cooling</h2><p>Temperature upstream grate cooling</p><pre class="codeinput">T_c     = Find_val(<span class="string">'1HLC03CT001_'</span>,data2);
+<span class="comment">% Cooling water flow in the different zones</span>
+F_z1    = Find_val(<span class="string">'1HLC51CF001_'</span>,data2);
+F_z2    = Find_val(<span class="string">'1HLC52CF001_'</span>,data2);
+F_z3    = Find_val(<span class="string">'1HLC53CF001_'</span>,data2);
+<span class="comment">% Cooling water temperature in the different zones</span>
+T_z1    = Find_val(<span class="string">'1HLC51CT001_'</span>,data2);
+T_z2    = Find_val(<span class="string">'1HLC52CT001_'</span>,data2);
+T_z3    = Find_val(<span class="string">'1HLC53CT001_'</span>,data2);
+<span class="comment">% C_min in the different zones</span>
+C_z1    = F_z1.*4.2e3;
+C_z2    = F_z2.*4.2e3;
+C_z3    = F_z3.*4.2e3;
+<span class="comment">% Heat exchanged in the different zones</span>
+Q_z1    = C_z1.*(T_z1-T_c);
+Q_z2    = C_z2.*(T_z2-T_c);
+Q_z3    = C_z3.*(T_z3-T_c);
+<span class="comment">% Make bus signals</span>
+Q_grate.signals.values = [Q_z1,Q_z2,Q_z3];
+Q_grate.time           = delta_t*[0:(length(Q_grate.signals.values)-1)]';
+</pre><h2 id="29">District heating water</h2><pre class="codeinput">F_from_DH.signals.values= Find_val(<span class="string">'1NDA10CF010_A'</span>,data4);          <span class="comment">% Water flow in district heating</span>
+F_from_DH.time          = delta_t*[0:(length(F_from_DH.signals.values)-1)]';
+T_from_DH.signals.values= Find_val(<span class="string">'1NDB10CT003_'</span>,data4) + 273.15;  <span class="comment">% Water flow in district heating</span>
+T_from_DH.time          = delta_t*[0:(length(T_from_DH.signals.values)-1)]';
+</pre><h2 id="30">Controller</h2><pre class="codeinput"><span class="comment">% Controller type</span>
+<span class="comment">%</span>
+<span class="comment">% Open, AB, Cascade or MPC. Is used by the ChooseController block.</span>
+<span class="comment">%</span>
+reg.controller_type = ControllerType.AB;
+
+<span class="comment">% Operating values</span>
+<span class="comment">%</span>
+<span class="comment">% The controller action happens around these operating values.</span>
+<span class="comment">%</span>
+reg.op_F_O2 = 4.6345;                   <span class="comment">% Oxygen flow (kg/s)</span>
+reg.op_F_st = 10.761;                   <span class="comment">% Steam flow (kg/s)</span>
+reg.op_HHV = 4.133444255e+07;           <span class="comment">% Heat value (J/s?)</span>
+reg.op_F_aII = 14;                      <span class="comment">% Secondary air (kg/s)</span>
+reg.op_F_aI = 18;                       <span class="comment">% Total primary air (kg/s)</span>
+reg.op_v_grate = 0.0025;                <span class="comment">% Grate speed (m/s)</span>
+reg.op_F_w_in = 4;                      <span class="comment">% Waste feed (kg/s)</span>
+reg.op_MVs = [<span class="keyword">...</span>
+    reg.op_F_aII;<span class="keyword">...</span>
+    reg.op_F_aI;<span class="keyword">...</span><span class="comment">                     % Needed for backwards compatibility.</span>
+    reg.op_v_grate;<span class="keyword">...</span><span class="comment">                  % Should be fixed.</span>
+    reg.op_F_w_in<span class="keyword">...</span>
+ ];
+reg.MV_names = [<span class="string">"F_aII"</span> <span class="string">"F_aI"</span><span class="keyword">...</span><span class="comment">       % Needed for backwards compatibility.</span>
+    <span class="string">"v_grate"</span> <span class="string">"F_w"</span>];                   <span class="comment">% Should be fixed.</span>
+
+<span class="comment">% Constant input values</span>
+<span class="comment">%</span>
+<span class="comment">% These are used when the corresponding variable has</span>
+<span class="comment">% input_type set to InputType.Constant.</span>
+<span class="comment">%</span>
+reg.const_F_aI = reg.op_F_aI;                   <span class="comment">% Total primary air (kg/s)</span>
+reg.const_v_grate = reg.op_v_grate;             <span class="comment">% Grate speed (m/s)</span>
+reg.const_F_w_in = reg.op_F_w_in;               <span class="comment">% Waste feed (kg/s)</span>
+reg.const_F_aII = reg.op_F_aII;                 <span class="comment">% Secondary air (kg/s)</span>
+reg.const_T_aI = 380;                           <span class="comment">% Primary air temperature (K)</span>
+reg.const_T_aII = 300;                          <span class="comment">% Secondary air temperature (K)</span>
+reg.const_Q_grate = [1.0e+05 2.2e+05 2.5e+05];  <span class="comment">% Grate heat exchange (J?)</span>
+reg.const_F_from_DH = 130;                      <span class="comment">% Flow from district heating (kg/s?)</span>
+reg.const_T_from_DH = 320;                      <span class="comment">% Temperature of flow from district heating (K)</span>
+<span class="comment">%</span>
+<span class="comment">% Primary air flow distribution</span>
+<span class="comment">%</span>
+<span class="comment">% The relative distribution between primary air zones.</span>
+<span class="comment">%</span>
+reg.const_F_aI_dist = [0.05 0.3 0.38 0.24 0.03];
+
+<span class="comment">% Input signal type</span>
+<span class="comment">%</span>
+<span class="comment">% Set the input type for different process variables. Is used by the</span>
+<span class="comment">% ChooseSignal block.</span>
+<span class="comment">%   Constant: The signal is determined by reg.const_&lt;variable&gt;.</span>
+<span class="comment">%   Experimental: The signal is loaded from process data.</span>
+<span class="comment">%   Controlled: The signal is determined by the controller.</span>
+<span class="comment">% Note that not all variables can be Controlled.</span>
+<span class="comment">%</span>
+<span class="comment">% Controllable:</span>
+<span class="comment">%</span>
+reg.input_type_F_aII = InputType.Controlled;    <span class="comment">% Secondary air</span>
+reg.input_type_F_aI = InputType.Controlled;     <span class="comment">% Primary air</span>
+reg.input_type_v_grate = InputType.Controlled;  <span class="comment">% Grate speed</span>
+reg.input_type_F_w_in = InputType.Controlled;   <span class="comment">% Waste feed</span>
+reg.input_type_HHV = InputType.Controlled;      <span class="comment">% Heating value</span>
+reg.input_type_AB = InputType.Controlled;       <span class="comment">% Primary-secondary air ratio</span>
+<span class="comment">%</span>
+<span class="comment">% Not controllable:</span>
+<span class="comment">%</span>
+reg.input_type_T_aI = InputType.Constant;       <span class="comment">% Primary air temperature</span>
+reg.input_type_T_aII = InputType.Constant;      <span class="comment">% Secondary air temperature</span>
+reg.input_type_Q_grate = InputType.Constant;    <span class="comment">% Grate heat exchange</span>
+reg.input_type_F_from_DH = InputType.Constant;  <span class="comment">% Flow from district heating</span>
+reg.input_type_T_from_DH = InputType.Constant;  <span class="comment">% Temperature from district heating</span>
+<span class="comment">%</span>
+<span class="comment">% Heat value setpoint override</span>
+<span class="comment">%</span>
+<span class="comment">% Set to true if you are using the cascade controller want to control the</span>
+<span class="comment">% HHV setpoint manually using reg.op_HHV, instead of getting it from the</span>
+<span class="comment">% primary air PID. This is useful (and necessary) when tuning the slave</span>
+<span class="comment">% loop.</span>
+<span class="comment">%</span>
+reg.override_sp_HHV = false;
+
+<span class="comment">% PID parameters</span>
+<span class="comment">%</span>
+<span class="comment">% The critical value is an estimate of the P-constant</span>
+<span class="comment">% required to get 30% overshoot when performing the SIMC tuning. It will</span>
+<span class="comment">% probably need some adjustment.</span>
+<span class="comment">%</span>
+<span class="comment">% Oxygen controller</span>
+<span class="comment">%</span>
+reg.Kp_O2 = 1.9769;             <span class="comment">% Critical: 34</span>
+reg.Ki_O2 = 0.5054;             <span class="comment">% Critical: 0</span>
+<span class="comment">%</span>
+<span class="comment">% Steam controller (no cascade)</span>
+<span class="comment">%</span>
+reg.Kp_st = 45.8596;            <span class="comment">% Critical: 125</span>
+reg.Ki_st = 0.8579;             <span class="comment">% Critical: 0</span>
+reg.Kd_st = 0;                  <span class="comment">% Critical: 0</span>
+<span class="comment">%</span>
+<span class="comment">% AB ratio controller (no cascade)</span>
+<span class="comment">%</span>
+reg.Kp_AB = -0.0010;            <span class="comment">% Critical: -0.0002</span>
+reg.Ki_AB = -2.9786e-05;        <span class="comment">% Critical: 0</span>
+<span class="comment">%</span>
+<span class="comment">% Heat value controller</span>
+<span class="comment">%</span>
+reg.Kp_HHV = 2.1723e-07;        <span class="comment">% Critical: ?</span>
+reg.Ki_HHV = 1.4988e-07;        <span class="comment">% Critical: 0</span>
+<span class="comment">%</span>
+<span class="comment">% Steam controller (cascade)</span>
+<span class="comment">%</span>
+reg.Kp_st_HHV = 1.2459e+07;     <span class="comment">% Critical: ?</span>
+reg.Ki_st_HHV = 2.4691e+05;     <span class="comment">% Critical: 0</span>
+reg.Kd_st_HHV = 0;              <span class="comment">% Critical: 0</span>
+<span class="comment">%</span>
+<span class="comment">% AB ratio controller (cascade)</span>
+<span class="comment">%</span>
+reg.Kp_AB_HHV = -0.0010;        <span class="comment">% Critical: -0.001</span>
+reg.Ki_AB_HHV = -2.9786e-05;	<span class="comment">% Critical: 0</span>
+<span class="comment">%</span>
+<span class="comment">% Fan controllers</span>
+<span class="comment">%</span>
+reg.Kp_fan = 15;                <span class="comment">% Critical: ?</span>
+reg.Ki_fan = 15;                <span class="comment">% Critical: 0</span>
+<span class="comment">%</span>
+<span class="comment">% AB ratio controller output distribution</span>
+<span class="comment">%</span>
+<span class="comment">% The PID output is multiplied with these constants to determine their</span>
+<span class="comment">% control signals.</span>
+<span class="comment">%</span>
+reg.F_w_ratio = 400;
+reg.v_grate_ratio = 1;
+
+<span class="comment">% Set points</span>
+<span class="comment">%</span>
+<span class="comment">% The controller setpoints. Add to these values to witness the controller</span>
+<span class="comment">% response to setpoint changes.</span>
+<span class="comment">%</span>
+reg.sp_F_O2 = reg.op_F_O2;      <span class="comment">% Oxygen setpoint (kg/s)</span>
+reg.sp_F_st = reg.op_F_st;      <span class="comment">% Steam setpoint (kg/s)</span>
+reg.sp_AB = 1.286;              <span class="comment">% AB setpoint</span>
+reg.sp_HHV = reg.op_HHV;        <span class="comment">% HHV setpoint, not used by the controller,</span>
+                                <span class="comment">% only the tuning script</span>
+
+<span class="comment">% Waste feed perturbation</span>
+<span class="comment">%</span>
+<span class="comment">% A square wave is applied to the waste feed input</span>
+<span class="comment">% to emulate composition variation. Set the amplitude to 0 to disable, and</span>
+<span class="comment">% set the frequency to a large value to create a step disturbance. Note</span>
+<span class="comment">% that the square wave is offset 50% down on the y axis.</span>
+<span class="comment">%</span>
+reg.F_w_pert_amp = 0*4*0.1;     <span class="comment">% Peak-to-peak amplitude (kg/s)</span>
+reg.F_w_pert_freq = 1/400000;   <span class="comment">% Frequency (s)</span>
+
+
+<span class="comment">% PID output low pass filters</span>
+<span class="comment">%</span>
+<span class="comment">% The discrete PIDs and the MPC create stepping outputs, which can upset</span>
+<span class="comment">% the differentiator. A first order low pass filter is used, but the</span>
+<span class="comment">% effectiveness of this approach is not determined. Set higher time</span>
+<span class="comment">% constants to increase smoothing.</span>
+<span class="comment">%</span>
+reg.T_O2_LPF = 1e-01;   <span class="comment">% Oxygen PID smoothing</span>
+reg.T_st_LPF = 1e-01;   <span class="comment">% Steam PID smoothing</span>
+reg.T_AB_LPF = 1e-01;   <span class="comment">% AB PID smoothing</span>
+reg.T_MPC_LPF = 1e-01;  <span class="comment">% MPC smoothing</span>
+
+<span class="comment">% Initial values</span>
+<span class="comment">%</span>
+<span class="comment">% Needed by fan model to avoid spikes at startup.</span>
+<span class="comment">%</span>
+reg.F_aII_fan_PID_int = 1.01e+03;       <span class="comment">% Secondary air PID integrator</span>
+reg.F_aII_fan_model_int = 16.8;         <span class="comment">% Secondary air model integrator</span>
+reg.F_aI_fan_PID_int = 1.66e+03;        <span class="comment">% Primary air PID integrator</span>
+reg.F_aI_fan_model_int = 16.8;          <span class="comment">% Primary air model integrator</span>
+
+<span class="comment">% MPC variables</span>
+<span class="comment">%</span>
+<span class="comment">% The linear system and MPC object is stored between runs. To create new</span>
+<span class="comment">% versions, just overwrite the corresponding file.</span>
+<span class="comment">%</span>
+load(<span class="string">'linsys.mat'</span>);     <span class="comment">% Linear system, see linearize_model.m</span>
+load(<span class="string">'lmpc.mat'</span>);       <span class="comment">% MPC object, see config_mpc.m</span>
+</pre><h2 id="31">Additional part added by Jorn</h2><pre class="codeinput">set_post_step_values; <span class="comment">% Set the values after a step</span>
+reg.stepTime = 17e3;
+reg.include_noise = false;
+load(<span class="string">"last_mpc_params.mat"</span>); <span class="comment">% Parameter for the MPC are needed to keep the system form crashing (and the last MPC controller)</span>
+mpc_function_type  = mpc_params.mpc_function_parameter_type;
+unpack_mpc_params(<span class="string">"mpc_params.mpc_function_params"</span>)
+reg.enforce_parameter_limits = false;
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+[p_sat,T_sat,rho_vap,h_w,~,c_p]=SatWater;
+k.n_cell    = 15;
+k.switch    = -1;
+%% INTEGRATION PARAMETERS
+%k.T         = 3600*24;
+k.T         = 2000*1;
+
+%% AMBIENT CONDITIONS
+k.p_amb     = 1E05;             % Ambient pressure [Pa]
+k.T_amb     = 10 + 273.15;      % Ambient temperature [K]
+
+%% SOLID WASTE PARAMETERS
+% Molar mass of the waste elemental components [kg/kmol] in the combustable
+% fraction
+k.Mw_w      = [12.011;         % C
+               1.0079;         % H
+               32.06;          % S
+               35.45;          % Cl 
+               14.007;         % N   
+               15.999;         % O
+               18.998];        % F
+k.nc_w      = length(k.Mw_w);
+
+% Specific heat capacity [J/kgK]        
+k.cp_w      = 2.26e+03;
+
+%% GAS PARAMETERS
+% Molar mass [kg/kmol]
+k.Mw_gas    = [k.Mw_w(2)*2+k.Mw_w(6);         % H2O
+               k.Mw_w(5)*2;                   % N2
+               k.Mw_w(1)+k.Mw_w(6)*2;         % CO2
+               k.Mw_w(6)*2;                   % O2
+               k.Mw_w(1)+k.Mw_w(2)*4;         % CH4
+               k.Mw_w(2)*2;                   % H2
+               k.Mw_w(1)+k.Mw_w(6);           % CO
+               k.Mw_w(3)+k.Mw_w(6)*2;         % SO2
+               k.Mw_w(2)+k.Mw_w(4);           % HCl  
+               k.Mw_w(2)+k.Mw_w(7);           % HF
+               k.Mw_w(5)+k.Mw_w(6)*2;         % NO2
+               k.Mw_w(5)+k.Mw_w(2)*3];        % NH3
+k.nc_gas    = length(k.Mw_gas);
+% Specific heat capacity [J/kgK]
+k.cp_fg     = 1.23e+03;
+% Universal gas constant [J/kmol K]
+k.R         = 8.314462175*1E3; 
+
+%% LIQUID WATER PARAMETERS
+k.cp_water  = 4.2E+03; % [J/kg K]
+k.rho_water = 1E+03;   % [kg/m3]
+k.Mw_water  = k.Mw_gas(1);
+
+%% WASTE IN
+k.w_w_in    = [26;                          % Moisture (H2O)
+               20.8; 
+               3; 
+               0.3; 
+               0.2; 
+               0.4; 
+               17.5;
+               0.01; 
+               23.8]./100;                  % Ashes
+k.w_w_in    = k.w_w_in./sum(k.w_w_in);    
+
+%% GRATE 
+% GEOMETRY 
+% data from "Ryu, C., Yang, Y.B., Nasserzadeh, V. and Swithenbank, J., 2004
+% "Thermal reaction modeling of a large municipal solid waste incinerator."
+% Combustion Science and Technology, 176(11), pp.1891-1907.
+k.W         = 3.76;             % Width of the grate
+k.L         = 9.84;             % total grate lenght
+k.A         = k.W*k.L; 
+k.v_grate   = 7.38./3600;       % [m/s]
+k.rho_w     = 500;              % density of waste [kg/m3]
+h_grate     = 0.3;              % Height of the grate[m] REPLACE_WITH_DASH_DASH> assumed value
+k.A_grate   = k.W.*h_grate;
+% Waste and methal conductivity
+k.k_w       = 0.1;
+k.k_grate   = 50;
+% Other data
+k.sigma     = 5.67051e-8;       % Stefan-Boltzmann constant [J/(m2 s K4)]
+k.epsilon_gt= 0.88;             % Emissivity of flue gas  (WHAT VALUES SHOULD BE HERE??)
+k.alpha_gt  = k.epsilon_gt;     % Absorptivity of flue gas (WHAT VALUES SHOULD BE HERE??)
+
+%% Zone dimensions
+k.M_steel_grate = 1500;             % Mass of steel in the different zones of the furnace (this is just a random number)
+
+%% FREE BOARD
+k.V_FreeBoard = k.W.*k.L*1.5;
+k.M_steel_FB  = 2000;               % Mass of steel in the free board (this is just a random number)
+
+%% PRIMARY AIR
+RH_aI       = 90;               % The air is taken from the waste bunker REPLACE_WITH_DASH_DASH> very humid
+k.w_a       = CALC_w_ha(k.T_amb,RH_aI,k.Mw_gas);  % The temperature of the air in the bunker is assumed equal to ambient temperature
+k.T_aI      = 110 +  273.15;    % Pre-heating of primary air
+y_a         = CALC_y_a(k.w_a,k.Mw_gas);
+Mw_a        = sum(k.Mw_gas.*y_a);
+
+%% Primary air fan
+k.Pmax_aI = 114.1.*1e3; % maximum power the fan can deliver [W]
+k.I_aI = 82.8; % moment of inertia [kg*m^2]
+rpm_T_p = 400; % lowest value of rpm for which Torque equals Power/omega
+k.omega_T_aI = rpm_T_p*2*pi/60;
+% estimating volume flow as function of rpm, assuming a linear relationship
+
+% insert data points from fan data
+Q_est = [1136 747 447]; % [m^3/min]
+rpm_est1 = [1383 931 560]; % [rpm]
+k.map_aI = mean(Q_est./rpm_est1); % propornality constant [m^3/(min*rpm)]
+
+% estimating torque drag function, assumed to be quadratic (T =
+% alpha*omega^2)
+
+% insert datapoints from torque diagram
+torq_est_fg = [370]; % [N*m]
+% insert corresponding rpm
+rpm_est2_fg= [931]; % [rpm]
+omega_est_fg = rpm_est2_fg.*(2*pi/60); % change to angular velocity [rad/s]
+k.alpha_est_aII = mean(torq_est_fg./(omega_est_fg.^2)); % estimated propotionality constant [J*s]
+
+rpm_in_p = 1; % initial rotation 
+omega_in_p = rpm_in_p*2*pi/60; 
+
+k.mu_eff    = 0.8;
+
+%% Secondary air fan
+k.Pmax_aII = 34.4; % maximum power the fan can deliver [kW]
+k.I_aII = 3.13; % moment of inertia [kg*m^2]
+rpm_T_s = 500; % lowest value of rpm for which Torque equals Power/omega
+k.omega_T_aII = rpm_T_s*2*pi/60;
+
+% estimating volume flow as function of rpm, assuming a linear relationship
+
+% insert data points from fan data
+Q_est = [333]; % [m^3/min]
+rpm_est1 = [2960]; % [rpm]
+k.map_aII = mean(Q_est./rpm_est1); % propornality constant [m^3/(min*rpm)]
+
+% estimating torque drag function, assumed to be quadratic (T =
+% alpha*omega^2)
+
+% insert datapoints from torque diagram
+torq_est_fg = [111.4]; % [N*m]
+% insert corresponding rpm
+rpm_est2_fg= [2960]; % [rpm]
+omega_est_fg = rpm_est2_fg.*(2*pi/60); % change to angular velocity [rad/s]
+k.alpha_est_s = mean(torq_est_fg./(omega_est_fg.^2)); % estimated propotionality constant [J*s]
+
+rpm_in_s = 1; % initial rotation 
+omega_in_s = rpm_in_s*2*pi/60; 
+%% INITIAL CONDITIONS
+% Zone 1
+k.T_0       = 850+273.15;
+k.M_fg_IC   = k.p_amb.*k.V_FreeBoard./(k.R.*k.T_0).*Mw_a;
+
+%% EVAPORATOR GEOMETRY (need data here)
+k.p_drum    = 51e5;
+M_H2O_l     = 148e3;            % Mass of liquid water in the boiler [kg] at T=T_amb
+k.V_H2O     = M_H2O_l./k.rho_water; % Volume of the vessel occupied by water [m3]
+k.V_EVA     = 203;              % Volume of vessel
+k.V_gas     = k.V_EVA-k.V_H2O;  % Volume of the vessel eccupied by air
+y_sat       = CALC_xsat(k.T_amb);
+p_vap       = y_sat*k.p_amb;
+rho_steam   = interp1(T_sat,rho_vap,k.T_amb,'linear','extrap');
+p_steam     = interp1(T_sat,p_sat,k.T_amb,'linear','extrap');
+Z_steam     = p_steam.*k.Mw_water./(rho_steam.*k.R.*k.T_amb);
+M_H2O_v     = p_vap.*k.V_gas./(Z_steam.*k.R.*k.T_amb).*k.Mw_water;
+k.M_H2O     = M_H2O_l + M_H2O_v;
+k.x_vap_0   = M_H2O_v/k.M_H2O;
+k.epsilon_EVA=0.7;             % Evaporator effectiveness
+k.M_steel   = 200000;           % Total mass of metal in the boiler [kg] 
+k.cp_steel  = 460;              % Heat capacity steel [J/kg K]
+
+k.N_air     = (k.p_amb-p_vap).*k.V_gas./(k.R.*k.T_amb);
+k.Mw_air    = 28.014.*0.79 + 15.999*0.21;
+k.M_air     = k.N_air.*k.Mw_air;
+
+%% GLOBAL HEAT EXCHANGER EFFICIENCY
+k.eff_HE    = 0.96;
+%% ECONOMIZER
+k.epsilon_ECO= 0.72;            % Economizer effectiveness
+k.eta_ECO   = 0.9;
+%% HEAT EXCHANGER WITH UTILITIES
+k.epsilon_HE= 0.953;            % HE effectiveness 
+ 
+%% SUPERHEATER
+k.epsilon_SH= 0.95;
+
+%% DRUM
+% Liquid water enthalpy
+h_w_sat     = interp1(p_sat,h_w,k.p_amb,'linear','extrap');
+h_water     = h_w_sat - k.cp_water.*(373.15-k.T_amb);
+% Vapour water enthalphy
+h_vap       = interp1(T_sat,h_w,k.T_amb,'linear','extrap');
+% Initial energy stored in the boiler
+k.A_0       = (k.M_H2O.*(1-k.x_vap_0).*h_water + k.M_H2O.*k.x_vap_0.*h_vap - k.p_amb.*k.V_EVA ); 
+k.T_guess   = 300;
+k.x_guess   = 0;
+
+%% TURBINE
+k.p_HP      = (-0.256 + 1).*1e5;
+k.p_LP      = (-0.546 + 1).*1e5;
+k.eta_TURB  = 0.9;
+
+%% HEAT OF REACTIONS
+k = CALC_DeltaH(k);
+
+%% GAS CLEANING SYSTEM
+k.epsilon_HE1 = 0.054;
+k.epsilon_HE2 = 0.70;
+k.eff_HE2     = 0.83;
+k.epsilon_HE3 = 0.47;
+k.epsilon_HE4 = 0.69;
+
+%% DYNAMIC PARAMETERS FROM PROCESS DATA
+data2       = importdata('Data_Boiler.txt');     	
+data3       = importdata('Data_Fg.txt');
+data4       = importdata('Data_Turbine.txt');
+
+% Time (in seconds) between data points in the excel files, and also the
+% total time span of the process data
+delta_t     = 5*60; 
+max_t       = 60*60*24; 
+
+%% Primary air
+% temperature
+data_ex = Find_val('1HLA30DT001_PV',data2); % Read process data from t=0 to 
+% t = max_t
+T_aI.signals.values = data_ex + 273.15; % Celsius to Kelvin
+T_aI.time = delta_t*[0:(length(T_aI.signals.values)-1)]'; 
+% Flow rate of primary air to the different zones. each zone is given a
+% struct
+data_ex = Find_val('1HLA41FF001_',data2); %left 1
+data_ex_r = Find_val('1HLA51FF001_',data2); 
+% merge and scale to [kg/s]
+F_aI_z1.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966; 
+F_aI_z1.time = delta_t*[0:(length(F_aI_z1.signals.values)-1)]';
+% repeat for the other 4
+data_ex = Find_val('1HLA42FF001_',data2); %left 2
+data_ex_r = Find_val('1HLA52FF001_',data2); % right 2
+F_aI_z2.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;
+F_aI_z2.time = delta_t*[0:(length(F_aI_z2.signals.values)-1)]';
+data_ex = Find_val('1HLA43FF001_',data2); %left 1
+data_ex_r = Find_val('1HLA53FF001_',data2); % right 1
+F_aI_z3.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;
+F_aI_z3.time = delta_t*[0:(length(F_aI_z3.signals.values)-1)]';
+data_ex = Find_val('1HLA44FF001_',data2); %left 1
+data_ex_r = Find_val('1HLA54FF001_',data2); % right 1
+F_aI_z4.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;
+F_aI_z4.time = delta_t*[0:(length(F_aI_z4.signals.values)-1)]';
+data_ex = Find_val('1HLA45FF001_',data2); %left 1
+data_ex_r = Find_val('1HLA55FF001_',data2); % right 1
+F_aI_z5.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;
+F_aI_z5.time = delta_t*[0:(length(F_aI_z5.signals.values)-1)]';
+% merge all to one struct as well
+F_aI.signals.values = [F_aI_z1.signals.values, F_aI_z2.signals.values, F_aI_z3.signals.values, F_aI_z4.signals.values, F_aI_z5.signals.values];
+F_aI.signals.dimensions = 5;
+F_aI.time = delta_t*[0:(length(F_aI_z5.signals.values)-1)]';
+% total air flow from primary air source
+F_aI.totave = sum(mean(F_aI.signals.values));
+% total primary air struct
+F_aI_tot.signals.values = sum(F_aI.signals.values,2);
+F_aI_tot.time = F_aI.time;
+
+%% Secondary air
+data_ex = Find_val('1HLA81CF001_F_',data2);                             % Flow secondary air front wall
+data_ex_r = Find_val('1HLA82CF001_F_',data2);                           % Flow secondary air rear wall
+F_aII.signals.values = (data_ex + data_ex_r)./(3600*22.414).*28.966;    % Secondary air flows from both walls are summed 
+F_aII.time = delta_t*[0:(length(F_aII.signals.values)-1)]';
+F_aII.totave = mean(F_aII.signals.values);
+F_a_tot = (F_aII.signals.values+F_aI_tot.signals.values).*(3600*22.414)./28.966;
+% Temperature 
+data_ex = Find_val('1HLA80CT001_F_',data2); %(correct??)
+T_aII.signals.values = data_ex + 273.15;                                % Celsius to Kelvin
+T_aII.time = delta_t*[0:(length(T_aII.signals.values)-1)]'; 
+
+%% Waste
+data_ex = Find_val('1HFB10FF002',data2); % rear wall
+F_w_in.signals.values = (data_ex) ./3.6; 
+F_w_in.time = delta_t*[0:(length(F_aII.signals.values)-1)]';
+
+%% Grate cooling
+% Temperature upstream grate cooling
+T_c     = Find_val('1HLC03CT001_',data2); 
+% Cooling water flow in the different zones
+F_z1    = Find_val('1HLC51CF001_',data2); 
+F_z2    = Find_val('1HLC52CF001_',data2); 
+F_z3    = Find_val('1HLC53CF001_',data2); 
+% Cooling water temperature in the different zones
+T_z1    = Find_val('1HLC51CT001_',data2); 
+T_z2    = Find_val('1HLC52CT001_',data2); 
+T_z3    = Find_val('1HLC53CT001_',data2); 
+% C_min in the different zones
+C_z1    = F_z1.*4.2e3;
+C_z2    = F_z2.*4.2e3;
+C_z3    = F_z3.*4.2e3;
+% Heat exchanged in the different zones
+Q_z1    = C_z1.*(T_z1-T_c);
+Q_z2    = C_z2.*(T_z2-T_c);
+Q_z3    = C_z3.*(T_z3-T_c);
+% Make bus signals
+Q_grate.signals.values = [Q_z1,Q_z2,Q_z3];
+Q_grate.time           = delta_t*[0:(length(Q_grate.signals.values)-1)]';
+
+%% District heating water
+F_from_DH.signals.values= Find_val('1NDA10CF010_A',data4);          % Water flow in district heating
+F_from_DH.time          = delta_t*[0:(length(F_from_DH.signals.values)-1)]'; 
+T_from_DH.signals.values= Find_val('1NDB10CT003_',data4) + 273.15;  % Water flow in district heating
+T_from_DH.time          = delta_t*[0:(length(T_from_DH.signals.values)-1)]';
+
+%% Controller
+
+% Controller type
+% 
+% Open, AB, Cascade or MPC. Is used by the ChooseController block.
+%
+reg.controller_type = ControllerType.AB;  
+
+% Operating values
+%
+% The controller action happens around these operating values.
+%
+reg.op_F_O2 = 4.6345;                   % Oxygen flow (kg/s)
+reg.op_F_st = 10.761;                   % Steam flow (kg/s)
+reg.op_HHV = 4.133444255e+07;           % Heat value (J/s?)
+reg.op_F_aII = 14;                      % Secondary air (kg/s)
+reg.op_F_aI = 18;                       % Total primary air (kg/s)
+reg.op_v_grate = 0.0025;                % Grate speed (m/s)
+reg.op_F_w_in = 4;                      % Waste feed (kg/s)
+reg.op_MVs = [...                       
+    reg.op_F_aII;...                   
+    reg.op_F_aI;...                     % Needed for backwards compatibility.
+    reg.op_v_grate;...                  % Should be fixed.
+    reg.op_F_w_in...
+ ];
+reg.MV_names = ["F_aII" "F_aI"...       % Needed for backwards compatibility.
+    "v_grate" "F_w"];                   % Should be fixed.
+
+% Constant input values
+%
+% These are used when the corresponding variable has
+% input_type set to InputType.Constant.
+%
+reg.const_F_aI = reg.op_F_aI;                   % Total primary air (kg/s)
+reg.const_v_grate = reg.op_v_grate;             % Grate speed (m/s)
+reg.const_F_w_in = reg.op_F_w_in;               % Waste feed (kg/s)
+reg.const_F_aII = reg.op_F_aII;                 % Secondary air (kg/s)
+reg.const_T_aI = 380;                           % Primary air temperature (K)
+reg.const_T_aII = 300;                          % Secondary air temperature (K)
+reg.const_Q_grate = [1.0e+05 2.2e+05 2.5e+05];  % Grate heat exchange (J?)
+reg.const_F_from_DH = 130;                      % Flow from district heating (kg/s?)
+reg.const_T_from_DH = 320;                      % Temperature of flow from district heating (K)
+%
+% Primary air flow distribution
+%
+% The relative distribution between primary air zones.
+%
+reg.const_F_aI_dist = [0.05 0.3 0.38 0.24 0.03];
+
+% Input signal type
+% 
+% Set the input type for different process variables. Is used by the
+% ChooseSignal block.
+%   Constant: The signal is determined by reg.const_<variable>.
+%   Experimental: The signal is loaded from process data.
+%   Controlled: The signal is determined by the controller.
+% Note that not all variables can be Controlled.
+%
+% Controllable:
+%
+reg.input_type_F_aII = InputType.Controlled;    % Secondary air
+reg.input_type_F_aI = InputType.Controlled;     % Primary air
+reg.input_type_v_grate = InputType.Controlled;  % Grate speed
+reg.input_type_F_w_in = InputType.Controlled;   % Waste feed
+reg.input_type_HHV = InputType.Controlled;      % Heating value
+reg.input_type_AB = InputType.Controlled;       % Primary-secondary air ratio
+%
+% Not controllable:
+%
+reg.input_type_T_aI = InputType.Constant;       % Primary air temperature
+reg.input_type_T_aII = InputType.Constant;      % Secondary air temperature
+reg.input_type_Q_grate = InputType.Constant;    % Grate heat exchange
+reg.input_type_F_from_DH = InputType.Constant;  % Flow from district heating
+reg.input_type_T_from_DH = InputType.Constant;  % Temperature from district heating
+%
+% Heat value setpoint override
+%
+% Set to true if you are using the cascade controller want to control the
+% HHV setpoint manually using reg.op_HHV, instead of getting it from the
+% primary air PID. This is useful (and necessary) when tuning the slave
+% loop.
+% 
+reg.override_sp_HHV = false;                    
+
+% PID parameters
+%
+% The critical value is an estimate of the P-constant
+% required to get 30% overshoot when performing the SIMC tuning. It will
+% probably need some adjustment.
+%
+% Oxygen controller
+%
+reg.Kp_O2 = 1.9769;             % Critical: 34
+reg.Ki_O2 = 0.5054;             % Critical: 0
+%
+% Steam controller (no cascade)
+%
+reg.Kp_st = 45.8596;            % Critical: 125
+reg.Ki_st = 0.8579;             % Critical: 0
+reg.Kd_st = 0;                  % Critical: 0
+%
+% AB ratio controller (no cascade)
+%
+reg.Kp_AB = -0.0010;            % Critical: -0.0002
+reg.Ki_AB = -2.9786e-05;        % Critical: 0
+%
+% Heat value controller
+%
+reg.Kp_HHV = 2.1723e-07;        % Critical: ?
+reg.Ki_HHV = 1.4988e-07;        % Critical: 0
+%
+% Steam controller (cascade)
+%
+reg.Kp_st_HHV = 1.2459e+07;     % Critical: ?
+reg.Ki_st_HHV = 2.4691e+05;     % Critical: 0
+reg.Kd_st_HHV = 0;              % Critical: 0
+%
+% AB ratio controller (cascade)
+%
+reg.Kp_AB_HHV = -0.0010;        % Critical: -0.001
+reg.Ki_AB_HHV = -2.9786e-05;	% Critical: 0
+%
+% Fan controllers
+%
+reg.Kp_fan = 15;                % Critical: ?
+reg.Ki_fan = 15;                % Critical: 0
+%
+% AB ratio controller output distribution
+% 
+% The PID output is multiplied with these constants to determine their
+% control signals.
+% 
+reg.F_w_ratio = 400;
+reg.v_grate_ratio = 1;
+
+% Set points
+%
+% The controller setpoints. Add to these values to witness the controller
+% response to setpoint changes.
+%
+reg.sp_F_O2 = reg.op_F_O2;      % Oxygen setpoint (kg/s)
+reg.sp_F_st = reg.op_F_st;      % Steam setpoint (kg/s)
+reg.sp_AB = 1.286;              % AB setpoint
+reg.sp_HHV = reg.op_HHV;        % HHV setpoint, not used by the controller,
+                                % only the tuning script
+
+% Waste feed perturbation
+%
+% A square wave is applied to the waste feed input
+% to emulate composition variation. Set the amplitude to 0 to disable, and
+% set the frequency to a large value to create a step disturbance. Note
+% that the square wave is offset 50% down on the y axis.
+%
+reg.F_w_pert_amp = 0*4*0.1;     % Peak-to-peak amplitude (kg/s)
+reg.F_w_pert_freq = 1/400000;   % Frequency (s)
+
+
+% PID output low pass filters
+%
+% The discrete PIDs and the MPC create stepping outputs, which can upset
+% the differentiator. A first order low pass filter is used, but the
+% effectiveness of this approach is not determined. Set higher time
+% constants to increase smoothing.
+%
+reg.T_O2_LPF = 1e-01;   % Oxygen PID smoothing
+reg.T_st_LPF = 1e-01;   % Steam PID smoothing
+reg.T_AB_LPF = 1e-01;   % AB PID smoothing
+reg.T_MPC_LPF = 1e-01;  % MPC smoothing
+
+% Initial values
+%
+% Needed by fan model to avoid spikes at startup.
+%
+reg.F_aII_fan_PID_int = 1.01e+03;       % Secondary air PID integrator
+reg.F_aII_fan_model_int = 16.8;         % Secondary air model integrator
+reg.F_aI_fan_PID_int = 1.66e+03;        % Primary air PID integrator
+reg.F_aI_fan_model_int = 16.8;          % Primary air model integrator
+
+% MPC variables
+%
+% The linear system and MPC object is stored between runs. To create new
+% versions, just overwrite the corresponding file.
+%
+load('linsys.mat');     % Linear system, see linearize_model.m
+load('lmpc.mat');       % MPC object, see config_mpc.m
+
+
+%% Additional part added by Jorn
+set_post_step_values; % Set the values after a step 
+reg.stepTime = 17e3; 
+reg.include_noise = false; 
+load("last_mpc_params.mat"); % Parameter for the MPC are needed to keep the system form crashing (and the last MPC controller)
+mpc_function_type  = mpc_params.mpc_function_parameter_type; 
+unpack_mpc_params("mpc_params.mpc_function_params")
+reg.enforce_parameter_limits = false; 
+##### SOURCE END #####
+--></body></html>

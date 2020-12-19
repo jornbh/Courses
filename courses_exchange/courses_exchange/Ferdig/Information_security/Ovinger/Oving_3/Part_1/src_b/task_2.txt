@@ -1,0 +1,22 @@
+Apocalypse Now
+Chinatown
+Citizen Kane
+Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb
+Lawrence of Arabia
+Modern Times
+Once Upon a Time in the West
+Psycho
+Schindler's List
+Seven Samurai
+Singin' in the Rain
+Star Wars: Episode IV - A New Hope
+Star Wars: Episode V - The Empire Strikes Back
+Sunset Blvd.
+Taxi Driver
+The Dark Knight
+The Godfather: Part II
+The Shawshank Redemption
+
+{% comment %} 
+r_el[ 18,[0. 3. 3. 7. 1. 4.],dbc4e2a9d23c5364bf4cfe7ac74ab962a35a0d3d78d152716c04e5e58ee95e94 ]
+r_el[ 18,[0. 4. 2. 2. 3. 7.],jorn.hofstad@epfl.ch ] {% endcomment %}

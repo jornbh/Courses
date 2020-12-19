@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Final simulator</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="final-simulator">Final simulator</h1>
+<p>On linux: Run <code>firefox &quot;README.html&quot;</code> for prettier documentation.</p>
+<h2 id="running-the-project">Running the project</h2>
+<p>There are several methods of running the project</p>
+<ul>
+<li>Running <code>Main.m</code> runs both variations of the PID-controllers, as welll as the different kinds of optimal controllers.
+<ul>
+<li>The defalult is to only run the discrete MPC that assumes disturbances on all states, but this can be changed by removing the lines containing the comment: &quot;% Delete these to run more kinds of optimal controllers&quot;</li>
+</ul>
+</li>
+<li>Running &quot;prepare_furnace.m&quot; adds uses default values for all parameters in the plant and the controller. After that, it should be possible to run the simulink project.</li>
+<li>Running the script <code>tune_mpc_battery.m</code> starts the tuning process for optimizing the controller parameters. This will take at least the entire night.</li>
+</ul>
+<h2 id="only-runnning-simulink">Only runnning simulink</h2>
+<p>If the goal is to run the model directly from simulink, run the command <code>addpath(genpath(pwd));</code> to include the entire project in the workspace and the script <code>prepare_furnace.m</code> to set all variables. Make sure the required blocks were not commented out, and set the parameters. This uses some default values, some of which may be bad.</p>
+<h2 id="project-structure">Project Structure</h2>
+<p>Each directory is made to make each piece of functionality more independant, so that it may be reused more easily.</p>
+<ul>
+<li>Main.m (Runs a comparison of all controllers)</li>
+<li>msrc (Matlab source code)</li>
+<li>ssrc (Simulink source code)</li>
+<li>doc (Documentation in HTML)</li>
+<li>deps (Modified project from the previous summer student)</li>
+<li>reqired_data (.mat files needed to make the controllers and estimated models)</li>
+<li>outputs (Directory for all saved results)</li>
+</ul>
+<!-- - Main Folder 
+  - [identify_system_from_step](doc/identify_system_from_step.html)
+  - [integral_based_MPC](doc/integral_based_MPC.html)
+  - [automated_tuning](doc/automated_tuning.html) -->
+<h2 id="notable-exported-functions">Notable exported functions</h2>
+<ul>
+<li>compare_ERA_approxomations
+<ul>
+<li>Compares the different possible model orders when it comes to approxomating a step-response.</li>
+</ul>
+</li>
+</ul>
+
+    </body>
+    </html>

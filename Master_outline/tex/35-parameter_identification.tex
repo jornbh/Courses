@@ -1,0 +1,222 @@
+\chapter{Parameter estimation}
+\label{sec:ERA}
+
+Even if most physical constants are known, there are always some that are specific for each plant. They have to be measured or estimated, since they can be dependant on properties unique to each plant, like size, mass, etc. There are be methods for estimating the dynamics of nonlinear plants, but linear approximations are often much easier to perform, and has well-known methods that can be used without full state measurement. As long as the plant is sufficiently well-behaved and the state remains close enough to the operating point linear parameter estimation is preferred. 
+
+\noindent
+There are several robust methods for approximating the parameters of MISO systems or MIMO-systems where the outputs are loosely coupled, as shown in \cite{Adaptiv_boken}. But, in the case of the MSWC-plant, the fact that the amount of oxygen consumed in the and the amount of heat produced makes it steam somewhat unreasonable that these two output variables should be independent. As a result, a MIMO-scheme for parameter estimation is needed instead. There are several different methods of performing linear parameter estimation, like the state-space approach and a transfer-function based approach, as presented in \cite{MIMO_estimation}. However, in this project, the Eigensystem Realisation Algorithm (ERA) was used instead. This is mostly because it can estimate systems without full-state measurement. Additionally, the fact that it is somewhat easier to understand and implement made it the preferred candidate for parameter estimation. 
+
+
+\section{Eigensystem Realisation Algorithm}
+The ERA, as described in \cite{ERA_source}, is a method for estimating linear, discrete systems when the impulse response is known for some measurements of a system.  It also allows for the creation of reduced-order models, that describe the dominant dynamics of the impulse-response, even if the original system was of a higher order than the estimated one. 
+
+The ERA assumes that the system is linear on the form:
+\begin{align}
+    \vec{x}_{k+1} &= A \vec{x}_k + B \vec{u}_k  \\
+    \vec{y}_k &= C \vec{x}_k + D \vec{x}_u
+\end{align}
+
+Where 
+\begin{align*}
+    x \in \Re^n \\
+    u \in \Re^m \\
+    y \in \Re^p \\
+\end{align*}
+\noindent
+$y$ and $u$ must be measured, but the states $x$ can be unknown. Unless full-state measurement is available, the states $x$ in the estimated system will correspond to some abstract values that do not need to correspond to any of the physical states of the real plant. The ERA is based on the impulse-responses of the discrete system. It uses the impulse-response from each separate input. If $\vec{u}_{0,i}$ is a Kronecker delta at element $i$ and 0 everywhere else, then the impulse-response $y_i$ for that input can be written as:
+
+\begin{align}
+    y_{0,i} &= D \vec{u}_{0,i} \\
+    y_{k,i} &= C A^{k-1} B \vec{u}_{0,i} \forall k = 1,2,...
+    \label{eq:impulse_dynamics}
+\end{align}
+
+All possible impulse-responses at one time-step can be combined into one matrix $Y_{k}$. 
+\begin{align}
+    Y_{k} = 
+    \begin{bmatrix}
+        y_{k,1} & y_{k,2} & \dots & y_{k,m}
+    \end{bmatrix}
+\end{align}
+
+
+\noindent
+
+The concatenation of all input-vectors $u_{k,i}$ is the same as 
+\begin{align}
+    I = \begin{bmatrix} u_{0,1} & u_{0,2} & \cdots & u_{0,m} \end{bmatrix}    
+    \label{eq:impulse_structure}
+\end{align}
+
+By combining equation \ref{eq:impulse_dynamics} and \ref{eq:impulse_structure}, $Y_{k}$ can be written quite conveniently as a matrix-product. 
+\begin{align}
+    Y_{k} = C A^{k-1} B
+\end{align}
+All the impulse responses can be written into a $r \times s$ block matrix, on the form of a Hankel -matrix. 
+
+\begin{align}
+    H_k = \begin{bmatrix}
+        \vec{Y}_{k+1} & \vec{Y}_{k+2} & \dots & \vec{Y}_{k+s}\\ 
+        \vec{Y}_{k+2} & \vec{Y}_{k+3} & \dots & \vec{Y}_{k+s+1}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        \vec{Y}_{k+r} & \vec{Y}_{k+r+1} & \dots & \vec{Y}_{k+r+s}
+    \end{bmatrix}
+\end{align}
+This also means that the Hankel-matrix can ideally also be expressed by using $\left[ A,B,C \right]$. For instance The first matrix, $H_1$ can be written as: 
+
+\begin{align}
+    H_1 = 
+    \begin{bmatrix}
+        CB & CAB & \dots & CA^{m-1}B\\ 
+        CAB & CA^2B & \dots & CA^{m}B\\
+        \vdots & \vdots & \ddots & \vdots\\
+        CA^{m-1}B & CA^{m}B & \dots & CA^{2m-2}B
+    \end{bmatrix} 
+\end{align}
+ 
+\noindent
+$H_1$ can equivalently be written as $H_1 = \mathbb{O}\mathbb{C}$, which is the product of the adjoint impulse response $\mathbb{O}$ and the direct impulse response matrix $\mathbb{C}$. These are given by:
+
+\begin{align}
+\mathbb{O} = 
+\begin{bmatrix}
+    C \\ CA \\ CA^2 \\ \vdots \\ CA^{m-1}
+\end{bmatrix}
+\vec{u}_0
+\end{align}
+
+\begin{align}
+\mathbb{C} = 
+\begin{bmatrix}
+    B & AB& \dots & A^{m-1}B
+\end{bmatrix}                             
+\end{align}
+The matrices $\mathbb{O}$ and $\mathbb{C}$ are also the same as the observability matrix and the controllability matrix. Any following matrix $H_k$ can be described as $H_k = \mathbb{O}A^k \mathbb{C}$.
+Since $A$, $B$ and $C$ are unknown, the goal is to find some matrices $\hat{A}$, $\hat{B}$ and $\hat{C}$ which is able to produce the same (Or a similar) Hankel-matrix.  
+
+\noindent
+$Y_{k+1}$ can be extracted quite easily from $H_k$. If the matrix $E_p^T = \left[ I_p, 0_p, \dots, 0_p \right]$ and $E_m^T = \left[ I_m, 0_m, \dots, 0_m \right]$, then 
+\begin{align}
+    Y_{k+1} = E_p H_k E_m = E_p \mathbb{O}  A^k \mathbb{C}  E_m
+    \label{eq:magic_eq_1}
+\end{align}
+This structure will be used to find good good matrices $\hat{A}$, $\hat{B}$ and $\hat{C}$. 
+\noindent
+In \cite{ERA_source} a matrix $H^\#$ is found, which has the properties 
+\begin{align}
+    \mathbb{O} H^\# \mathbb{C} = I_n 
+    \label{eq:H_sharp_cancelation}
+\end{align}
+The matrix $H^\#$ satisfies being the pseudoinverse of $H_1$, but we will not prove that in this thesis.
+\noindent
+Another important tool will be the Singular Value Decomposition (SVD) of $H_1$
+
+
+\begin{align}
+    H_1 = U \Sigma V^*  
+\end{align}
+
+\noindent
+The SVD has the property that all the column vectors in the matrices $U$ and $V$ are orthonormal to the other vectors from the same matrix. This is because the Hankel-matrix is purely real. This means that $VV^*=I$ and $U^TU=I$. $\Sigma$ is a diagonal matrix of positive elements.
+Finally, we introduce the matrices $U_d$ and $U_d^\#$
+\begin{align}
+    U_d &= U \Sigma \\
+    U_d ^\# &= \Sigma^{-1}U^T
+\end{align}
+
+\cite{ERA_source} also shows that $H^\# = VU^\#_d $. By inserting equation \ref{eq:H_sharp_cancelation} into equation \ref{eq:magic_eq_1}, a new expression can be found. 
+
+\begin{align}
+    \label{eq:magic_eq_2}
+    Y_{k+1} = E_p \mathbb{O} \mathbb{C}H^\#  \mathbb{O} A^k \mathbb{C}H^\#  \mathbb{O}\mathbb{C}  E_m
+\end{align}
+
+Next, $\mathbb{O}\mathbb{C}$ can be contracted, and $H^\# $ can be replaced by $VU_d^\#$. 
+\begin{align}
+    Y_{k+1} = E_p H_1 V U_d^\#  \mathbb{O} A^k \mathbb{C} V U_d^\# H_1  E_m
+\end{align}
+Next, a trick is needed to get rid of the expression containing $A^k$. To use this trick, we will have to show that $\left[ U_d^\# H_2 V\right]^k  = \left[ U_d^\# \mathbb{O} A \mathbb{C} V \right]^k $ is the same as $U_d^\#  \mathbb{O} A^k \mathbb{C} V$. A polynomial $\left[ U_d^\# \mathbb{O} A \mathbb{C} V\right]^k$ can be written as $(U_d^\# \mathbb{O} A \mathbb{C} V)...(U_d^\# \mathbb{O} A \mathbb{C} V)$. By opening the parenthesis and replacing $VU_d^\#$ with $H^\#$, and then replacing any $\mathbb{C}H^\#\mathbb{O}$ with $I_p$, the result is $ = U_d^\# \mathbb{O}( A I_p)^k \mathbb{C} V$. As a result the two expressions are the same and equation \ref{eq:magic_eq_2} can be rewritten as: 
+\begin{align}
+    Y_{k+1} = E_pH_1 V \left[ U_d^\# H_2 V\right]^k  U_d^\# H_1  E_m
+\end{align}
+
+Finally, since $U_d^\# = \Sigma^{-1} U^T$, the square root of $\Sigma$ can be taken, and extracted from the exponential term, giving 
+
+\begin{align}
+    Y_{k+1} = E_p U \Sigma^{\frac{1}{2}} \left[ \Sigma^{-\frac{1}{2}} U^T H_2 V \Sigma^{-\frac{1}{2}} \right]^k \Sigma^{\frac{1}{2}} V^T E_m
+\end{align}
+
+This final equation gives a formulation that makes it possible to extract estimates of $A$, $B$ and $C$ that will have the same impulse-response. We will denote these estimates with a symbol hat. 
+\begin{align}
+    \hat{A} &= \Sigma^{-\frac{1}{2}} U^T H_2 V \Sigma^{-\frac{1}{2}} \\
+    \hat{B} &= \Sigma^{\frac{1}{2}} V^T E_m \\
+    \hat{C} &= E_p U \Sigma^{\frac{1}{2}}  \\
+\end{align}
+
+
+\noindent
+Under idealised circumstances, the rank of the Hankel-matrix can be found when performing the SVD, as all elements after a given index will be 0. As a result, it will not matter if $\Sigma$, $U$ and $V$ are all truncated after that given index. The matrices can be divided into two parts. The part that is used to estimate the system, and the part that can be truncated. 
+
+\begin{align}
+    \Sigma = 
+    \begin{bmatrix}
+        \tilde{\Sigma} & 0 \\
+        0 & \Sigma_{tr}
+    \end{bmatrix}\\
+    U = 
+    \begin{bmatrix}
+        \tilde{U} & U_{tr}
+    \end{bmatrix}\\
+    V = 
+    \begin{bmatrix}
+        \tilde{V} & V_{tr}
+    \end{bmatrix}\\
+\end{align}
+
+If all sub-matrices with subscript tr truly are equal to 0, then 
+\begin{align}
+    U\Sigma V^* = \tilde{U}\tilde{\Sigma}\tilde{V}^*
+\end{align}
+\noindent
+Consequently, the truncated matrices can be used to find a minimal representation of $\left[ \hat{A}, \hat{B}, \hat{C} \right]$. In reality, noise, non-linearities, and numerical errors are inevitable, so the rank of the Hankel-matrix can not be given certainly. Furthermore, in the case of this project, it will be highly desirable to have a model of reduced order, since it will speed up an MPC-controller significantly. 
+\noindent
+So, in practice, some index is simply chosen for where to cut off $\tilde{\Sigma}$. A common way to find a decent index is to choose some value $\epsilon$, such that 
+
+\begin{align}
+    \frac{\text{sum(diag(}\tilde{\Sigma}))}{\text{sum(diag(}\Sigma))} \ge \left( 1 - \epsilon \right)
+\end{align}
+And then making $\tilde{\Sigma}$ to be as small as possible, while satisfying the condition. By plotting the values of $\tilde{\Sigma}$, it also becomes a lot easier to see what is to be gained by adding more states to the estimated model. 
+\todo[inline]{Add a figure of how this is done}
+
+\noindent
+Finally, it is important to remark that unless all states are observed, the states that result from the SVD will not necessarily represent physical values, but rather some linear combination of underlying properties of the system. This can easily be proven.
+\noindent
+For any non-singular matrix T, the triplet $\left[TAT^{-1}, TB, CT^{-1}\right]$ will result in the same Hankel-matrix as $\left[ A,B,C \right]$
+\begin{align}
+    CT^{-1} \left( TAT^{-1} \right)^k TB = CA^kB
+\end{align}
+This means that any true system representing a physical process can be transformed into infinitely many other systems that will have the same input-output response. 
+
+
+
+\subsection{Handling Hysteresis}
+If the system suffers from a small amount of hysteresis, or nonlinearities at the at first when responding to an impulse, then the impulse-response of the physical system may not reflect the dynamics of the linearized system very well. The solution to this is to use some kind of more permanent excitation, and then using that to find some other kind of excitation and then using that to get an estimate of what the impulse-response would have been without the transient nonlinearities. The normal method is to use Observer Kalman Filter Identification (OKID) to find out what the impulse-response "would have been" for a linear system, given some pseudorandom input. The asymptotic memory-usage of OKID is $O(n^2)$, so if the number of samples is too large, the required space needed for system identification will be several gigabytes. In those cases, a simple trick with the step-response can be used instead. If a linear model should be valid, then the principle of superposition should also be somewhat true. This means that the response $y$ from a sum  of inputs and initial sates is the same as the sum of the responses that would have resulted from each separate signal. 
+
+\begin{align}
+    y(u_1 + u_2) = y(u_1) + y(u_2) \\
+    \alpha y(u) = y(\alpha u)
+\end{align}
+
+An impulse is just two step-inputs subtracted by each other if they have the same amplitude, but different delay.
+\begin{align}
+    \delta(T_i) = u(T_i) - u(T_{i-1})
+\end{align}
+
+Therefore, the superposition-principle allows us to find the impulse-response by subtracting a step-response by a delayed version of itself. 
+
+If the plant is asymptotically BIBO (Bounded Input, Bounded output)-stable, then this allows us to avoid some of the issues related to hysteresis, or nonlinearities at the beginning of a response. 
+
+
+
+
+
